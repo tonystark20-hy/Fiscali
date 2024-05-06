@@ -1,7 +1,12 @@
 import React from "react";
 import type { ColumnDef } from "@tanstack/react-table";
-import { useTable, useExpanded } from 'react-table';
-import { flexRender, getCoreRowModel, useReactTable, getSortedRowModel } from "@tanstack/react-table";
+import { useTable, useExpanded } from "react-table";
+import {
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+  getSortedRowModel,
+} from "@tanstack/react-table";
 
 import {
   Column,
@@ -10,19 +15,18 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
   getExpandedRowModel,
-} from '@tanstack/react-table'
+} from "@tanstack/react-table";
 
 type ReactTableProps<D extends unknown> = {
   data: D[];
   // columns: ColumnDef<D, string>[];
-  columns: any,
+  columns: any;
   headerProps?: {};
   bodyProps?: {};
   rowDataProps?: { className: string };
 
   [x: string]: any;
 };
-
 
 const ReactTable = <D extends unknown>({
   columns,
@@ -34,7 +38,7 @@ const ReactTable = <D extends unknown>({
 
   ...restConfig
 }: ReactTableProps<D>) => {
-  const [expanded, setExpanded] = React.useState<ExpandedState>({})
+  const [expanded, setExpanded] = React.useState<ExpandedState>({});
 
   const tableConfig = {
     columns,
@@ -43,7 +47,7 @@ const ReactTable = <D extends unknown>({
       expanded,
     },
     onExpandedChange: setExpanded,
-    getSubRows: row => row.subRows,
+    getSubRows: (row) => row.subRows,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -61,8 +65,17 @@ const ReactTable = <D extends unknown>({
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <th style={header ? {} : { border: 'none' }} key={header.id} {...header.column.columnDef?.meta}>
-                {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+              <th
+                style={header ? {} : { border: "none" }}
+                key={header.id}
+                {...header.column.columnDef?.meta}
+              >
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
               </th>
             ))}
           </tr>
@@ -70,16 +83,22 @@ const ReactTable = <D extends unknown>({
       </thead>
       <tbody {...bodyProps}>
         {table.getRowModel().rows.map((row) => (
-          <tr onClick={() => console.info(row)} {...rowDataProps} className={`${rowDataProps?.className}`} key={row.id}>
+          <tr
+            onClick={() => console.info(row)}
+            {...rowDataProps}
+            className={`${rowDataProps?.className}`}
+            key={row.id}
+          >
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+              <td key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </td>
             ))}
           </tr>
         ))}
       </tbody>
       {/* <pre>{JSON.stringify(expanded, null, 2)}</pre> */}
     </table>
-
   );
 };
 
