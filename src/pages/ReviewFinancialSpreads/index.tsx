@@ -89,10 +89,10 @@ export default function ReviewFinancialSpreadsPage() {
     return [
       tableColumnHelper.accessor("rowtablehead", {
         cell: (info) => (
-          <div className="flex justify-between items-center">
+          <div className="flex justify-start items-center">
             <Heading
               as="h4"
-              className={`flex justify-center items-center h-[36px] border-indigo-50 ${
+              className={`flex justify-start pl-2 items-center h-[36px] border-indigo-50 ${
                 info?.getValue?.() === "Total Revenues" ? "font-bold" : ""
               }`}
               style={{ color: "black" }}
@@ -103,10 +103,22 @@ export default function ReviewFinancialSpreadsPage() {
             {info.row.getCanExpand() && (
               <button
                 onClick={info.row.getToggleExpandedHandler()}
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                  paddingLeft: "15px",
+                }}
               >
                 {/* {info.row.getIsExpanded() ? ' ▲ ' : ' ▼ '} */}
-                {info.row.getIsExpanded() ? " ∧ " : " ∨ "}
+                {/* {info.row.getIsExpanded() ? "∧" : "∨"} */}
+                {info.row.getIsExpanded() ? (
+                  <img src="images/img_down_arw.svg" alt="Down Arrow" />
+                ) : (
+                  <img
+                    src="images/img_down_arw.svg"
+                    alt="Up Arrow"
+                    style={{ transform: "rotateX(180deg)" }}
+                  />
+                )}
               </button>
             )}
           </div>
@@ -122,7 +134,7 @@ export default function ReviewFinancialSpreadsPage() {
         header: (info) => (
           <Heading
             as="h1"
-            className="flex justify-center items-center h-[36px] border-indigo-50"
+            className="flex justify-start pl-2 items-center h-[36px] border-indigo-50"
             style={{ color: "black" }}
           >
             Millions of USD
@@ -138,7 +150,7 @@ export default function ReviewFinancialSpreadsPage() {
         header: (info) => (
           <Heading
             as="h2"
-            className="flex justify-center items-center h-[36px] border-indigo-50"
+            className="flex justify-start pl-2 items-center h-[36px] border-indigo-50"
             style={{ color: "black" }}
           >
             Category Labels
@@ -148,7 +160,7 @@ export default function ReviewFinancialSpreadsPage() {
       }),
       tableColumnHelper.accessor("rowconfidence", {
         cell: (info) => (
-          <div className="flex justify-center md:w-full p-2 border-indigo-50">
+          <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
             <Heading
               as="p"
               className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
@@ -179,7 +191,7 @@ export default function ReviewFinancialSpreadsPage() {
         header: (info) => (
           <Heading
             as="h2"
-            className="flex justify-center items-center h-[36px] border-indigo-50"
+            className="flex justify-start pl-2 items-center h-[36px] border-indigo-50"
             style={{ color: "black" }}
           >
             Confidence Score

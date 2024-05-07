@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "include": ["src"]
 }

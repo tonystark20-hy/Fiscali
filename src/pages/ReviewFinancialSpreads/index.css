@@ -4,5 +4,5 @@ table tbody tr td {
     border-bottom-width: 1px;
     border-left-width: 1px;
     border-style: solid;
-    border-color: blue;
+    border-color: rgba(216, 225, 252, 1);
   }
