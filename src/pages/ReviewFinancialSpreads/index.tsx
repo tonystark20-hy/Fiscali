@@ -106,6 +106,7 @@ export default function ReviewFinancialSpreadsPage() {
                 style={{
                   cursor: "pointer",
                   paddingLeft: "15px",
+                  paddingTop: "2.5px",
                 }}
               >
                 {/* {info.row.getIsExpanded() ? ' ▲ ' : ' ▼ '} */}
@@ -454,6 +455,7 @@ export default function ReviewFinancialSpreadsPage() {
               <ReviewFinancialSpreadsRowupload
                 upload="Review Financial Spreads"
                 upload1="images/img_arrow_right.svg"
+                active={true}
                 className="flex justify-center items-center gap-1"
               />
               <ReviewFinancialSpreadsRowupload
@@ -478,7 +480,7 @@ export default function ReviewFinancialSpreadsPage() {
             Sirius XM
           </Text>
           <div className="flex mt-2 ml-[7px] md:ml-0">
-            <Text as="p" className="!font-medium">
+            <Text as="p" className="!font-medium pr-1">
               For the Fiscal Period Ending
             </Text>
             <Text as="p" className="ml-[-2px] text-right !font-medium">
