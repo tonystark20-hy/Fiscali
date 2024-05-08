@@ -11,11 +11,11 @@ const CellComponent: React.FC<{ initialValue: string }> = ({ initialValue }) => 
   return (
     <Text
       as="p"
-      className="flex justify-center items-center h-[36px] !font-normal border-teal-50 border border-solid bg-white-A700"
+      className="flex items-center h-[36px] !font-normal bg-white-A700"
     >
       <input 
         type="text" 
-        className="mr-2 w-16 text-center" 
+        className="text-left" 
         value={value} 
         onChange={handleChange} 
       />
