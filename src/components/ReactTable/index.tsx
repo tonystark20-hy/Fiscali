@@ -60,7 +60,7 @@ const ReactTable = <D extends unknown>({
 
   // Render the UI for your table
   return (
-    <table className={className}>
+    <table className={className} style={{ width: '70%' }}>
       <thead {...headerProps}>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>

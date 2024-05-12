@@ -1,8 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { Img, Text, Heading, Button, SelectBox } from "../../components";
 import CellComponent from "../../components/CellComponent";
+import CategoryRanking from "../../components/CategoryRanking";
 import { ReactTable } from "../../components/ReactTable";
 import ReviewFinancialSpreadsRowupload from "../../components/ReviewFinancialSpreadsRowupload";
 import ReviewFinancialSpreadsScrollbar from "../../components/ReviewFinancialSpreadsScrollbar";
@@ -46,25 +47,63 @@ const tableData = [
         categorylabels: "Revenues",
         rowconfidence: "High",
       },
+      {
+        rowtablehead: "Total Revenues",
+        millionsofusd: "8696.0",
+        categorylabels: "Total Revenues",
+        rowconfidence: "High",
+      },
     ],
-  },
-  {
-    rowtablehead: "Total Revenues",
-    rowview: "images/img_check.svg",
   },
   {},
   {
-    rowtablehead: "Expenses",
+    rowtablehead: "Operating Expenses",
     subRows: [
       {
-        rowtablehead: "Total other operating expenses, net",
+        rowtablehead: "Cost of Services",
         millionsofusd: "3,336",
         rowconfidence: "High",
       },
       {
-        rowtablehead: "Operating Income",
-        millionsofusd: "317",
-        rowconfidence: "High",
+        rowtablehead: "REvenue Share & Royalties",
+        subRows: [
+          {
+            rowtablehead: "Programming & Comfort",
+            millionsofusd: "559.0",
+            categorylabels: "Cost of Goods Sold",
+            rowconfidence: "High",
+          },
+          {
+            rowtablehead: "Customer Service Center & Billing",
+            millionsofusd: "501.0",
+            categorylabels: "Cost of Goods Sold",
+            rowconfidence: "High",
+          },
+          {
+            rowtablehead: "Transmission",
+            millionsofusd: "218.0",
+            categorylabels: "Cost of Goods Sold",
+            rowconfidence: "High",
+          },
+          {
+            rowtablehead: "Cost of Equipment",
+            millionsofusd: "18.0",
+            categorylabels: "Cost of Goods Sold",
+            rowconfidence: "High",
+          },
+          {
+            rowtablehead: "Subscriber Acquisition Costs",
+            millionsofusd: "325.0",
+            categorylabels: "Cost of Goods Sold",
+            rowconfidence: "High",
+          },
+          {
+            rowtablehead: "Sales and Marketing",
+            millionsofusd: "1056.0",
+            categorylabels: "Cost of Goods Sold",
+            rowconfidence: "High",
+          },
+        ],
       },
     ],
   },
@@ -79,10 +118,41 @@ type TableRowType = {
   subRows?: TableRowType[];
 };
 
+const isMainRow = (row) => row.depth === 0;
+// const tableRef = useRef(null);
+
 export default function ReviewFinancialSpreadsPage() {
   const [collapsed, setCollapsed] = React.useState(false);
   const navigate = useNavigate();
   // const history = useHistory();
+
+  const [showTable, setShowTable] = useState(false);
+  const [tablePosition, setTablePosition] = useState({ x: 0, y: 0 });
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top } = event.currentTarget.getBoundingClientRect();
+
+    // console.log({left, top})
+    // console.log(window.scrollX)
+
+    if (showTable) {
+      setShowTable(false);
+    } else {
+      setShowTable(true);
+      setTablePosition({
+        x: event.clientX - left / 2,
+        y: event.clientY - top / 2,
+      });
+      console.log(event.clientX);
+      console.log(event.clientY);
+    }
+    // console.log(tablePosition.x)
+    // console.log(tablePosition.y)
+  };
+
+  const handleMouseLeave = () => {
+    // setShowTable(false);
+  };
 
   const tableColumns = React.useMemo(() => {
     const tableColumnHelper = createColumnHelper<TableRowType>();
@@ -122,14 +192,24 @@ export default function ReviewFinancialSpreadsPage() {
                 )}
               </button>
             )}
+            {/* </Heading> */}
           </div>
         ),
-        header: ({ table }) => <div className="md:self-stretch flex-1"></div>,
-        meta: { width: "331px" },
+        header: ({ table }) => (
+          <Heading
+            as="h1"
+            className="flex justify-center items-center h-[36px] bg-white-A700"
+            style={{ color: "black" }}
+          >
+            {/* Revenues */}
+          </Heading>
+        ),
+        meta: { width: "25%" },
       }),
       tableColumnHelper.accessor("millionsofusd", {
         cell: (info) => {
           const initialValue = info?.getValue?.();
+
           return <CellComponent initialValue={initialValue} />;
         },
         header: (info) => (
@@ -141,12 +221,22 @@ export default function ReviewFinancialSpreadsPage() {
             Millions of USD
           </Heading>
         ),
-        meta: { width: "140px" },
+        meta: { width: "15%" },
       }),
       tableColumnHelper.accessor("categorylabels", {
         cell: (info) => {
           const initialValue = info?.getValue?.();
-          return <CellComponent initialValue={initialValue} />;
+          return (
+            <>
+              <div
+                onClick={handleClick}
+                // onMouseLeave={handleMouseLeave}
+                style={{ cursor: "pointer" }}
+              >
+                <CellComponent initialValue={initialValue} />
+              </div>
+            </>
+          );
         },
         header: (info) => (
           <Heading
@@ -157,7 +247,7 @@ export default function ReviewFinancialSpreadsPage() {
             Category Labels
           </Heading>
         ),
-        meta: { width: "173px" },
+        meta: { width: "15%" },
       }),
       tableColumnHelper.accessor("rowconfidence", {
         cell: (info) => (
@@ -176,11 +266,11 @@ export default function ReviewFinancialSpreadsPage() {
               style={{
                 color: `${
                   info?.getValue?.() == "High"
-                    ? "green"
+                    ? "#038C8C"
                     : info?.getValue?.() == "Medium"
                     ? "#CCB400"
                     : info?.getValue?.() == "Low"
-                    ? "red"
+                    ? "#DF4D5A"
                     : "white"
                 }`,
               }}
@@ -198,13 +288,13 @@ export default function ReviewFinancialSpreadsPage() {
             Confidence Score
           </Heading>
         ),
-        meta: { width: "173px" },
+        meta: { width: "15%" },
       }),
       tableColumnHelper.accessor("rowview", {
         cell: (info) => (
           <div className="flex justify-center">
             {info.row.depth > 0 && info.row.subRows ? (
-              <div className="h-[36px] w-[41px] border-indigo-50 flex items-center justify-center">
+              <div className="h-[36px] flex items-center justify-center">
                 <input
                   type="checkbox"
                   defaultChecked={info.row.original.rowconfidence === "High"}
@@ -221,7 +311,9 @@ export default function ReviewFinancialSpreadsPage() {
                   }}
                 />
               </div>
-            ) : null}
+            ) : (
+              <div className="h-[36px] w-[41px] flex items-center justify-center"></div>
+            )}
           </div>
         ),
         header: (info) => (
@@ -232,7 +324,7 @@ export default function ReviewFinancialSpreadsPage() {
             ></div>
           </div>
         ),
-        meta: { width: "41px" },
+        meta: { width: "1%" },
       }),
     ];
   }, []);
@@ -262,7 +354,7 @@ export default function ReviewFinancialSpreadsPage() {
         />
       </Helmet>
 
-      <header className="flex justify-center items-center w-full pt-[15px]">
+      <header className="flex justify-center items-center pt-[15px]">
         <div className="flex w-[100%] md:w-full">
           <Img
             src="images/img_image_23.png"
@@ -497,542 +589,26 @@ export default function ReviewFinancialSpreadsPage() {
             data={tableData}
           />
 
+          {showTable && (
+            <div
+              style={{
+                position: "absolute",
+                left: tablePosition.x,
+                top: tablePosition.y,
+              }}
+              onClick={() => setShowTable(false)}
+            >
+              <CategoryRanking initialValue={""} />
+            </div>
+          )}
+
           <Button
-            className="flex items-center justify-center h-[39px] mt-[51px] ml-[1000px] px-[15px] mb-5 md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px]"
+            className="flex items-center justify-center h-[39px] mt-[51px] mr-[30%] ml-[60%] px-[15px] mb-5 md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px]"
             onClick={handleNavigate}
           >
             Continue
           </Button>
         </div>
-
-        {/* <div className="flex flex-col items-end bottom-[3%] right-[3%] m-auto bg-white-A700_02 shadow-xs absolute">
-
-          <div className="self-stretch">
-            <div className="flex md:flex-col justify-center">
-              <SelectBox
-                name="tablehead"
-                placeholder={`Revenue`}
-                options={dropDownOptions}
-                className="pl-2.5 pr-[35px] py-[9px] sm:pr-5 text-black-900 text-sm font-bold border-indigo-50 border border-solid bg-white-A700 flex-1"
-              />
-              <Heading
-                as="h1"
-                className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 !text-black-900 border-indigo-50 border border-solid bg-white-A700"
-              >
-                Millions of USD
-              </Heading>
-              <Heading
-                as="h2"
-                className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 !text-black-900 border-indigo-50 border border-solid bg-white-A700"
-              >
-                Category Labels
-              </Heading>
-              <Heading
-                as="h3"
-                className="flex justify-center items-center h-[36px] pl-2.5 pr-[22px] py-[9px] sm:pr-5 !text-black-900 border-indigo-50 border border-solid bg-white-A700"
-              >
-                Confidence Score
-              </Heading>
-              <div className="h-[36px] w-[4%] border-indigo-50 border border-solid bg-white-A700" />
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="flex flex-col self-stretch pt-9 gap-px sm:pt-5">
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-[18px] pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Advertising Revenues
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-teal-50 border border-solid bg-white-A700"
-                  >
-                    1,700.0
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-teal-50 border border-solid bg-white-A700"
-                  >
-                    Revenues
-                  </Text>
-                  <div className="flex w-[14%] md:w-full p-2 border-indigo-50 border border-solid bg-white-A700">
-                    <Heading
-                      as="h4"
-                      className="flex justify-center items-center h-[20px] px-2.5 py-px !text-lime-900 bg-amber-200 rounded-[10px]"
-                    >
-                      Medium
-                    </Heading>
-                  </div>
-                  <div className="flex justify-center w-[4%] md:w-full p-[7px] border-indigo-50 border border-solid bg-white-A700">
-                    <div className="self-start h-[20px] w-[20px] border-blue_gray-500 border border-solid bg-white-A700_02 rounded-md" />
-                  </div>
-                </div>
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <div className="flex md:flex-col flex-1">
-                    <Text
-                      as="p"
-                      className="flex justify-center items-center h-[36px] pl-[18px] pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                    >
-                      Subscriber Revenues
-                    </Text>
-                    <Text
-                      as="p"
-                      className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-teal-50 border border-solid bg-white-A700"
-                    >
-                      6,614.0
-                    </Text>
-                    <Text
-                      as="p"
-                      className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-teal-50 border border-solid bg-white-A700"
-                    >
-                      Revenues
-                    </Text>
-                    <div className="flex w-[14%] md:w-full p-2 border-indigo-50 border border-solid bg-white-A700">
-                      <Heading
-                        as="h5"
-                        className="flex justify-center items-center h-[20px] px-2.5 py-px !text-red-400 bg-red-100 rounded-[10px]"
-                      >
-                        Low
-                      </Heading>
-                    </div>
-                  </div>
-                  <div className="flex w-[4%] md:w-full p-[7px] border-indigo-50 border border-solid bg-white-A700">
-                    <div className="self-start h-[20px] w-[20px] border-blue_gray-500 border border-solid bg-white-A700_02 rounded-md" />
-                  </div>
-                </div>
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <div className="flex md:flex-col flex-1">
-                    <Text
-                      as="p"
-                      className="flex justify-center items-center h-[36px] pl-[18px] pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                    >
-                      Other Revenues
-                    </Text>
-                    <Text
-                      as="p"
-                      className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-teal-50 border border-solid bg-white-A700"
-                    >
-                      151.0
-                    </Text>
-                    <Text
-                      as="p"
-                      className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-teal-50 border border-solid bg-white-A700"
-                    >
-                      Revenues
-                    </Text>
-                    <div className="flex w-[14%] md:w-full p-2 border-indigo-50 border border-solid bg-white-A700">
-                      <Heading
-                        as="h6"
-                        className="flex justify-center items-center h-[20px] px-2.5 py-px bg-teal-100 rounded-[10px]"
-                      >
-                        High
-                      </Heading>
-                    </div>
-                  </div>
-                  <div className="flex justify-center p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex self-end items-center h-[20px] w-[20px] border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                </div>
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-[18px] pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Equipment Revenues
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-teal-50 border border-solid bg-white-A700"
-                  >
-                    201.0
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-teal-50 border border-solid bg-white-A700"
-                  >
-                    Revenues
-                  </Text>
-                  <div className="flex w-[14%] md:w-full p-2 border-indigo-50 border border-solid bg-white-A700">
-                    <Heading
-                      as="p"
-                      className="flex justify-center items-center h-[20px] px-2.5 py-px bg-teal-100 rounded-[10px]"
-                    >
-                      High
-                    </Heading>
-                  </div>
-                  <div className="flex justify-center p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex self-end items-center justify-center h-[20px] w-[20px] border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                </div>
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <Heading
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 !text-black-900 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Total Revenue
-                  </Heading>
-                  <Heading
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 !text-black-900 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    8696.0
-                  </Heading>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Total Revenue
-                  </Text>
-                  <div className="flex w-[14%] md:w-full p-2 border-indigo-50 border border-solid bg-white-A700">
-                    <Heading
-                      as="p"
-                      className="flex justify-center items-center h-[20px] px-2.5 py-px bg-teal-100 rounded-[10px]"
-                    >
-                      High
-                    </Heading>
-                  </div>
-                  <div className="flex justify-center p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex self-end items-center justify-center h-[20px] w-[20px] border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col self-stretch gap-px">
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <div className="h-[36px] border-indigo-50 border border-solid bg-white-A700 flex-1" />
-                  <div className="h-[36px] w-[16%] border-indigo-50 border border-solid bg-white-A700" />
-                  <div className="h-[36px] w-[20%] border-indigo-50 border border-solid bg-white-A700" />
-                  <div className="h-[36px] w-[14%] border-indigo-50 border border-solid bg-white-A700" />
-                  <div className="h-[36px] w-[4%] border-indigo-50 border border-solid bg-white-A700" />
-                </div>
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <Heading
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 !text-black-900 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Operating Expenses
-                  </Heading>
-                  <div className="h-[36px] w-[16%] border-indigo-50 border border-solid bg-white-A700" />
-                  <div className="h-[36px] w-[20%] border-indigo-50 border border-solid bg-white-A700" />
-                  <div className="h-[36px] w-[14%] border-indigo-50 border border-solid bg-white-A700" />
-                  <div className="h-[36px] w-[4%] border-indigo-50 border border-solid bg-white-A700" />
-                </div>
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <Heading
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-[26px] pr-[35px] py-[9px] sm:px-5 !text-black-900 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Cost of Services
-                  </Heading>
-                  <div className="h-[36px] w-[16%] border-indigo-50 border border-solid bg-white-A700" />
-                  <div className="h-[36px] w-[20%] border-indigo-50 border border-solid bg-white-A700" />
-                  <div className="h-[36px] w-[14%] border-indigo-50 border border-solid bg-white-A700" />
-                  <div className="h-[36px] w-[4%] border-indigo-50 border border-solid bg-white-A700" />
-                </div>
-              </div>
-              <div className="flex flex-col self-stretch gap-px">
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <SelectBox
-                    name="tablehead"
-                    placeholder={`           Revenue Share & Royalties`}
-                    options={dropDownOptions}
-                    className="px-[35px] py-[9px] sm:px-5 text-black-900 text-sm font-bold border-indigo-50 border border-solid bg-white-A700 flex-1"
-                  />
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    2,672.0
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Cost of Goods Sold
-                  </Text>
-                  <div className="flex w-[14%] md:w-full p-2 border-indigo-50 border border-solid bg-white-A700">
-                    <Heading
-                      as="p"
-                      className="flex justify-center items-center h-[20px] px-2.5 py-px bg-teal-100 rounded-[10px]"
-                    >
-                      High
-                    </Heading>
-                  </div>
-                  <div className="flex flex-col items-center justify-center w-[4%] md:w-full p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex items-center justify-center h-[20px] w-[20px] mt-1 border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                </div>
-                <div className="flex md:flex-col md:p-5 flex-1">
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] px-[35px] py-[9px] sm:px-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Programming & Comfort
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    559.0
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Cost of Goods Sold
-                  </Text>
-                  <div className="flex w-[14%] md:w-full p-2 border-indigo-50 border border-solid bg-white-A700">
-                    <Heading
-                      as="p"
-                      className="flex justify-center items-center h-[20px] px-2.5 py-px bg-teal-100 rounded-[10px]"
-                    >
-                      High
-                    </Heading>
-                  </div>
-                  <div className="flex flex-col items-center justify-center w-[4%] md:w-full p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex items-center justify-center h-[20px] w-[20px] mt-1 border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div className="flex md:flex-col self-stretch">
-                <div className="flex flex-col md:p-5">
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] px-[35px] py-[9px] sm:px-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Customer Service Center & Billing
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] px-[35px] py-[9px] sm:px-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Transmission
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] px-[35px] py-[9px] sm:px-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Cost of Equipment
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] px-[35px] py-[9px] sm:px-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Subscriber Acquisition Costs
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] px-[35px] py-[9px] sm:px-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Sales and Marketing
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] px-[35px] py-[9px] sm:px-5 border-indigo-50 border border-solid bg-white-A700"
-                  >
-                    Engineering, Design, and Development
-                  </Text>
-                </div>
-                <div className="h-[216px] md:w-full flex-1 relative md:flex-none">
-                  <div className="flex flex-col items-end justify-center w-full h-full left-0 bottom-0 right-0 top-0 m-auto absolute">
-                    <div className="flex flex-col self-stretch items-center">
-                      <div className="flex flex-col self-stretch items-start">
-                        <div className="flex flex-col self-stretch">
-                          <div className="flex flex-col items-center">
-                            <div className="flex flex-col self-stretch items-start">
-                              <div className="flex sm:flex-col self-stretch">
-                                <div className="flex sm:flex-col items-start sm:p-5 z-[1] flex-1">
-                                  <Text
-                                    as="p"
-                                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                                  >
-                                    501.0
-                                  </Text>
-                                  <div className="flex flex-col ml-[-8px] sm:ml-0 shadow-xl flex-1">
-
-                                  </div>
-                                </div>
-                                <div className="w-[23%] sm:w-full ml-[-100px] sm:p-5 sm:ml-0">
-                                  <div className="flex flex-col items-start p-2 border-indigo-50 border border-solid bg-white-A700">
-                                    <div className="flex justify-center bg-teal-100 rounded-[10px]">
-                                      <Heading as="p" className="self-end">
-                                        High
-                                      </Heading>
-                                    </div>
-                                  </div>
-                                  <div className="flex p-2 border-indigo-50 border border-solid bg-white-A700">
-                                    <Heading
-                                      as="p"
-                                      className="flex justify-center items-center h-[20px] px-2.5 py-px bg-teal-100 rounded-[10px]"
-                                    >
-                                      High
-                                    </Heading>
-                                  </div>
-                                  <div className="flex p-2 border-indigo-50 border border-solid bg-white-A700">
-                                    <Heading
-                                      as="p"
-                                      className="flex justify-center items-center h-[20px] px-2.5 py-px bg-teal-100 rounded-[10px]"
-                                    >
-                                      High
-                                    </Heading>
-                                  </div>
-                                  <div className="flex flex-col items-start p-2 border-indigo-50 border border-solid bg-white-A700">
-                                    <div className="flex justify-center bg-teal-100 rounded-[10px]">
-                                      <Heading as="p" className="self-end">
-                                        High
-                                      </Heading>
-                                    </div>
-                                  </div>
-                                  <div className="flex p-2 border-indigo-50 border border-solid bg-white-A700">
-                                    <Heading
-                                      as="p"
-                                      className="flex justify-center items-center h-[20px] px-2.5 py-px bg-teal-100 rounded-[10px]"
-                                    >
-                                      High
-                                    </Heading>
-                                  </div>
-                                </div>
-                              </div>
-                              <Text
-                                as="p"
-                                className="flex justify-center items-center h-[36px] mt-[-36px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                              >
-                                1056.0
-                              </Text>
-                            </div>
-                            <div className="flex w-[41%] md:w-full mt-[-36px] p-[9px] border-indigo-50 border border-solid bg-white-A700">
-                              <Text as="p">Cost of Goods Sold</Text>
-                            </div>
-                          </div>
-                          <Img
-                            src="images/img_vector_5.svg"
-                            alt="vectorfive_one"
-                            className="h-[14px] mt-[-7px] ml-[186px] md:ml-0"
-                          />
-                        </div>
-                        <Text
-                          as="p"
-                          className="flex justify-center items-center h-[36px] mt-[-7px] pl-2.5 pr-[35px] py-[9px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-                        >
-                          265.0
-                        </Text>
-                      </div>
-                      <div className="flex w-[41%] md:w-full mt-[-36px] p-2 border-indigo-50 border border-solid bg-white-A700">
-                        <Text as="p" className="self-end">
-                          R&D Expense
-                        </Text>
-                      </div>
-                    </div>
-                    <div className="flex w-[28%] md:w-full mt-[-36px] p-2 border-indigo-50 border border-solid bg-white-A700">
-                      <Heading
-                        as="p"
-                        className="flex justify-center items-center h-[20px] px-2.5 py-px !text-red-400 bg-red-100 rounded-[10px]"
-                      >
-                        Low
-                      </Heading>
-                    </div>
-                  </div>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] left-0 top-[17%] py-[9px] m-auto sm:pr-5 border-indigo-50 border border-solid bg-white-A700 absolute"
-                  >
-                    218.0
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] left-0 top-[33%] py-[9px] m-auto sm:pr-5 border-indigo-50 border border-solid bg-white-A700 absolute"
-                  >
-                    18.0
-                  </Text>
-                  <Text
-                    as="p"
-                    className="flex justify-center items-center h-[36px] pl-2.5 pr-[35px] bottom-[33%] left-0 py-[9px] m-auto sm:pr-5 border-indigo-50 border border-solid bg-white-A700 absolute"
-                  >
-                    325.0
-                  </Text>
-                  <div className="w-[41%] top-0 right-0 left-0 m-auto absolute">
-                    <div className="flex p-[9px] border-indigo-50 border border-solid bg-white-A700">
-                      <Text as="p">Cost of Goods Sold</Text>
-                    </div>
-                    <div className="flex p-[9px] border-indigo-50 border border-solid bg-white-A700">
-                      <Text as="p">Cost of Goods Sold</Text>
-                    </div>
-                    <div className="flex p-[9px] border-indigo-50 border border-solid bg-white-A700">
-                      <Text as="p">Cost of Goods Sold</Text>
-                    </div>
-                    <div className="flex p-[9px] border-indigo-50 border border-solid bg-white-A700">
-                      <Text as="p">Cost of Goods Sold</Text>
-                    </div>
-                  </div>
-                  <Img
-                    src="images/img_vector_6.svg"
-                    alt="vectorsix_three"
-                    className="h-[11px] w-[10px] bottom-[13%] left-[33%] m-auto absolute"
-                  />
-                </div>
-                <div className="w-[4%] md:w-full md:p-5">
-                  <div className="flex flex-col items-center justify-center p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex items-center justify-center h-[20px] w-[20px] mt-1 border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex items-center justify-center h-[20px] w-[20px] mt-1 border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex items-center justify-center h-[20px] w-[20px] mt-1 border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex items-center justify-center h-[20px] w-[20px] mt-1 border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-1.5 border-indigo-50 border border-solid bg-white-A700">
-                    <Button className="flex items-center justify-center h-[20px] w-[20px] mt-1 border-cyan-800 border border-solid bg-white-A700_02 rounded-md">
-                      <Img src="images/img_check.svg" />
-                    </Button>
-                  </div>
-                  <div className="flex flex-col items-center justify-center p-[7px] border-indigo-50 border border-solid bg-white-A700">
-                    <div className="h-[20px] w-[20px] border-blue_gray-500 border border-solid bg-white-A700_02 rounded-md" />
-                  </div>
-                </div>
-              </div>
-              <Text
-                as="p"
-                className="flex self-start justify-center items-center h-px pt-2.5 pl-[18px] pr-[35px] sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-              >
-                Income form operations
-              </Text>
-              <Heading
-                as="p"
-                className="flex self-end justify-center items-center h-px pt-2.5 pl-2.5 pr-[35px] sm:pr-5 !text-black-900 border-indigo-50 border border-solid bg-white-A700"
-              >
-                2,035.0
-              </Heading>
-            </div>
-          </div>
-          <Text
-            as="p"
-            className="flex justify-center items-center h-px mt-9 mr-[424px] pt-2.5 pl-2.5 pr-[35px] md:mr-0 sm:pr-5 border-indigo-50 border border-solid bg-white-A700"
-          >
-            533.0
-          </Text>
-          <div className="h-px w-[4%] mt-9 border-indigo-50 border border-solid bg-white-A700" />
-        </div>  */}
       </div>
     </>
   );
