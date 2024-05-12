@@ -30,10 +30,19 @@ const tableData = [
   {
   },
   { 
-    rowtablehead: "Expenses", 
+    rowtablehead: "Operating Expenses", 
     subRows: [
-      { rowtablehead: "Total other operating expenses, net", millionsofusd: "3,336", rowconfidence: "High" },
-      { rowtablehead: "Operating Income", millionsofusd: "317", rowconfidence: "High" },
+      { rowtablehead: "Cost of Services", millionsofusd: "3,336", rowconfidence: "High" },
+      { rowtablehead: "REvenue Share & Royalties",
+      subRows: [
+        { rowtablehead: "Programming & Comfort", millionsofusd: "559.0", categorylabels: "Cost of Goods Sold", rowconfidence: "High" },
+        { rowtablehead: "Customer Service Center & Billing", millionsofusd: "501.0", categorylabels: "Cost of Goods Sold", rowconfidence: "High" },
+        { rowtablehead: "Transmission", millionsofusd: "218.0", categorylabels: "Cost of Goods Sold", rowconfidence: "High" },
+        { rowtablehead: "Cost of Equipment", millionsofusd: "18.0", categorylabels: "Cost of Goods Sold", rowconfidence: "High" },
+        { rowtablehead: "Subscriber Acquisition Costs", millionsofusd: "325.0", categorylabels: "Cost of Goods Sold", rowconfidence: "High" },
+        { rowtablehead: "Sales and Marketing", millionsofusd: "1056.0", categorylabels: "Cost of Goods Sold", rowconfidence: "High" },
+      ]
+       },
     ]
   },
 ];
@@ -118,7 +127,7 @@ export default function ReviewFinancialSpreadsPage() {
             {/* Revenues */}
           </Heading>
         ),
-        meta: { width: "15%"},
+        meta: { width: "25%"},
       }),
       tableColumnHelper.accessor("millionsofusd", {
         cell: (info) => {
