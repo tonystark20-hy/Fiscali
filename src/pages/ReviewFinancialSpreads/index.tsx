@@ -65,7 +65,7 @@ const tableData = [
         rowconfidence: "High",
       },
       {
-        rowtablehead: "REvenue Share & Royalties",
+        rowtablehead: "Revenue Share & Royalties",
         subRows: [
           {
             rowtablehead: "Programming & Comfort",
@@ -123,6 +123,7 @@ const isMainRow = (row) => row.depth === 0;
 
 export default function ReviewFinancialSpreadsPage() {
   const [collapsed, setCollapsed] = React.useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const navigate = useNavigate();
   // const history = useHistory();
 
@@ -143,8 +144,8 @@ export default function ReviewFinancialSpreadsPage() {
         x: event.clientX - left / 2,
         y: event.clientY - top / 2,
       });
-      console.log(event.clientX);
-      console.log(event.clientY);
+      // console.log(event.clientX);
+      // console.log(event.clientY);
     }
     // console.log(tablePosition.x)
     // console.log(tablePosition.y)
@@ -179,8 +180,6 @@ export default function ReviewFinancialSpreadsPage() {
                   paddingTop: "2.5px",
                 }}
               >
-                {/* {info.row.getIsExpanded() ? ' ▲ ' : ' ▼ '} */}
-                {/* {info.row.getIsExpanded() ? "∧" : "∨"} */}
                 {info.row.getIsExpanded() ? (
                   <img src="images/img_down_arw.svg" alt="Down Arrow" />
                 ) : (
@@ -210,7 +209,9 @@ export default function ReviewFinancialSpreadsPage() {
         cell: (info) => {
           const initialValue = info?.getValue?.();
 
-          return <CellComponent initialValue={initialValue} />;
+          // return <CellComponent value={selectedCategory} onChange={handleInputChange} />;
+          return <CellComponent initialValue={initialValue}  onChange={handleInputChange} category={selectedCategory} />;
+          
         },
         header: (info) => (
           <Heading
@@ -233,7 +234,8 @@ export default function ReviewFinancialSpreadsPage() {
                 // onMouseLeave={handleMouseLeave}
                 style={{ cursor: "pointer" }}
               >
-                <CellComponent initialValue={initialValue} />
+                {/* <CellComponent value={selectedCategory} onChange={handleInputChange} /> */}
+                <CellComponent initialValue={initialValue}  onChange={handleInputChange} category={selectedCategory} />
               </div>
             </>
           );
@@ -342,6 +344,21 @@ export default function ReviewFinancialSpreadsPage() {
   const NavigateUpload = () => {
     // Navigate to the '/reviewcovenantmatches' route
     navigate("/");
+  };
+
+  const categories = [
+    { name: "G&A Expense", ranking: 1 },
+    { name: "R&D Expense", ranking: 2 },
+    { name: "Tax Expense", ranking: 3 }
+  ];
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+    console.log(selectedCategory)
+  }
+
+  const handleInputChange = (value: string) => {
+    setSelectedCategory(value);
   };
 
   return (
@@ -598,7 +615,7 @@ export default function ReviewFinancialSpreadsPage() {
               }}
               onClick={() => setShowTable(false)}
             >
-              <CategoryRanking initialValue={""} />
+              <CategoryRanking categories={categories} onCategoryClick={handleCategoryClick} />
             </div>
           )}
 
