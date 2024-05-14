@@ -42,7 +42,7 @@ export default function CovenantComplianceResultsPage() {
         />
       </Helmet>
 
-      <header className="flex justify-center items-center w-full pt-[15px] bg-gray shadow-md">
+      {/* <header className="flex justify-center items-center w-full pt-[15px] bg-gray shadow-md">
         <div className="flex w-[100%] md:w-full">
           <Img
             src="images/img_image_23.png"
@@ -57,6 +57,28 @@ export default function CovenantComplianceResultsPage() {
               src="images/img_fluent_person_12_regular.svg"
               alt="fluentperson"
               className="self-start h-[16px]"
+            />
+            <Text as="p">Henry Coleman</Text>
+          </div>
+        </div>
+      </header> */}
+      <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit ">
+        <div className="flex w-[100%] md:w-full  ">
+          <Img
+            src="images/img_image_23.png"
+            className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"
+          />
+        </div>
+
+        {/* <div className="my-auto flex self-start justify-between items-center whitespace-nowrap w-[94%] md:w-full 
+        ml-0.5 gap-5 md:ml-0"> */}
+        <div className="whitespace-nowrap w-[94%] flex self-start justify-between  my-auto ">
+          <div className="w-[13%] object-cover"></div>
+          <div className="flex item-center gap-[17px] px-5 ">
+            <Img
+              src="images/img_fluent_person_12_regular.svg"
+              alt="fluentperson"
+              className="self-start h-[19px]"
             />
             <Text as="p">Henry Coleman</Text>
           </div>
@@ -236,13 +258,20 @@ export default function CovenantComplianceResultsPage() {
           </Menu>
         </Sidebar>
 
-        <div className="h-[1024px] w-full md:h-auto bg-white-A700_01 relative pl-10">
-          <div className="flex flex-col items-start w-[82%] mb-[34px] mr-[41px] md:mr-0">
-            <div className="flex md:flex-col items-end ml-[13px] gap-2 md:ml-0">
-              <div className="flex flex-col items-start mb-[3px] md:p-5">
-                <Text size="xl" as="p" className="z-[1]">
+        {/* <div className="h-[1024px] w-full md:h-auto bg-white-A700_01 relative pl-10"> */}
+        {/* <div className="flex md:flex-col justify-end items-start w-[82%] gap-6 pl-10">
+          <div className="flex flex-col items-start w-[82%] mb-[34px] mr-[41px] md:mr-0"> */}
+        {/* <div className="flex md:flex-col items-end ml-[13px] gap-2 md:ml-0">
+              <div className="flex flex-col items-start mb-[3px] md:p-5"> */}
+        <div>
+          <div>
+            <div className="flex md:flex-col justify-end items-start w-[82%] gap-6 pl-10">
+              <div className="flex flex-col items-start md:self-stretch mt-14 md:p-5 flex-1">
+                <Text size="xl" as="p">
                   Covenant Compliance Results
                 </Text>
+                {/* <div className="flex md:flex-col justify-between w-[83%] md:w-full mt-[9px] gap-5">
+                  <div className="flex md:flex-col md:self-stretch gap-[7px] flex-1"> */}
                 <div className="flex md:flex-col justify-between w-[83%] md:w-full mt-[9px] gap-5">
                   <div className="flex md:flex-col md:self-stretch gap-[7px] flex-1">
                     <div onClick={NavigateUpload} style={{ cursor: "pointer" }}>
@@ -280,6 +309,7 @@ export default function CovenantComplianceResultsPage() {
                 </div>
               </div>
             </div>
+
             <div className="self-stretch mt-[69px] p-[22px] sm:p-5 bg-white-A700_01 shadow-xs">
               <div className="flex flex-col mt-[7px] mb-[74px]">
                 <div className="flex md:flex-col justify-center items-center gap-7 z-[1]">
@@ -386,7 +416,7 @@ export default function CovenantComplianceResultsPage() {
                 </div>
               </div>
             </div>
-            <Button className="flex items-center justify-center h-[39px] mt-32 ml-[991px] px-[35px] md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px]">
+            <Button className="flex whitespace-nowrap items-center justify-center h-[39px] mt-0 ml-[991px] px-[35px] md:ml-0 m-0  sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] right-40 absolute bottom-12">
               Export File
             </Button>
           </div>

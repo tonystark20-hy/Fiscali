@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import "./index.css";
 
 import DragDropFiles from "./dragDropFiles";
+import { Container } from "react-bootstrap";
 
 export default function UploadFileInfoPage() {
   const [searchBarValue, setSearchBarValue] = React.useState("");
@@ -45,14 +46,13 @@ export default function UploadFileInfoPage() {
         />
       </Helmet>
 
-      <header className="flex justify-center items-center w-full pt-[15px]">
+      {/* <header className="flex justify-center items-center w-full pt-[15px]">
         <div className="flex w-[100%] md:w-full">
           <Img
             src="images/img_image_23.png"
             className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"
           />
         </div>
-
         <div className="flex self-start justify-between items-center w-[94%] md:w-full ml-0.5 gap-5 md:ml-0">
           <div className="w-[13%] object-cover"></div>
           <div className="flex items-center gap-[17px] p-5">
@@ -64,14 +64,38 @@ export default function UploadFileInfoPage() {
             <Text as="p">Henry Coleman</Text>
           </div>
         </div>
+      </header> */}
+      <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit ">
+        <div className="flex w-[100%] md:w-full  ">
+          <Img
+            src="images/img_image_23.png"
+            className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"
+          />
+        </div>
+
+        {/* <div className="my-auto flex self-start justify-between items-center whitespace-nowrap w-[94%] md:w-full 
+        ml-0.5 gap-5 md:ml-0"> */}
+        <div className="whitespace-nowrap w-[94%] flex self-start justify-between  my-auto ">
+          <div className="w-[13%] object-cover"></div>
+          <div className="flex item-center gap-[17px] px-5 ">
+            <Img
+              src="images/img_fluent_person_12_regular.svg"
+              alt="fluentperson"
+              className="self-start h-[19px]"
+            />
+            <Text as="p">Henry Coleman</Text>
+          </div>
+        </div>
       </header>
 
       <div className="h-[1024px] w-full md:h-auto bg-white-A700_01 relative flex">
+        {/* <Container> */}
         <Sidebar
           width="205px !important"
           collapsedWidth="80px !important"
           collapsed={collapsed}
-          className="flex flex-col h-screen pb-9 top-0 md:p-5 sm:pb-5 bg-gray-50 shadow-sm !sticky overflow-auto md:hidden"
+          // className="flex flex-col h-screen pb-9 top-0 md:p-5 sm:pb-5 bg-gray-50 shadow-sm !sticky overflow-auto md:hidden"
+          className="flex flex-col h-screen pb-9 gap-[21px] top-0 md:p-5 sm:pb-5 bg-gray-50 shadow-sm overflow-auto md:hidden"
         >
           <Input
             name="search"
@@ -238,9 +262,11 @@ export default function UploadFileInfoPage() {
             </div>
           </Menu>
         </Sidebar>
-
-        <div className="h-[1024px] w-full md:h-auto bg-white-A700_01 relative pl-10">
-          <div className="flex flex-col items-start w-[81%] mb-[37px] mr-[76px] md:mr-0 pl-10">
+        {/* </Container> */}
+        {/* <Container> */}
+        <div className="flex md:flex-col justify-end items-start w-[82%] gap-6 pl-10">
+          {/* <div className="flex flex-col items-start w-[81%] mb-[37px] mr-[76px] md:mr-0 pl-10"> */}
+          <div className="flex flex-col items-start md:self-stretch mt-14 md:p-5 flex-1">
             <Text size="xl" as="p">
               Upload Documents
             </Text>
@@ -348,13 +374,15 @@ export default function UploadFileInfoPage() {
             <DragDropFiles />
 
             <Button
-              className="flex items-center justify-center h-[39px] mt-[51px] ml-[942px] px-[35px] mb-5 md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px]"
+              className="flex items-center justify-center h-[39px] mt-[51px] ml-[942px] px-[35px] mb-5 md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] "
               onClick={() => navigate("reviewfinancialspreads")}
             >
               Continue
             </Button>
           </div>
         </div>
+        {/* </Container> */}
+        {/* <div className="h-fit w-full md:h-auto bg-white-A700_01 relative pl-10"> */}
       </div>
     </>
   );

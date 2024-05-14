@@ -182,13 +182,13 @@ export default function ReviewFinancialSpreadsPage() {
                 {/* {info.row.getIsExpanded() ? ' ▲ ' : ' ▼ '} */}
                 {/* {info.row.getIsExpanded() ? "∧" : "∨"} */}
                 {info.row.getIsExpanded() ? (
-                  <img src="images/img_down_arw.svg" alt="Down Arrow" />
-                ) : (
                   <img
                     src="images/img_down_arw.svg"
                     alt="Up Arrow"
                     style={{ transform: "rotateX(180deg)" }}
                   />
+                ) : (
+                  <img src="images/img_down_arw.svg" alt="Down Arrow" />
                 )}
               </button>
             )}
@@ -354,7 +354,7 @@ export default function ReviewFinancialSpreadsPage() {
         />
       </Helmet>
 
-      <header className="flex justify-center items-center pt-[15px]">
+      {/* <header className="flex justify-center items-center w-full pt-[15px]">
         <div className="flex w-[100%] md:w-full">
           <Img
             src="images/img_image_23.png"
@@ -373,14 +373,36 @@ export default function ReviewFinancialSpreadsPage() {
             <Text as="p">Henry Coleman</Text>
           </div>
         </div>
+      </header> */}
+      <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit ">
+        <div className="flex w-[100%] md:w-full  ">
+          <Img
+            src="images/img_image_23.png"
+            className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"
+          />
+        </div>
+
+        {/* <div className="my-auto flex self-start justify-between items-center whitespace-nowrap w-[94%] md:w-full 
+        ml-0.5 gap-5 md:ml-0"> */}
+        <div className="whitespace-nowrap w-[94%] flex self-start justify-between  my-auto ">
+          <div className="w-[13%] object-cover"></div>
+          <div className="flex item-center gap-[17px] px-5 ">
+            <Img
+              src="images/img_fluent_person_12_regular.svg"
+              alt="fluentperson"
+              className="self-start h-[19px]"
+            />
+            <Text as="p">Henry Coleman</Text>
+          </div>
+        </div>
       </header>
 
-      <div className="h-[1024px] w-full bg-white-A700_02 relative flex">
+      <div className="h-[1024px] w-full md:h-auto bg-white-A700_02 relative flex">
         <Sidebar
           width="205px !important"
           collapsedWidth="80px !important"
           collapsed={collapsed}
-          className="flex flex-col h-screen pb-9 gap-[23px] top-0 sm:pb-5 bg-gray-50 shadow-sm !sticky overflow-auto"
+          className="flex flex-col h-screen pb-9 gap-[21px] top-0 md:p-5 sm:pb-5 bg-gray-50 shadow-sm !sticky overflow-auto md:hidden"
         >
           <Menu
             menuItemStyles={{
@@ -531,83 +553,85 @@ export default function ReviewFinancialSpreadsPage() {
             </div>
           </Menu>
         </Sidebar>
-
-        <div className="flex flex-col w-[66%] top-[13%] right-0 left-0 m-auto absolute">
-          <Text size="xl" as="p">
-            Review Financial Spreads
-          </Text>
-          <div className="flex md:flex-col justify-between mt-[5px] gap-5">
-            <div className="flex md:flex-col gap-[7px] md:p-5 flex-1">
-              <div onClick={NavigateUpload} style={{ cursor: "pointer" }}>
+        <div className="flex md:flex-col justify-end items-start w-[82%] gap-6 pl-10">
+          {/* <div className="flex flex-col w-[66%] top-[13%] right-0 left-0 m-auto absolute"> */}
+          <div className="flex flex-col items-start md:self-stretch mt-14 md:p-5 flex-1">
+            <Text size="xl" as="p">
+              Review Financial Spreads
+            </Text>
+            <div className="flex md:flex-col justify-between mt-[5px] gap-5">
+              <div className="flex md:flex-col gap-[7px] md:p-5 flex-1">
+                <div onClick={NavigateUpload} style={{ cursor: "pointer" }}>
+                  <ReviewFinancialSpreadsRowupload
+                    upload1="images/img_arrow_right.svg"
+                    className="flex justify-center items-center gap-1"
+                  />
+                </div>
                 <ReviewFinancialSpreadsRowupload
+                  upload="Review Financial Spreads"
+                  upload1="images/img_arrow_right.svg"
+                  active={true}
+                  className="flex justify-center items-center gap-1"
+                />
+                <ReviewFinancialSpreadsRowupload
+                  upload="Review Covenant Matches"
                   upload1="images/img_arrow_right.svg"
                   className="flex justify-center items-center gap-1"
                 />
+                <ReviewFinancialSpreadsRowupload
+                  upload="Covenant Compliance Results"
+                  className="flex justify-center items-center gap-1"
+                />
               </div>
-              <ReviewFinancialSpreadsRowupload
-                upload="Review Financial Spreads"
-                upload1="images/img_arrow_right.svg"
-                active={true}
-                className="flex justify-center items-center gap-1"
-              />
-              <ReviewFinancialSpreadsRowupload
-                upload="Review Covenant Matches"
-                upload1="images/img_arrow_right.svg"
-                className="flex justify-center items-center gap-1"
-              />
-              <ReviewFinancialSpreadsRowupload
-                upload="Covenant Compliance Results"
-                className="flex justify-center items-center gap-1"
-              />
             </div>
-          </div>
-          <Text size="md" as="p" className="mt-3">
-            Please review line items and click on any row to amend. You will
-            need to confirm all unchecked boxes before proceeding.{" "}
-          </Text>
-          <Text size="lg" as="p" className="mt-9 ml-[7px] md:ml-0">
-            Income Statement
-          </Text>
-          <Text as="p" className="mt-[15px] ml-[7px] md:ml-0 !font-medium">
-            Sirius XM
-          </Text>
-          <div className="flex mt-2 ml-[7px] md:ml-0">
-            <Text as="p" className="!font-medium pr-1">
-              For the Fiscal Period Ending
+            <Text size="md" as="p" className="mt-3">
+              Please review line items and click on any row to amend. You will
+              need to confirm all unchecked boxes before proceeding.{" "}
             </Text>
-            <Text as="p" className="ml-[-2px] text-right !font-medium">
-              12 Months, Dec-31-2021
+            <Text size="lg" as="p" className="mt-9 ml-[7px] md:ml-0">
+              Income Statement
             </Text>
-          </div>
+            <Text as="p" className="mt-[15px] ml-[7px] md:ml-0 !font-medium">
+              Sirius XM
+            </Text>
+            <div className="flex mt-2 ml-[7px] md:ml-0">
+              <Text as="p" className="!font-medium pr-1">
+                For the Fiscal Period Ending
+              </Text>
+              <Text as="p" className="ml-[-2px] text-right !font-medium">
+                12 Months, Dec-31-2021
+              </Text>
+            </div>
 
-          <ReactTable
-            bodyProps={{ className: "" }}
-            headerProps={{ className: "md:flex-col" }}
-            rowDataProps={{ className: "md:flex-col" }}
-            className="self-stretch mt-1.5 shadow-lg"
-            columns={tableColumns}
-            data={tableData}
-          />
+            <ReactTable
+              bodyProps={{ className: "" }}
+              headerProps={{ className: "md:flex-col" }}
+              rowDataProps={{ className: "md:flex-col" }}
+              className="self-stretch mt-1.5 shadow-lg"
+              columns={tableColumns}
+              data={tableData}
+            />
 
-          {showTable && (
-            <div
-              style={{
-                position: "absolute",
-                left: tablePosition.x,
-                top: tablePosition.y,
-              }}
-              onClick={() => setShowTable(false)}
+            {showTable && (
+              <div
+                style={{
+                  position: "absolute",
+                  left: tablePosition.x,
+                  top: tablePosition.y,
+                }}
+                onClick={() => setShowTable(false)}
+              >
+                <CategoryRanking initialValue={""} />
+              </div>
+            )}
+
+            <Button
+              className="flex items-center justify-center h-[39px] mt-[51px] mr-[30%] ml-[60%] px-[15px] mb-5 md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] "
+              onClick={handleNavigate}
             >
-              <CategoryRanking initialValue={""} />
-            </div>
-          )}
-
-          <Button
-            className="flex items-center justify-center h-[39px] mt-[51px] mr-[30%] ml-[60%] px-[15px] mb-5 md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px]"
-            onClick={handleNavigate}
-          >
-            Continue
-          </Button>
+              Continue
+            </Button>
+          </div>
         </div>
       </div>
     </>

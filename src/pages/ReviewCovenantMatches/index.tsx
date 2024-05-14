@@ -195,21 +195,23 @@ export default function ReviewCovenantMatchesPage() {
         />
       </Helmet>
 
-      <header className="flex justify-center items-center w-full pt-[15px]">
-        <div className="flex w-[100%] md:w-full">
+      <header className="flex justify-center items-center w-full shadow-lg h-24 md:h-fit ">
+        <div className="flex w-[100%] md:w-full  ">
           <Img
             src="images/img_image_23.png"
             className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"
           />
         </div>
 
-        <div className="flex self-start justify-between items-center w-[94%] md:w-full ml-0.5 gap-5 md:ml-0">
+        {/* <div className="my-auto flex self-start justify-between items-center whitespace-nowrap w-[94%] md:w-full 
+        ml-0.5 gap-5 md:ml-0"> */}
+        <div className="whitespace-nowrap w-[94%] flex self-start justify-between  my-auto ">
           <div className="w-[13%] object-cover"></div>
-          <div className="flex items-center gap-[17px] p-5">
+          <div className="flex item-center gap-[17px] px-5 ">
             <Img
               src="images/img_fluent_person_12_regular.svg"
               alt="fluentperson"
-              className="self-start h-[16px]"
+              className="self-start h-[19px]"
             />
             <Text as="p">Henry Coleman</Text>
           </div>
@@ -378,25 +380,26 @@ export default function ReviewCovenantMatchesPage() {
                 <div onClick={NavigateUpload} style={{ cursor: "pointer" }}>
                   <CovenantComplianceResultsRowupload
                     upload1="images/img_arrow_right.svg"
-                    className="flex items-center gap-1"
+                    className="flex items-center gap-1 "
                   />
                 </div>
                 <div onClick={NavigateFinancial} style={{ cursor: "pointer" }}>
                   <CovenantComplianceResultsRowupload
                     upload="Review Financial Spreads"
                     upload1="images/img_arrow_right.svg"
-                    className="flex items-center gap-1"
+                    className="flex items-center gap-1 "
                   />
                 </div>
                 <CovenantComplianceResultsRowupload
                   upload="Review Covenant Matches"
                   upload1="images/img_arrow_right.svg"
                   active={true}
-                  className="flex items-center gap-1"
+                  className="flex items-center gap-1 "
                 />
+
                 <CovenantComplianceResultsRowupload
                   upload="Covenant Compliance Results"
-                  className="flex items-center gap-1"
+                  className="flex items-center gap-1 "
                 />
               </div>
             </div>
@@ -422,7 +425,7 @@ export default function ReviewCovenantMatchesPage() {
               data={tableData}
             />
             <Button
-              className="flex items-center justify-center h-[39px] mt-[51px] ml-[1300px] px-[15px] mb-5 md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px]"
+              className="flex items-center justify-center h-[39px] mt-[51px] ml-[1300px] px-[15px] mb-5 md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] right-40 absolute bottom-12"
               onClick={handleNavigate}
             >
               Continue
