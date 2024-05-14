@@ -1,13 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { Img, Text, Heading, Button, SelectBox } from "../../components";
 
-const CellComponent: React.FC<{ initialValue: string }> = ({
-  initialValue,
-}) => {
+interface CellComponentProps {
+  initialValue: string;
+  onChange: (value: string) => void;
+  category: string;
+}
+
+const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, category }) => {
+  // const CellComponent: React.FC<CellComponentProps> = ({ initialValue }) => {
   const [value, setValue] = useState<string>(initialValue);
+
+
+  useEffect(() => {
+    console.log("In Cell");
+    console.log(category);
+  }, [category]);
+
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
+    onChange(e.target.value);
   };
 
   return (
