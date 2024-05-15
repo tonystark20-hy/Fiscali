@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import "./index.css";
 
 import DragDropFiles from "./dragDropFiles";
-import { Container } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 
 export default function UploadFileInfoPage() {
   const [searchBarValue, setSearchBarValue] = React.useState("");
@@ -45,36 +45,13 @@ export default function UploadFileInfoPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-
-      {/* <header className="flex justify-center items-center w-full pt-[15px]">
-        <div className="flex w-[100%] md:w-full">
-          <Img
-            src="images/img_image_23.png"
-            className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"
-          />
-        </div>
-        <div className="flex self-start justify-between items-center w-[94%] md:w-full ml-0.5 gap-5 md:ml-0">
-          <div className="w-[13%] object-cover"></div>
-          <div className="flex items-center gap-[17px] p-5">
-            <Img
-              src="images/img_fluent_person_12_regular.svg"
-              alt="fluentperson"
-              className="self-start h-[16px]"
-            />
-            <Text as="p">Henry Coleman</Text>
-          </div>
-        </div>
-      </header> */}
-      <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit ">
+      <header className="flex justify-center items-center w-full shadow-lg h-24 md:h-fit mb-2">
         <div className="flex w-[100%] md:w-full  ">
           <Img
             src="images/img_image_23.png"
             className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"
           />
         </div>
-
-        {/* <div className="my-auto flex self-start justify-between items-center whitespace-nowrap w-[94%] md:w-full 
-        ml-0.5 gap-5 md:ml-0"> */}
         <div className="whitespace-nowrap w-[94%] flex self-start justify-between  my-auto ">
           <div className="w-[13%] object-cover"></div>
           <div className="flex item-center gap-[17px] px-5 ">
@@ -88,23 +65,22 @@ export default function UploadFileInfoPage() {
         </div>
       </header>
 
-      <div className="h-[1024px] w-full md:h-auto bg-white-A700_01 relative flex">
-        {/* <Container> */}
+      <div className="w-full md:h-auto bg-white-A700_01 relative flex h-full">
+        {/* <Col md className="border-2 border-blue-500 border-dashed"> */}
         <Sidebar
-          width="205px !important"
+          width="250px !important"
           collapsedWidth="80px !important"
           collapsed={collapsed}
-          // className="flex flex-col h-screen pb-9 top-0 md:p-5 sm:pb-5 bg-gray-50 shadow-sm !sticky overflow-auto md:hidden"
-          className="flex flex-col h-screen pb-9 gap-[21px] top-0 md:p-5 sm:pb-5 bg-gray-50 shadow-sm overflow-auto md:hidden"
+          className="md:hidden relative px-2 flex flex-col pb-9 md:p-5 sm:pb-5 bg-gray-50 shadow-lg h-full m-0  border-2 border-blue-500 border-dashed"
         >
           <Input
             name="search"
-            placeholder={`Search`}
+            placeholder={`Search Company`}
             value={searchBarValue}
             onChange={(e: string) => setSearchBarValue(e)}
             prefix={
               <Img
-                src="images/img_fluentsearch16regular.svg"
+                src="images/img_fluent_search_16_regular.svg"
                 alt="fluent:search-16-regular"
                 className="cursor-pointer"
               />
@@ -121,7 +97,7 @@ export default function UploadFileInfoPage() {
             }
             className="flex items-center justify-center w-[90%] h-[32px] mt-[21px] pl-[7px] pr-[35px] gap-2 sm:pr-5 text-gray-500_01 text-xs font-medium border-gray-300 border border-solid rounded-[10px]"
           />
-          <div className="flex items-center mt-5 gap-[26px] p-1.5">
+          <div className="flex items-center mt-5 justify-between p-1.5 pr-8">
             <div className="flex items-center gap-1">
               <Img
                 src="images/img_fluent_text_bul.svg"
@@ -136,9 +112,7 @@ export default function UploadFileInfoPage() {
               className="h-[10px]"
             />
           </div>
-          <Text size="xs" as="p" className="self-start mt-[3px] !text-gray-500">
-            Sirius XM
-          </Text>
+
           <Menu
             menuItemStyles={{
               button: {
@@ -154,44 +128,56 @@ export default function UploadFileInfoPage() {
                 },
               },
             }}
-            className="flex flex-col self-stretch items-center w-full mt-[15px] pb-[15px]"
+            className="flex flex-col self-stretch items-center w-full  pb-[15px]"
           >
             <div className="flex flex-col self-stretch gap-[0.22px]">
+              <MenuItem>Sirius XM</MenuItem>
+
               <MenuItem>Microsoft</MenuItem>
               <MenuItem>Caterpillar</MenuItem>
             </div>
-            <div className="flex self-stretch justify-between items-start mt-0.5 gap-5">
-              <div className="flex items-center mb-[3px] ml-[3px] gap-1">
+
+            <div className="flex items-center  justify-between p-1.5 pr-8">
+              <div className="flex items-center gap-1">
                 <Img
                   src="images/img_fluent_history_20_filled.svg"
                   alt="fluenthistory"
-                  className="self-start h-[16px] w-[16px]"
+                  className="h-[20px] w-[20px]"
                 />
-                <Text as="p" className="self-end">
-                  Yearly Report
-                </Text>
+                <Text as="p">Yearly Report</Text>
               </div>
               <Img
                 src="images/img_frame_234.svg"
-                alt="image_two"
-                className="h-[10px] mt-[3px] mr-[3px]"
+                alt="image_one"
+                className="h-[10px]"
               />
             </div>
             <div className="flex flex-col self-stretch gap-[0.22px]">
               <MenuItem>2021-2022</MenuItem>
               <MenuItem>2020-2021</MenuItem>
               <MenuItem>2019-2020</MenuItem>
+            </div>
+            <div className="flex flex-col self-start ">
               <MenuItem
                 icon={
                   <Img
                     src="images/img_fluent_form_new_20_regular.svg"
                     alt="fluentformnew"
-                    className="h-[20px] w-[20px]"
+                    className=" h-[20px] w-[20px]"
                   />
                 }
               >
                 New Report
               </MenuItem>
+            </div>
+            <div className="flex flex-col self-start items-start mt-[21px]">
+              <Heading
+                size="xs"
+                as="p"
+                className="ml-[13px] md:ml-0 !text-blue_gray-700"
+              >
+                User
+              </Heading>
               <MenuItem
                 icon={
                   <Img
@@ -204,7 +190,7 @@ export default function UploadFileInfoPage() {
                 My Account
               </MenuItem>
             </div>
-            <div className="flex flex-col self-start items-start mt-[61px]">
+            <div className="flex flex-col self-start items-start ">
               <Heading
                 size="xs"
                 as="p"
@@ -262,37 +248,39 @@ export default function UploadFileInfoPage() {
             </div>
           </Menu>
         </Sidebar>
-        {/* </Container> */}
-        {/* <Container> */}
-        <div className="flex md:flex-col justify-end items-start w-[82%] gap-6 pl-10">
-          {/* <div className="flex flex-col items-start w-[81%] mb-[37px] mr-[76px] md:mr-0 pl-10"> */}
-          <div className="flex flex-col items-start md:self-stretch mt-14 md:p-5 flex-1">
+
+        <div className="flex md:flex-col justify-end items-start w-[82%] gap-6 pl-10 mb-20">
+          <div className="flex flex-col items-start md:self-stretch mt-14 flex-1 w-full">
             <Text size="xl" as="p">
               Upload Documents
             </Text>
-            <div className="flex md:flex-col mt-[11px] gap-[7px]">
-              <CovenantComplianceResultsRowupload
-                upload1="images/img_arrow_right.svg"
-                active={true}
-                className="flex items-center gap-1 md:p-5"
-              />
-              <CovenantComplianceResultsRowupload
-                upload="Review Financial Spreads"
-                upload1="images/img_arrow_right.svg"
-                className="flex items-center gap-1 md:p-5"
-              />
-              <CovenantComplianceResultsRowupload
-                upload="Review Covenant Matches"
-                upload1="images/img_arrow_right.svg"
-                className="flex items-center gap-2 md:p-5"
-              />
-              <div className="flex md:p-5">
+            <div className="flex md:flex-col justify-between w-[83%] md:w-full mt-[9px] gap-5">
+              <div className="flex md:flex-col md:self-stretch gap-[7px] flex-1">
+                <CovenantComplianceResultsRowupload
+                  upload1="images/img_arrow_right.svg"
+                  active={true}
+                  className="flex items-center gap-1 "
+                />
+
+                <CovenantComplianceResultsRowupload
+                  upload="Review Financial Spreads"
+                  upload1="images/img_arrow_right.svg"
+                  className="flex items-center gap-1 "
+                />
+
+                <CovenantComplianceResultsRowupload
+                  upload="Review Covenant Matches"
+                  upload1="images/img_arrow_right.svg"
+                  className="flex items-center gap-1 "
+                />
+
                 <CovenantComplianceResultsRowupload
                   upload="Covenant Compliance Results"
-                  className="flex items-end"
+                  className="flex items-center gap-1 "
                 />
               </div>
             </div>
+
             <Text size="lg" as="p" className="mt-[23px]">
               Upload Financial Statement
             </Text>
@@ -317,30 +305,6 @@ export default function UploadFileInfoPage() {
               </label>
             </div>
             <DragDropFiles />
-            {/* <input
-  type="file"
-  id="fileInput"
-  // className="hidden-input"
-  onChange={(e) => handleFileChange(e.target.files)}
-/>
-<label
-  htmlFor="fileInput"
-  className="flex self-start items-center justify-center h-[43px] px-[35px] md:p-5 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 min-w-[177px] rounded-[3px] cursor-pointer"
-  id="fileInputLabel"
->
-  Browse Files
-</label> */}
-
-            {/* <div className="flex flex-col items-center justify-center w-[96%] md:w-full mt-[22px] gap-12 px-14 py-[75px] md:p-5 border-gray-400 border border-dashed bg-gray-100">
-              <Img
-                src="images/img_line_md_cloud_upload_loop.svg"
-                alt="linemdcloud_one"
-                className="h-[86px] w-[86px] mt-2.5"
-              />
-              <Heading size="md" as="h1" className="!text-gray-500_02">
-                Drag and drop files here
-              </Heading>
-            </div> */}
 
             <Text size="lg" as="p" className="mt-[53px]">
               Upload Credit Agreement
@@ -361,28 +325,17 @@ export default function UploadFileInfoPage() {
                 Browse Files
               </Button>
             </div>
-            {/* <div className="flex flex-col items-center justify-center w-[96%] md:w-full mt-[22px] gap-12 px-14 py-[75px] md:p-5 border-gray-400 border border-dashed bg-gray-100">
-              <Img
-                src="images/img_line_md_cloud_upload_loop.svg"
-                alt="linemdcloud_one"
-                className="h-[86px] w-[86px] mt-2.5"
-              />
-              <Heading size="md" as="h1" className="!text-gray-500_02">
-                Drag and drop files here
-              </Heading>
-            </div> */}
             <DragDropFiles />
 
             <Button
-              className="flex items-center justify-center h-[39px] mt-[51px] ml-[942px] px-[35px] mb-5 md:ml-0 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] "
+              className="flex whitespace-nowrap items-center justify-center h-[39px]  px-[35px]  text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] mt-20  ml-auto "
               onClick={() => navigate("reviewfinancialspreads")}
             >
               Continue
             </Button>
           </div>
         </div>
-        {/* </Container> */}
-        {/* <div className="h-fit w-full md:h-auto bg-white-A700_01 relative pl-10"> */}
+        {/* </Col> */}
       </div>
     </>
   );
