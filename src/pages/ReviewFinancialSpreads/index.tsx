@@ -139,7 +139,7 @@ export default function ReviewFinancialSpreadsPage() {
     if (showTable) {
       setShowTable(false);
     } else {
-      setShowTable(true);
+      // setShowTable(true);
       setTablePosition({
         x: event.clientX - left / 2,
         y: event.clientY - top / 2,
@@ -284,6 +284,15 @@ export default function ReviewFinancialSpreadsPage() {
                     ? "#DF4D5A"
                     : "white"
                 }`,
+                backgroundColor: `${
+                  info?.getValue?.() == "High"
+                    ? "#BAD8D8"
+                    : info?.getValue?.() == "Medium"
+                    ? "#FFE08E" // Equivalent to bg-yellow-200
+                    : info?.getValue?.() == "Low"
+                    ? "#F9CDD0" // Equivalent to bg-red-300
+                    : "#FDFFFF" // Equivalent to bg-white-500
+                }`,
               }}
             >
               {info?.getValue?.()}
@@ -367,7 +376,7 @@ export default function ReviewFinancialSpreadsPage() {
   };
 
   const handleInputChange = (value: string) => {
-    setSelectedCategory(value);
+    // setSelectedCategory(value);
   };
 
   return (

@@ -13,8 +13,8 @@ const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, c
 
 
   useEffect(() => {
-    console.log("In Cell");
-    console.log(category);
+    console.log("Updated category prop:", category);
+    // setValue(category)
   }, [category]);
 
 
@@ -27,7 +27,7 @@ const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, c
   return (
     <Text
       as="p"
-      className="flex items-center h-[36px] !font-normal bg-white-A700"
+      className="flex items-center  !font-normal bg-white-A700"
     >
       <input
         type="text"
