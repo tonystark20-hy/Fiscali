@@ -9,7 +9,7 @@ import { MenuItem, Menu, Sidebar } from "react-pro-sidebar";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 
-import DragDropFiles from "./dragDropFiles";
+import SelectNDragFile from "./selectNDragFile";
 import { Container, Col, Row } from "react-bootstrap";
 
 export default function UploadFileInfoPage() {
@@ -288,23 +288,7 @@ export default function UploadFileInfoPage() {
               Please upload PDF, Word or HTML file below. Please keep file size
               under 10 MB.
             </Text>
-            <div className="flex md:flex-col items-center mt-3.5 border-black-900 border border-solid">
-              <Text
-                size="md"
-                as="p"
-                className="flex justify-center items-center h-[45px] pl-[26px] pr-[35px] py-3 md:p-5 sm:px-5 !text-gray-400_01 border-indigo-800 border border-solid bg-white-A700_01"
-              >
-                Choose files to upload
-              </Text>
-              <input type="file" className="hidden" id="fileInput" />
-              <label
-                htmlFor="fileInput"
-                className="flex self-start items-center justify-center h-[43px] px-[35px] md:p-5 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 min-w-[177px] rounded-[3px] cursor-pointer"
-              >
-                Browse Files
-              </label>
-            </div>
-            <DragDropFiles />
+            <SelectNDragFile />
 
             <Text size="lg" as="p" className="mt-[53px]">
               Upload Credit Agreement
@@ -313,19 +297,8 @@ export default function UploadFileInfoPage() {
               Please upload PDF, Word or HTML file below. Please keep file size
               under 10 MB.
             </Text>
-            <div className="flex md:flex-col items-center mt-5 border-black-900 border border-solid">
-              <Text
-                size="md"
-                as="p"
-                className="flex justify-center items-center h-[45px] pl-[26px] pr-[35px] py-3 md:p-5 sm:px-5 !text-gray-400_01 border-indigo-800 border border-solid bg-white-A700_01"
-              >
-                Choose files to upload
-              </Text>
-              <Button className="flex self-start items-center justify-center h-[43px] px-[35px] md:p-5 sm:px-5 text-white-A700_01 text-center text-base font-medium bg-indigo-800 min-w-[177px] rounded-[3px]">
-                Browse Files
-              </Button>
-            </div>
-            <DragDropFiles />
+
+            <SelectNDragFile />
 
             <Button
               className="flex whitespace-nowrap items-center justify-center h-[39px]  px-[35px]  text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] mt-20  ml-auto "
