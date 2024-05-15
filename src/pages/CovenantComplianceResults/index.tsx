@@ -264,6 +264,7 @@ export default function CovenantComplianceResultsPage() {
                 <div onClick={NavigateUpload} style={{ cursor: "pointer" }}>
                   <CovenantComplianceResultsRowupload
                     upload1="images/img_arrow_right.svg"
+                    status="activated"
                     className="flex items-center gap-1"
                   />
                 </div>
@@ -271,6 +272,7 @@ export default function CovenantComplianceResultsPage() {
                   <CovenantComplianceResultsRowupload
                     upload="Review Financial Spreads"
                     upload1="images/img_arrow_right.svg"
+                    status="activated"
                     className="flex items-center gap-1"
                   />
                 </div>
@@ -278,12 +280,13 @@ export default function CovenantComplianceResultsPage() {
                   <CovenantComplianceResultsRowupload
                     upload="Review Covenant Matches"
                     upload1="images/img_arrow_right.svg"
+                    status="activated"
                     className="flex items-center gap-1"
                   />
                 </div>
                 <CovenantComplianceResultsRowupload
                   upload="Covenant Compliance Results"
-                  active={true}
+                  status="active"
                   className="flex items-center gap-1 "
                 />
               </div>

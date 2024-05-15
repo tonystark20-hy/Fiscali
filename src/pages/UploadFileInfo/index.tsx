@@ -258,7 +258,7 @@ export default function UploadFileInfoPage() {
               <div className="flex md:flex-col md:self-stretch gap-[7px] flex-1">
                 <CovenantComplianceResultsRowupload
                   upload1="images/img_arrow_right.svg"
-                  active={true}
+                  status="active"
                   className="flex items-center gap-1 text-red-400"
                 />
 

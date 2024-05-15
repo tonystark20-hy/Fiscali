@@ -5,13 +5,13 @@ interface Props {
   className?: string;
   upload?: string;
   upload1?: string;
-  active?: boolean;
+  status?: string;
 }
 
 export default function ReviewFinancialSpreadsRowupload({
   upload = "Upload Documents ",
   upload1,
-  active,
+  status,
   ...props
 }: Props) {
   return (
@@ -21,7 +21,11 @@ export default function ReviewFinancialSpreadsRowupload({
           size="md"
           as="p"
           className={` mt-1.5 mb-1 ${
-            active ? "text-black-900" : " !text-indigo-400"
+            status === "active"
+              ? "!containertext-black-900"
+              : status === "activated"
+              ? "!text-indigo-400"
+              : "!text-[#aaaaaa]"
           }`}
         >
           {upload}
