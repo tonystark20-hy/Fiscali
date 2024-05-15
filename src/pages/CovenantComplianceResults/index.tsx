@@ -43,26 +43,6 @@ export default function CovenantComplianceResultsPage() {
         />
       </Helmet>
 
-      {/* <header className="flex justify-center items-center w-full pt-[15px] bg-gray shadow-md">
-        <div className="flex w-[100%] md:w-full">
-          <Img
-            src="images/img_image_23.png"
-            className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"
-          />
-        </div>
-
-        <div className="flex self-start justify-between items-center w-[94%] md:w-full ml-0.5 gap-5 md:ml-0">
-          <div className="w-[13%] object-cover"></div>
-          <div className="flex items-center gap-[17px] p-5">
-            <Img
-              src="images/img_fluent_person_12_regular.svg"
-              alt="fluentperson"
-              className="self-start h-[16px]"
-            />
-            <Text as="p">Henry Coleman</Text>
-          </div>
-        </div>
-      </header> */}
       <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit mb-2">
         <div className="flex w-[100%] md:w-full  ">
           <Img
@@ -71,8 +51,6 @@ export default function CovenantComplianceResultsPage() {
           />
         </div>
 
-        {/* <div className="my-auto flex self-start justify-between items-center whitespace-nowrap w-[94%] md:w-full 
-        ml-0.5 gap-5 md:ml-0"> */}
         <div className="whitespace-nowrap w-[94%] flex self-start justify-between  my-auto ">
           <div className="w-[13%] object-cover"></div>
           <div className="flex item-center gap-[17px] px-5 ">
@@ -87,177 +65,6 @@ export default function CovenantComplianceResultsPage() {
       </header>
 
       <div className="h-full w-full bg-white-A700_01 relative flex ">
-        {/* <Sidebar
-          width="205px !important"
-          collapsedWidth="80px !important"
-          collapsed={collapsed}
-          className="flex flex-col h-screen pb-9 top-0 md:p-5 sm:pb-5 bg-gray-50 shadow-sm !sticky overflow-auto md:hidden"
-        >
-          <Input
-            name="search"
-            placeholder={`Search`}
-            value={searchBarValue}
-            onChange={(e: string) => setSearchBarValue(e)}
-            prefix={
-              <Img
-                src="images/img_fluentsearch16regular.svg"
-                alt="fluent:search-16-regular"
-                className="cursor-pointer"
-              />
-            }
-            suffix={
-              searchBarValue?.length > 0 ? (
-                <CloseSVG
-                  onClick={() => setSearchBarValue("")}
-                  height={16}
-                  width={16}
-                  fillColor="#aeaeb2ff"
-                />
-              ) : null
-            }
-            className="flex items-center justify-center w-[90%] h-[32px] mt-[21px] pl-[7px] pr-[35px] gap-2 sm:pr-5 text-gray-500_01 text-xs font-medium border-gray-300 border border-solid rounded-[10px]"
-          />
-          <div className="flex items-center mt-5 gap-[26px] p-1.5">
-            <div className="flex items-center gap-1">
-              <Img
-                src="images/img_fluent_text_bul.svg"
-                alt="image"
-                className="h-[20px] w-[20px]"
-              />
-              <Text as="p">Client Companies</Text>
-            </div>
-            <Img
-              src="images/img_frame_234.svg"
-              alt="image_one"
-              className="h-[10px]"
-            />
-          </div>
-          <Text size="xs" as="p" className="self-start mt-[3px] !text-gray-500">
-            Sirius XM
-          </Text>
-          <Menu
-            menuItemStyles={{
-              button: {
-                padding: "9px 9px 9px 36px",
-                alignSelf: "start",
-                gap: "8px",
-                color: "#9d9d9d",
-                fontWeight: 500,
-                fontSize: "12px",
-                [`&:hover, &.ps-active`]: {
-                  color: "#354365",
-                  backgroundColor: "#eaeaea !important",
-                },
-              },
-            }}
-            className="flex flex-col self-stretch items-center w-full mt-[15px] pb-[15px]"
-          >
-            <div className="flex flex-col self-stretch gap-[0.22px]">
-              <MenuItem>Microsoft</MenuItem>
-              <MenuItem>Caterpillar</MenuItem>
-            </div>
-            <div className="flex self-stretch justify-between items-start mt-0.5 gap-5">
-              <div className="flex items-center mb-[3px] ml-[3px] gap-1">
-                <Img
-                  src="images/img_fluent_history_20_filled.svg"
-                  alt="fluenthistory"
-                  className="self-start h-[16px] w-[16px]"
-                />
-                <Text as="p" className="self-end">
-                  Yearly Report
-                </Text>
-              </div>
-              <Img
-                src="images/img_frame_234.svg"
-                alt="image_two"
-                className="h-[10px] mt-[3px] mr-[3px]"
-              />
-            </div>
-            <div className="flex flex-col self-stretch gap-[0.22px]">
-              <MenuItem>2021-2022</MenuItem>
-              <MenuItem>2020-2021</MenuItem>
-              <MenuItem>2019-2020</MenuItem>
-              <MenuItem
-                icon={
-                  <Img
-                    src="images/img_fluent_form_new_20_regular.svg"
-                    alt="fluentformnew"
-                    className="h-[20px] w-[20px]"
-                  />
-                }
-              >
-                New Report
-              </MenuItem>
-              <MenuItem
-                icon={
-                  <Img
-                    src="images/img_fluent_person_12_regular.svg"
-                    alt="fluentperson"
-                    className="h-[16px] w-[16px]"
-                  />
-                }
-              >
-                My Account
-              </MenuItem>
-            </div>
-            <div className="flex flex-col self-start items-start mt-[61px]">
-              <Heading
-                size="xs"
-                as="p"
-                className="ml-[13px] md:ml-0 !text-blue_gray-700"
-              >
-                Admin
-              </Heading>
-              <MenuItem
-                icon={
-                  <Img
-                    src="images/img_fluent_people_team_16_regular.svg"
-                    alt="fluentpeople"
-                    className="h-[16px] w-[16px]"
-                  />
-                }
-              >
-                Account Management
-              </MenuItem>
-            </div>
-            <div className="self-stretch h-px mt-[273px] bg-gray-400_03" />
-            <div className="flex flex-col gap-[0.22px]">
-              <MenuItem
-                icon={
-                  <Img
-                    src="images/img_fluent_alert_32_regular.svg"
-                    alt="fluentalertthir"
-                    className="h-[16px] w-[16px]"
-                  />
-                }
-              >
-                Notifications
-              </MenuItem>
-              <MenuItem
-                icon={
-                  <Img
-                    src="images/img_fluent_chat_bub.svg"
-                    alt="fluentchatbub"
-                    className="h-[16px] w-[16px]"
-                  />
-                }
-              >
-                Support
-              </MenuItem>
-              <MenuItem
-                icon={
-                  <Img
-                    src="images/img_fluent_settings_16_regular.svg"
-                    alt="fluentsettings"
-                    className="h-[20px] w-[20px]"
-                  />
-                }
-              >
-                Settings
-              </MenuItem>
-            </div>
-          </Menu>
-        </Sidebar> */}
         <Sidebar
           width="250px !important"
           collapsedWidth="80px !important"
@@ -500,9 +307,23 @@ export default function CovenantComplianceResultsPage() {
                     <div className="flex flex-col items-start md:self-stretch flex-1">
                       <div className="flex sm:flex-col items-center mt-8 gap-2.5 p-2.5">
                         <div className="flex flex-col">
-                          <Button className="flex items-center justify-center h-[20px] w-[20px] border-cyan-800 border border-solid bg-white-A700_01 rounded-md">
-                            <Img src="images/img_check.svg" />
-                          </Button>
+                          <div className=" flex items-center justify-center">
+                            <input
+                              type="checkbox"
+                              defaultChecked={false}
+                              style={{
+                                appearance: "none", // Hide default checkbox appearance
+                                width: "20px",
+                                height: "20px",
+                                borderRadius: "15%", // Rounded checkbox
+                                border: "2px solid #4CAF50", // Green border
+                                // backgroundColor: '#fff',
+                                position: "relative",
+                                cursor: "pointer", // Show pointer cursor when hovering
+                                transition: "background-color 0.3s ease", // Smooth transition for background color change
+                              }}
+                            />
+                          </div>
                         </div>
                         <Text size="md" as="p" className="self-end">
                           Consolidated Leverage Ratio = 3.25&lt;3.75 Threshold
@@ -540,9 +361,26 @@ export default function CovenantComplianceResultsPage() {
                       </div>
                       <div className="flex sm:flex-col items-center  ml-2.5 gap-2.5 md:ml-0">
                         <div className="flex flex-col">
-                          <Button className="flex items-center justify-center h-[20px] w-[20px] border-cyan-800 border border-solid bg-white-A700_01 rounded-md">
+                          {/* <Button className="flex items-center justify-center h-[20px] w-[20px] border-cyan-800 border border-solid bg-white-A700_01 rounded-md">
                             <Img src="images/img_check.svg" />
-                          </Button>
+                          </Button> */}
+                          <div className=" flex items-center justify-center">
+                            <input
+                              type="checkbox"
+                              defaultChecked={false}
+                              style={{
+                                appearance: "none", // Hide default checkbox appearance
+                                width: "20px",
+                                height: "20px",
+                                borderRadius: "15%", // Rounded checkbox
+                                border: "2px solid #4CAF50", // Green border
+                                // backgroundColor: '#fff',
+                                position: "relative",
+                                cursor: "pointer", // Show pointer cursor when hovering
+                                transition: "background-color 0.3s ease", // Smooth transition for background color change
+                              }}
+                            />
+                          </div>
                         </div>
                         <Text size="md" as="p" className="self-start">
                           Indebtedness Covenant: Not Validated
@@ -559,11 +397,6 @@ export default function CovenantComplianceResultsPage() {
                         />
                       </div>
                     </div>
-                    {/* <Img
-                    src="images/img_lev_ratio.png"
-                    alt="levratio_one"
-                    className="self-end w-[40%] md:w-full object-cover"
-                  /> */}
                   </div>
                   <div className="flex md:flex-col justify-center items-start w-[97%] md:w-full mt-[-1px] gap-6">
                     <div className="md:self-stretch p-5 bg-white-A700_01 flex-1 rounded-[3px]">
