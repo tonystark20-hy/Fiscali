@@ -846,7 +846,7 @@ export default function ReviewFinancialSpreadsPage() {
                 For the Fiscal Period Ending
               </Text>
               <Text as="p" className="ml-[-2px] text-right !font-medium">
-                12 Months, Dec-31-2021
+                12 Months, March 28, 2023
               </Text>
             </div>
 
