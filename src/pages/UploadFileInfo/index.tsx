@@ -259,7 +259,7 @@ export default function UploadFileInfoPage() {
                 <CovenantComplianceResultsRowupload
                   upload1="images/img_arrow_right.svg"
                   active={true}
-                  className="flex items-center gap-1 "
+                  className="flex items-center gap-1 text-red-400"
                 />
 
                 <CovenantComplianceResultsRowupload
