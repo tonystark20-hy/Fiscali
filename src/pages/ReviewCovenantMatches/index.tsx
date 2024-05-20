@@ -50,44 +50,44 @@ const tableData = [
     subRows: [
       {
         rowtablehead: "Net Revenues",
-        millionsofusd: "6,614.0",
+        millionsofusd: "6,614.00",
       },
       {
         rowtablehead: "Cost of Goods Sold",
-        millionsofusd: "2,506.6",
+        millionsofusd: "2,506.60",
       },
       {
         rowtablehead: "Gross Profit",
-        millionsofusd: "3653.0",
+        millionsofusd: "3653.00",
 
       },
       {
         rowtablehead: "Selling, general and administrative expenses",
-        millionsofusd: "3,237.0",
+        millionsofusd: "3,237.00",
         notes: "Sg&A includes 269.5 Depreciation and Amortization expense in cash flow statement",
         definitionofcom: "(c) depreciation and amortization expense, \n(d) amortization of intangibles(including, \nbut not limited to, goodwill) and organization \ncosts",
         rowconfidence: "High"
       },
       {
         rowtablehead: "Impairment of assets",
-        millionsofusd: "31.6",
+        millionsofusd: "31.60",
         definitionofcom: "(ii) any extraordinary or non-recurring non-cash\n income or gains (including, whether or not \notherwise included sa a separate item in the \nstatement of such Consolidated Net Income for \nsuch period, gains on the sales of assets \noutside of the ordinary course of business)",
         rowconfidence: "High"
       },
       {
         rowtablehead: "Restructuring and other charges",
-        millionsofusd: "8.096",
+        millionsofusd: "8,096.00",
         definitionofcom: "(g) Chargers incured during such period in \nconnection with restructuring or reorganization \nchange, including without limitation post-closing\n restructuring, reorganization and/or\n intergration charges or costs",
         rowconfidence: "Medium"
       },
       {
         rowtablehead: "Total other operating expenses, net",
-        millionsofusd: "3,336.0",
+        millionsofusd: "3,336.00",
 
       },
       {
         rowtablehead: "Operating Profit",
-        millionsofusd: "317.0",
+        millionsofusd: "317.00",
 
       },
     ],

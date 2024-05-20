@@ -22,37 +22,37 @@ const tableData = [
     subRows: [
       {
         rowtablehead: "Subscriber Revenues",
-        millionsofusd: "6,614.0",
+        millionsofusd: "6,614.00",
         categorylabels: "Revenues",
-        rowconfidence: "Low",
+        rowconfidence: "High",
       },
       {
         rowtablehead: "Advertising Revenues",
-        millionsofusd: "1,700.0",
+        millionsofusd: "1,700.00",
         categorylabels: "Revenues",
-        rowconfidence: "Medium",
+        rowconfidence: "High",
       },
       {
         rowtablehead: "Other Revenues",
-        millionsofusd: "151.0",
+        millionsofusd: "151.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
       },
       {
         rowtablehead: "Equipment Revenues",
-        millionsofusd: "201.0",
+        millionsofusd: "201.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
       },
       {
         rowtablehead: "Gross Profit",
-        millionsofusd: "3,653",
+        millionsofusd: "3,653.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
       },
       {
         rowtablehead: "Total Revenues",
-        millionsofusd: "8696.0",
+        millionsofusd: "8696.00",
         categorylabels: "Total Revenues",
         rowconfidence: "High",
       },
@@ -64,7 +64,7 @@ const tableData = [
     subRows: [
       {
         rowtablehead: "Cost of Services",
-        millionsofusd: "3,336",
+        millionsofusd: "3,336.00",
         rowconfidence: "High",
       },
       {
@@ -72,37 +72,37 @@ const tableData = [
         subRows: [
           {
             rowtablehead: "Programming & Comfort",
-            millionsofusd: "559.0",
+            millionsofusd: "559.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
           },
           {
             rowtablehead: "Customer Service Center & Billing",
-            millionsofusd: "501.0",
+            millionsofusd: "501.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
           },
           {
             rowtablehead: "Transmission",
-            millionsofusd: "218.0",
+            millionsofusd: "218.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
           },
           {
             rowtablehead: "Cost of Equipment",
-            millionsofusd: "18.0",
+            millionsofusd: "18.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
           },
           {
             rowtablehead: "Subscriber Acquisition Costs",
-            millionsofusd: "325.0",
+            millionsofusd: "325.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
           },
           {
             rowtablehead: "Sales and Marketing",
-            millionsofusd: "1056.0",
+            millionsofusd: "1056.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
           },
