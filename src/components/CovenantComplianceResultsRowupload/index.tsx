@@ -5,13 +5,13 @@ interface Props {
   className?: string;
   upload?: string;
   upload1?: string;
-  active?: boolean;
+  status?: string;
 }
 
 export default function CovenantComplianceResultsRowupload({
   upload = "Upload Documents ",
   upload1,
-  active,
+  status,
   ...props
 }: Props) {
   return (
@@ -21,14 +21,18 @@ export default function CovenantComplianceResultsRowupload({
           size="md"
           as="p"
           className={` mt-1.5 mb-1 ${
-            active ? "text-black-900" : " !text-indigo-400"
+            status === "active"
+              ? "!containertext-black-900"
+              : status === "activated"
+              ? "!text-indigo-400"
+              : "!text-[#aaaaaa]"
           }`}
         >
           {upload}
         </Text>
       </div>
       {!!upload1 ? (
-        <Img src={upload1} alt="upload" className="h-[33px]" />
+        <Img src={upload1} alt="upload" className="h-[33px] " />
       ) : null}
     </div>
   );
