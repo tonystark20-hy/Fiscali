@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef   } from "react";
 import { Img, Text, Heading, Button, SelectBox } from "../../components";
-import "./index.css";
 
 
 interface CellComponentProps {
@@ -9,7 +8,7 @@ interface CellComponentProps {
   category: string;
 }
 
-const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, category }) => {
+const NumberComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, category }) => {
   // const CellComponent: React.FC<CellComponentProps> = ({ initialValue }) => {
   const [value, setValue] = useState<string>(initialValue);
   const textareaRef = useRef(null);
@@ -20,26 +19,6 @@ const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, c
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height to the scrollHeight
     }
   }, [value]);
-
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setValue(e.target.value);
-  //   onChange(e.target.value);
-  // };
-
-  // return (
-  //   <Text
-  //     as="p"
-  //     className="flex items-center  !font-normal bg-white-A700"
-  //   >
-  //     <input
-  //       type="text"
-  //       className="text-left"
-  //       value={value}
-  //       onChange={handleChange}
-  //     />
-  //   </Text>
-  // );
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -53,7 +32,7 @@ const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, c
       <div className="textarea-container">
       <textarea
       ref={textareaRef}
-        className="text-left resize-none overflow-hidden"
+        className="text-right resize-none overflow-hidden"
         value={value}
         onChange={handleChange}
         style={{ width: '100%', 
@@ -73,4 +52,4 @@ const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, c
 
 };
 
-export default CellComponent;
+export default NumberComponent;

@@ -62,20 +62,20 @@ const tableData = [
       {
         rowtablehead: "Selling, general and administrative expenses",
         millionsofusd: "3,237.00",
-        notes: "Sg&A includes 269.5 Depreciation and Amortization expense in cash flow statement",
-        definitionofcom: "(c) depreciation and amortization expense, \n(d) amortization of intangibles(including, \nbut not limited to, goodwill) and organization \ncosts",
+        notes: "SG&A includes 269.5 Depreciation and Amortization expense in cash flow statement",
+        definitionofcom: "(c) depreciation and amortization expense, (d) amortization of intangibles(including, but not limited to, goodwill) and organization costs",
         rowconfidence: "High"
       },
       {
         rowtablehead: "Impairment of assets",
         millionsofusd: "31.60",
-        definitionofcom: "(ii) any extraordinary or non-recurring non-cash\n income or gains (including, whether or not \notherwise included sa a separate item in the \nstatement of such Consolidated Net Income for \nsuch period, gains on the sales of assets \noutside of the ordinary course of business)",
+        definitionofcom: "(ii) any extraordinary or non-recurring non-cash income or gains (including, whether or not otherwise included sa a separate item in the statement of such Consolidated Net Income for such period, gains on the sales of assets outside of the ordinary course of business)",
         rowconfidence: "High"
       },
       {
         rowtablehead: "Restructuring and other charges",
         millionsofusd: "8,096.00",
-        definitionofcom: "(g) Chargers incured during such period in \nconnection with restructuring or reorganization \nchange, including without limitation post-closing\n restructuring, reorganization and/or\n intergration charges or costs",
+        definitionofcom: "(g) Chargers incured during such period in connection with restructuring or reorganization change, including without limitation post-closing restructuring, reorganization and/or intergration charges or costs",
         rowconfidence: "Medium"
       },
       {

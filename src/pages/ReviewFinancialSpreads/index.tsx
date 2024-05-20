@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { Img, Text, Heading, Button, SelectBox } from "../../components";
 import CellComponent from "../../components/CellComponent";
+import NumberComponent from "../../components/NumberComponent";
 import CategoryRanking from "../../components/CategoryRanking";
 import { ReactTable } from "../../components/ReactTable";
 import ReviewFinancialSpreadsRowupload from "../../components/ReviewFinancialSpreadsRowupload";
@@ -41,12 +42,6 @@ const tableData = [
       {
         rowtablehead: "Equipment Revenues",
         millionsofusd: "201.00",
-        categorylabels: "Revenues",
-        rowconfidence: "High",
-      },
-      {
-        rowtablehead: "Gross Profit",
-        millionsofusd: "3,653.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
       },
@@ -105,6 +100,12 @@ const tableData = [
             millionsofusd: "1056.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
+          },
+          {
+            rowtablehead: "Engineering, Design and Development",
+            millionsofusd: "265.00",
+            categorylabels: "R&D Expense",
+            rowconfidence: "Low",
           },
         ],
       },
@@ -215,11 +216,18 @@ export default function ReviewFinancialSpreadsPage() {
 
           // return <CellComponent value={selectedCategory} onChange={handleInputChange} />;
           return (
-            <CellComponent
-              initialValue={initialValue}
-              onChange={handleInputChange}
-              category={selectedCategory}
-            />
+            <div className="cell-container">
+              {/* <div className="left-blank"></div> */}
+              <div className="center-content">
+                <NumberComponent
+                  initialValue={initialValue}
+                  onChange={handleInputChange}
+                  category={selectedCategory}
+                />
+              </div>
+              <div className="right-blank"></div>
+              {/* <div className="right-blank"></div> */}
+            </div>
           );
         },
         header: (info) => (

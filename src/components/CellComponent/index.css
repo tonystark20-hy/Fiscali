@@ -1,0 +1,7 @@
+.textarea-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns the textarea to the right */
+    align-items: center;       /* Vertically centers the textarea */
+    width: 100%;               /* Ensures the container takes full width */
+  }
+  

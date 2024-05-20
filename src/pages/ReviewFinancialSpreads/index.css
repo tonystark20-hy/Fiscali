@@ -22,3 +22,35 @@ thead tr th{
     padding-left: 10px;
     padding-right: 10px;
   }
+
+  .cell-container {
+    display: flex;
+    /* height: 100vh; Adjust as needed */
+  }
+  
+  .left-blank, .right-blank {
+    flex: 1;
+  }
+  
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1; /* Adjust to control the width of the center-content block */
+  }
+
+  @media (max-width: 1100px) {
+    .cell-container {
+      flex-direction: column;
+    }
+    
+    .left-blank, .right-blank {
+      display: none;
+    }
+    
+    .center-content {
+      flex: none;
+      width: 100%; /* Full width on small screens */
+      justify-content: center; /* Center the component */
+    }
+  }
