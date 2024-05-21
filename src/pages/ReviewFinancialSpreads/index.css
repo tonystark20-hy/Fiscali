@@ -54,3 +54,13 @@ thead tr th{
       justify-content: center; /* Center the component */
     }
   }
+
+
+  .category-ranking-container {
+    position: absolute;
+    /* bottom: calc(200% + 5px);  */
+    bottom:  calc(100% + 35px );
+    left: 0;
+
+    z-index: 9999; 
+  }

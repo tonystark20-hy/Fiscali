@@ -15,7 +15,18 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { CloseSVG } from "../../assets/images";
 import PopoverDialog from "components/PopoverDialog";
-import { Popover, Button as ButtonMUI } from "@material-ui/core";
+import {
+  Popover,
+  Button as ButtonMUI,
+  Typography,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
 
 // import { useHistory } from 'react-router-dom';
 
@@ -292,14 +303,19 @@ export default function ReviewFinancialSpreadsPage() {
                   category={selectedCategory}
                 />
               </div>
+
               {info.row.original.rowconfidence === "Medium" ||
                 (info.row.original.rowconfidence === "Low" && (
-                  <CategoryRanking
-                    categories={categories}
-                    col={col}
-                    row={row}
-                    onCategoryClick={handleCategoryClick}
-                  />
+                  <div className="relative">
+                    <div className="category-ranking-container">
+                      <CategoryRanking
+                        categories={categories}
+                        col={col}
+                        row={row}
+                        onCategoryClick={handleCategoryClick}
+                      />
+                    </div>
+                  </div>
                 ))}
             </>
           );
@@ -730,43 +746,38 @@ export default function ReviewFinancialSpreadsPage() {
               data={data}
             />
 
-            {/* {showTable && (
-              <div
-                style={{
-                  position: "absolute",
-                  left: tablePosition.x,
-                  top: tablePosition.y,
-                }}
-                onClick={() => setShowTable(false)}
-              >
-                <CategoryRanking
-                  categories={categories}
-                  onCategoryClick={handleCategoryClick}
-                />
-              </div>
-            )} */}
-
             <Button
               className="flex whitespace-nowrap items-center justify-center h-[39px]  px-[35px]  text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] my-20  ml-auto "
               onClick={handleNavigate}
             >
               Continue
             </Button>
+            {/* <div>
+              <button
+                // variant="contained"
+                // color="secondary"
+                onClick={openPopover}
+                className="text-red-400 bg-yellow-300"
+              >
+                POPUPPPOP
+              </button>
+              <Popover
+                open={Boolean(anchor)}
+                anchorEl={anchor}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                onClose={() => setAnchor(null)}
+              >
+                popovre bottom text
+              </Popover>
+            </div> */}
           </div>
-
-          {/* <Popover
-            open={open}
-            anchorOrigin={{
-              vertical: "center",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-          >
-            The content of the Popover.
-          </Popover> */}
         </div>
       </div>
     </>
