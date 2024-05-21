@@ -19,6 +19,16 @@ import { Popover, Button as ButtonMUI } from "@material-ui/core";
 
 // import { useHistory } from 'react-router-dom';
 
+type TableDataType = {
+  rowtablehead: string;
+  subRows: {
+    rowtablehead: string;
+    millionsofusd: string;
+    categorylabels: string;
+    rowconfidence: string;
+  }[];
+};
+
 const tableData = [
   {
     rowtablehead: "Revenues",
@@ -55,7 +65,12 @@ const tableData = [
       },
     ],
   },
-  {},
+  {
+    rowtablehead: "",
+    millionsofusd: "",
+    categorylabels: "",
+    rowconfidence: "",
+  },
   {
     rowtablehead: "Operating Expenses",
     subRows: [
@@ -131,11 +146,16 @@ export default function ReviewFinancialSpreadsPage() {
   const [searchBarValue, setSearchBarValue] = React.useState("");
   const [collapsed, setCollapsed] = React.useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [data, setData] = useState(tableData);
   const navigate = useNavigate();
   // const history = useHistory();
 
   const [showTable, setShowTable] = useState(false);
   const [tablePosition, setTablePosition] = useState({ x: 0, y: 0 });
+
+  // console.log(data[0]['subRows'][1]['categorylabels'])
+
+  // console.log(data[0]['subRows'][1]['categorylabels'])
 
   const [anchor, setAnchor] = useState(null);
 
@@ -252,6 +272,13 @@ export default function ReviewFinancialSpreadsPage() {
       tableColumnHelper.accessor("categorylabels", {
         cell: (info) => {
           const initialValue = info?.getValue?.();
+          const id = info?.cell.id;
+          // console.log(id)
+          const col = id.split("_")[1];
+          const row = id.split("_")[0];
+          console.log(row);
+          console.log(col);
+
           return (
             <>
               <div
@@ -259,13 +286,19 @@ export default function ReviewFinancialSpreadsPage() {
                 // onMouseLeave={handleMouseLeave}
                 style={{ cursor: "pointer" }}
               >
-                {/* <CellComponent value={selectedCategory} onChange={handleInputChange} /> */}
                 <CellComponent
                   initialValue={initialValue}
                   onChange={handleInputChange}
                   category={selectedCategory}
                 />
               </div>
+              {info.row.original.rowconfidence === "Medium" ||
+                (info.row.original.rowconfidence === "Low" && (
+                  <CategoryRanking
+                    categories={categories}
+                    onCategoryClick={handleCategoryClick}
+                  />
+                ))}
             </>
           );
         },
@@ -412,7 +445,6 @@ export default function ReviewFinancialSpreadsPage() {
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
-    console.log(selectedCategory);
   };
 
   const handleInputChange = (value: string) => {
@@ -690,10 +722,10 @@ export default function ReviewFinancialSpreadsPage() {
               rowDataProps={{ className: "md:flex-col" }}
               className="self-stretch mt-1.5 shadow-lg"
               columns={tableColumns}
-              data={tableData}
+              data={data}
             />
 
-            {showTable && (
+            {/* {showTable && (
               <div
                 style={{
                   position: "absolute",
@@ -707,7 +739,7 @@ export default function ReviewFinancialSpreadsPage() {
                   onCategoryClick={handleCategoryClick}
                 />
               </div>
-            )}
+            )} */}
 
             <Button
               className="flex whitespace-nowrap items-center justify-center h-[39px]  px-[35px]  text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] my-20  ml-auto "

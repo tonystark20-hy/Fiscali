@@ -15,31 +15,8 @@ const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, c
   const textareaRef = useRef(null);
 
   useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto'; // Reset height to auto
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height to the scrollHeight
-    }
+    setValue(initialValue);
   }, [value]);
-
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setValue(e.target.value);
-  //   onChange(e.target.value);
-  // };
-
-  // return (
-  //   <Text
-  //     as="p"
-  //     className="flex items-center  !font-normal bg-white-A700"
-  //   >
-  //     <input
-  //       type="text"
-  //       className="text-left"
-  //       value={value}
-  //       onChange={handleChange}
-  //     />
-  //   </Text>
-  // );
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -52,7 +29,6 @@ const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, c
     >
       <div className="textarea-container">
       <textarea
-      ref={textareaRef}
         className="text-left resize-none overflow-hidden"
         value={value}
         onChange={handleChange}
