@@ -273,7 +273,7 @@ export default function ReviewFinancialSpreadsPage() {
         cell: (info) => {
           const initialValue = info?.getValue?.();
           const id = info?.cell.id;
-          // console.log(id)
+          console.log(initialValue)
           const col = id.split("_")[1];
           const row = id.split("_")[0];
           // console.log(row);
@@ -369,7 +369,7 @@ export default function ReviewFinancialSpreadsPage() {
       tableColumnHelper.accessor("rowview", {
         cell: (info) => (
           <div className="flex justify-center">
-            {info.row.depth > 0 && info.row.subRows ? (
+            {info.row.depth > 0 && info.row.subRows && info.row.original.categorylabels !== undefined ? (
               <div className="h-[36px] flex items-center justify-center">
                 <input
                   type="checkbox"
