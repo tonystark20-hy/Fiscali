@@ -158,7 +158,7 @@ const ReactTable = <D extends unknown>({
   );
 
   return (
-    <table className={className} style={{ width: '100%' }}>
+    <table className={className} style={{ width: '90%' }}>
       <thead {...headerProps}>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>

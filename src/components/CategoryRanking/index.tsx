@@ -31,6 +31,11 @@ interface Category {
                 <td>{category.ranking}</td>
               </tr>
             ))}
+            <tr>
+              <td colSpan={3} >
+                <input type="text" placeholder="Type Category Here" />
+                </td>
+            </tr>
           </tbody>
 
         </table>
