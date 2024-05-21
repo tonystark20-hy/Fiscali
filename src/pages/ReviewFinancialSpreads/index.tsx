@@ -276,8 +276,8 @@ export default function ReviewFinancialSpreadsPage() {
           // console.log(id)
           const col = id.split("_")[1];
           const row = id.split("_")[0];
-          console.log(row);
-          console.log(col);
+          // console.log(row);
+          // console.log(col);
 
           return (
             <>
@@ -296,6 +296,8 @@ export default function ReviewFinancialSpreadsPage() {
                 (info.row.original.rowconfidence === "Low" && (
                   <CategoryRanking
                     categories={categories}
+                    col={col}
+                    row={row}
                     onCategoryClick={handleCategoryClick}
                   />
                 ))}
@@ -350,25 +352,6 @@ export default function ReviewFinancialSpreadsPage() {
               }}
             >
               {info?.getValue?.()}
-              {/* <div> */}
-              {/* <ButtonMUI
-                  // variant="contained"
-                  // color="secondary"
-                  onClick={openPopover}
-                ></ButtonMUI> */}
-              <Popover
-                open={Boolean(anchor)}
-                anchorEl={anchor}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                transformOrigin={{ vertical: "bottom", horizontal: "left" }}
-                onClose={() => setAnchor(null)}
-              >
-                this is a POPOVER
-              </Popover>
-              {/* </div> */}
             </Heading>
           </div>
         ),
@@ -443,8 +426,30 @@ export default function ReviewFinancialSpreadsPage() {
     { name: "Tax Expense", ranking: 3 },
   ];
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = (col: string, row: string, category: string) => {
     setSelectedCategory(category);
+    console.log("row, col, category: ", row, col, category);
+
+    const updatedTableData = [...data];
+
+    // Identify the cell you want to update
+    const rowIndex = 0; // Row index of the cell
+    const subRowIndex = 1; // Sub-row index of the cell
+    const columnName = "millionsofusd"; // Column name of the cell
+
+    const rowSplit = row.split(".");
+
+    // Update the value of the cell
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
+      col
+    ] = category;
+
+    // console.log(data[0]['subRows'][1]['categorylabels'])
+
+    // Update the state with the modified table data
+    setData(updatedTableData);
+
+    console.log(data);
   };
 
   const handleInputChange = (value: string) => {
