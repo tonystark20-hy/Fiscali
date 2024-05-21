@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { Helmet } from "react-helmet";
-import { Img, Text, Heading, Button, SelectBox } from "../../components";
+import { Img, Text, Heading, SelectBox, Button } from "../../components";
 import CellComponent from "../../components/CellComponent";
 import NumberComponent from "../../components/NumberComponent";
 import CategoryRanking from "../../components/CategoryRanking";
@@ -14,6 +14,8 @@ import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { CloseSVG } from "../../assets/images";
+import PopoverDialog from "components/PopoverDialog";
+import { Popover, Button as ButtonMUI } from "@material-ui/core";
 
 // import { useHistory } from 'react-router-dom';
 
@@ -135,30 +137,36 @@ export default function ReviewFinancialSpreadsPage() {
   const [showTable, setShowTable] = useState(false);
   const [tablePosition, setTablePosition] = useState({ x: 0, y: 0 });
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const { left, top } = event.currentTarget.getBoundingClientRect();
+  const [anchor, setAnchor] = useState(null);
 
-    // console.log({left, top})
-    // console.log(window.scrollX)
-
-    if (showTable) {
-      setShowTable(false);
-    } else {
-      // setShowTable(true);
-      setTablePosition({
-        x: event.clientX - left / 2,
-        y: event.clientY - top / 2,
-      });
-      // console.log(event.clientX);
-      // console.log(event.clientY);
-    }
-    // console.log(tablePosition.x)
-    // console.log(tablePosition.y)
+  const openPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchor(event.currentTarget);
   };
 
-  const handleMouseLeave = () => {
-    // setShowTable(false);
-  };
+  // const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  //   const { left, top } = event.currentTarget.getBoundingClientRect();
+
+  //   // console.log({left, top})
+  //   // console.log(window.scrollX)
+
+  //   if (showTable) {
+  //     setShowTable(false);
+  //   } else {
+  //     // setShowTable(true);
+  //     setTablePosition({
+  //       x: event.clientX - left / 2,
+  //       y: event.clientY - top / 2,
+  //     });
+  //     // console.log(event.clientX);
+  //     // console.log(event.clientY);
+  //   }
+  //   // console.log(tablePosition.x)
+  //   // console.log(tablePosition.y)
+  // };
+
+  // const handleMouseLeave = () => {
+  //   // setShowTable(false);
+  // };
 
   const tableColumns = React.useMemo(() => {
     const tableColumnHelper = createColumnHelper<TableRowType>();
@@ -247,7 +255,7 @@ export default function ReviewFinancialSpreadsPage() {
           return (
             <>
               <div
-                onClick={handleClick}
+                // onClick={handleClick}
                 // onMouseLeave={handleMouseLeave}
                 style={{ cursor: "pointer" }}
               >
@@ -276,6 +284,7 @@ export default function ReviewFinancialSpreadsPage() {
         cell: (info) => (
           <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
             <Heading
+              onClick={openPopover}
               as="p"
               className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
                 info?.getValue?.() == "High"
@@ -308,6 +317,25 @@ export default function ReviewFinancialSpreadsPage() {
               }}
             >
               {info?.getValue?.()}
+              {/* <div> */}
+              {/* <ButtonMUI
+                  // variant="contained"
+                  // color="secondary"
+                  onClick={openPopover}
+                ></ButtonMUI> */}
+              <Popover
+                open={Boolean(anchor)}
+                anchorEl={anchor}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                transformOrigin={{ vertical: "bottom", horizontal: "left" }}
+                onClose={() => setAnchor(null)}
+              >
+                this is a POPOVER
+              </Popover>
+              {/* </div> */}
             </Heading>
           </div>
         ),
@@ -400,6 +428,7 @@ export default function ReviewFinancialSpreadsPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
+
       <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit mb-2">
         <div className="flex w-[100%] md:w-full  ">
           <Img
@@ -687,6 +716,20 @@ export default function ReviewFinancialSpreadsPage() {
               Continue
             </Button>
           </div>
+
+          {/* <Popover
+            open={open}
+            anchorOrigin={{
+              vertical: "center",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            The content of the Popover.
+          </Popover> */}
         </div>
       </div>
     </>
