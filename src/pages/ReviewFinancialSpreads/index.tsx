@@ -15,18 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { CloseSVG } from "../../assets/images";
 import PopoverDialog from "components/PopoverDialog";
-import {
-  Popover,
-  Button as ButtonMUI,
-  Typography,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
+import { Popover, Button as ButtonMUI } from "@material-ui/core";
 
 // import { useHistory } from 'react-router-dom';
 
@@ -284,7 +273,7 @@ export default function ReviewFinancialSpreadsPage() {
         cell: (info) => {
           const initialValue = info?.getValue?.();
           const id = info?.cell.id;
-          // console.log(id)
+          console.log(initialValue);
           const col = id.split("_")[1];
           const row = id.split("_")[0];
           // console.log(row);
@@ -385,11 +374,14 @@ export default function ReviewFinancialSpreadsPage() {
       tableColumnHelper.accessor("rowview", {
         cell: (info) => (
           <div className="flex justify-center">
-            {info.row.depth > 0 && info.row.subRows ? (
+            {info.row.depth > 0 &&
+            info.row.subRows &&
+            info.row.original.categorylabels !== undefined ? (
               <div className="h-[36px] flex items-center justify-center">
                 <input
                   type="checkbox"
                   defaultChecked={info.row.original.rowconfidence === "High"}
+                  checked={info.row.original.rowconfidence === "High"}
                   style={{
                     appearance: "none", // Hide default checkbox appearance
                     width: "20px",
@@ -459,6 +451,9 @@ export default function ReviewFinancialSpreadsPage() {
     updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
       col
     ] = category;
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
+      "rowconfidence"
+    ] = "High";
 
     // console.log(data[0]['subRows'][1]['categorylabels'])
 
