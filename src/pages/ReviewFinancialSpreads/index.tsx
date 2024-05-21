@@ -14,8 +14,8 @@ import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { CloseSVG } from "../../assets/images";
-import PopoverDialog from "components/PopoverDialog";
-import { Popover, Button as ButtonMUI } from "@material-ui/core";
+// import PopoverDialog from "components/PopoverDialog";
+// import { Popover, Button as ButtonMUI } from "@material-ui/core";
 
 // import { useHistory } from 'react-router-dom';
 
@@ -374,6 +374,7 @@ export default function ReviewFinancialSpreadsPage() {
                 <input
                   type="checkbox"
                   defaultChecked={info.row.original.rowconfidence === "High"}
+                  checked={info.row.original.rowconfidence === "High"}
                   style={{
                     appearance: "none", // Hide default checkbox appearance
                     width: "20px",
@@ -443,6 +444,9 @@ export default function ReviewFinancialSpreadsPage() {
     updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
       col
     ] = category;
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
+      "rowconfidence"
+    ] = "High";
 
     // console.log(data[0]['subRows'][1]['categorylabels'])
 

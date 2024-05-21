@@ -15,12 +15,21 @@ interface Category {
 
 // const CategoryRanking: React.FC<{ initialValue: string }> = ({ initialValue }) => {
 
+
+
 const CategoryRanking: React.FC<TableComponentProps> = ({
   categories,
   col,
   row,
   onCategoryClick,
 }) => {
+
+  const [value, setValue] = useState();
+
+  const handleChange = (event) => {
+    onCategoryClick(col, row, event.target.value)
+  };
+
   return (
     <div>
       <table id="cr">
@@ -42,7 +51,7 @@ const CategoryRanking: React.FC<TableComponentProps> = ({
           ))}
           <tr>
             <td colSpan={3}>
-              <input type="text" placeholder="Type Category Here" />
+              <input type="text" onChange={handleChange} placeholder="Type Category Here" />
             </td>
           </tr>
         </tbody>
