@@ -14,8 +14,17 @@ const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, c
   const [value, setValue] = useState<string>(initialValue);
   const textareaRef = useRef(null);
 
+  // useEffect(() => {
+  //   setValue(initialValue);
+  // }, [value]);
+
   useEffect(() => {
-    setValue(initialValue);
+    if (textareaRef.current) {
+      // Reset height to auto to allow shrinking
+      textareaRef.current.style.height = 'auto';
+      // Set height to the scrollHeight plus some extra space for padding/border
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
   }, [value]);
 
   const handleChange = (event) => {
@@ -29,6 +38,7 @@ const CellComponent: React.FC<CellComponentProps> = ({ initialValue, onChange, c
     >
       <div className="textarea-container">
       <textarea
+      ref={textareaRef}
         className="text-left resize-none overflow-hidden"
         value={value}
         onChange={handleChange}
