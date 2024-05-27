@@ -134,6 +134,7 @@ const ReactTable = <D extends unknown>({
     getFilteredRowModel: getFilteredRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    // autoResetExpanded: false,
     ...restConfig,
   };
 

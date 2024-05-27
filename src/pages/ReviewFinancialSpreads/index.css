@@ -59,8 +59,7 @@ thead tr th{
   .category-ranking-container {
     position: absolute;
     /* bottom: calc(200% + 5px);  */
-    bottom:  calc(100% + 35px );
+    bottom:  calc(100% + 45px );
     left: 0;
-
-    z-index: 9999; 
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);    /* z-index: 9999;  */
   }

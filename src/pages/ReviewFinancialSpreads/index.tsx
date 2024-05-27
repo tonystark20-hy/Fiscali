@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { Img, Text, Heading, SelectBox, Button } from "../../components";
@@ -76,8 +76,6 @@ const tableData = [
     subRows: [
       {
         rowtablehead: "Cost of Services",
-        millionsofusd: "3,336.00",
-        rowconfidence: "High",
       },
       {
         rowtablehead: "Revenue Share & Royalties",
@@ -153,15 +151,22 @@ export default function ReviewFinancialSpreadsPage() {
   const [showTable, setShowTable] = useState(false);
   const [tablePosition, setTablePosition] = useState({ x: 0, y: 0 });
 
-  // console.log(data[0]['subRows'][1]['categorylabels'])
+  const [showCategoryRanking, setShowCategoryRanking] = useState(false);
 
-  // console.log(data[0]['subRows'][1]['categorylabels'])
-
-  const [anchor, setAnchor] = useState(null);
-
-  const openPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchor(event.currentTarget);
+  const handleClick = () => {
+    setShowCategoryRanking(!showCategoryRanking);
+    console.log("showCate: ", showCategoryRanking);
   };
+
+  // console.log(data[0]['subRows'][1]['categorylabels'])
+
+  // console.log(data[0]['subRows'][1]['categorylabels'])
+
+  // const [anchor, setAnchor] = useState(null);
+
+  // const openPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   setAnchor(event.currentTarget);
+  // };
 
   // const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
   //   const { left, top } = event.currentTarget.getBoundingClientRect();
@@ -281,11 +286,7 @@ export default function ReviewFinancialSpreadsPage() {
 
           return (
             <>
-              <div
-                // onClick={handleClick}
-                // onMouseLeave={handleMouseLeave}
-                style={{ cursor: "pointer" }}
-              >
+              <div onClick={handleClick} style={{ cursor: "pointer" }}>
                 <CellComponent
                   initialValue={initialValue}
                   onChange={handleInputChange}
@@ -293,8 +294,14 @@ export default function ReviewFinancialSpreadsPage() {
                 />
               </div>
 
-              {info.row.original.rowconfidence === "Medium" ||
-                (info.row.original.rowconfidence === "Low" && (
+              {showCategoryRanking &&
+                (info.row.original.rowconfidence === "Medium" ||
+                  info.row.original.rowconfidence === "Low") && (
+                  // <div
+                  //   className={`relative ${
+                  //     showCategoryRanking ? "block" : "invisible"
+                  //   } `}
+                  // >
                   <div className="relative">
                     <div className="category-ranking-container">
                       <CategoryRanking
@@ -305,7 +312,7 @@ export default function ReviewFinancialSpreadsPage() {
                       />
                     </div>
                   </div>
-                ))}
+                )}
             </>
           );
         },
@@ -324,7 +331,7 @@ export default function ReviewFinancialSpreadsPage() {
         cell: (info) => (
           <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
             <Heading
-              onClick={openPopover}
+              // onClick={openPopover}
               as="p"
               className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
                 info?.getValue?.() == "High"
@@ -478,7 +485,10 @@ export default function ReviewFinancialSpreadsPage() {
       </Helmet>
 
       <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit mb-2">
-        <div className="flex w-[100%] md:w-full  ">
+        <div
+          onClick={handleClick}
+          className="flex w-[100%] md:w-full cursor-pointer "
+        >
           <Img
             src="images/img_image_23.png"
             className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"
