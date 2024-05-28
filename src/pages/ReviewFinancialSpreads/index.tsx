@@ -14,7 +14,7 @@ import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { CloseSVG } from "../../assets/images";
-import PopoverDialog from "components/PopoverDialog";
+// import PopoverDialog from "components/PopoverDialog";
 // import { Popover, Button as ButtonMUI } from "@material-ui/core";
 
 // import { useHistory } from 'react-router-dom';
