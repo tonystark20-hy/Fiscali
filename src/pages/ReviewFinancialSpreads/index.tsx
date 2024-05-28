@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { CloseSVG } from "../../assets/images";
 import PopoverDialog from "components/PopoverDialog";
-import { Popover, Button as ButtonMUI } from "@material-ui/core";
+// import { Popover, Button as ButtonMUI } from "@material-ui/core";
 
 // import { useHistory } from 'react-router-dom';
 
@@ -26,6 +26,7 @@ type TableDataType = {
     millionsofusd: string;
     categorylabels: string;
     rowconfidence: string;
+    showcategory: boolean;
   }[];
 };
 
@@ -38,30 +39,35 @@ const tableData = [
         millionsofusd: "6,614.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
+        rowview: false
       },
       {
         rowtablehead: "Advertising Revenues",
         millionsofusd: "1,700.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
+        rowview: false
       },
       {
         rowtablehead: "Other Revenues",
         millionsofusd: "151.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
+        rowview: false
       },
       {
         rowtablehead: "Equipment Revenues",
         millionsofusd: "201.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
+        rowview: false
       },
       {
         rowtablehead: "Total Revenues",
         millionsofusd: "8696.00",
         categorylabels: "Total Revenues",
         rowconfidence: "High",
+        rowview: false
       },
     ],
   },
@@ -85,42 +91,49 @@ const tableData = [
             millionsofusd: "559.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
+            rowview: false
           },
           {
             rowtablehead: "Customer Service Center & Billing",
             millionsofusd: "501.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
+            rowview: false
           },
           {
             rowtablehead: "Transmission",
             millionsofusd: "218.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
+            rowview: false
           },
           {
             rowtablehead: "Cost of Equipment",
             millionsofusd: "18.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
+            rowview: false
           },
           {
             rowtablehead: "Subscriber Acquisition Costs",
             millionsofusd: "325.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
+            rowview: false
           },
           {
             rowtablehead: "Sales and Marketing",
             millionsofusd: "1056.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
+            rowview: false
           },
           {
             rowtablehead: "Engineering, Design and Development",
             millionsofusd: "265.00",
             categorylabels: "R&D Expense",
             rowconfidence: "Low",
+            rowview: true
           },
         ],
       },
@@ -133,7 +146,7 @@ type TableRowType = {
   millionsofusd?: string;
   categorylabels?: any;
   rowconfidence?: any;
-  rowview?: any;
+  rowview?: boolean;
   subRows?: TableRowType[];
 };
 
@@ -153,45 +166,10 @@ export default function ReviewFinancialSpreadsPage() {
 
   const [showCategoryRanking, setShowCategoryRanking] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setShowCategoryRanking(!showCategoryRanking);
     console.log("showCate: ", showCategoryRanking);
   };
-
-  // console.log(data[0]['subRows'][1]['categorylabels'])
-
-  // console.log(data[0]['subRows'][1]['categorylabels'])
-
-  // const [anchor, setAnchor] = useState(null);
-
-  // const openPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   setAnchor(event.currentTarget);
-  // };
-
-  // const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-  //   const { left, top } = event.currentTarget.getBoundingClientRect();
-
-  //   // console.log({left, top})
-  //   // console.log(window.scrollX)
-
-  //   if (showTable) {
-  //     setShowTable(false);
-  //   } else {
-  //     // setShowTable(true);
-  //     setTablePosition({
-  //       x: event.clientX - left / 2,
-  //       y: event.clientY - top / 2,
-  //     });
-  //     // console.log(event.clientX);
-  //     // console.log(event.clientY);
-  //   }
-  //   // console.log(tablePosition.x)
-  //   // console.log(tablePosition.y)
-  // };
-
-  // const handleMouseLeave = () => {
-  //   // setShowTable(false);
-  // };
 
   const tableColumns = React.useMemo(() => {
     const tableColumnHelper = createColumnHelper<TableRowType>();
@@ -294,14 +272,9 @@ export default function ReviewFinancialSpreadsPage() {
                 />
               </div>
 
-              {showCategoryRanking &&
-                (info.row.original.rowconfidence === "Medium" ||
-                  info.row.original.rowconfidence === "Low") && (
-                  // <div
-                  //   className={`relative ${
-                  //     showCategoryRanking ? "block" : "invisible"
-                  //   } `}
-                  // >
+              {
+                (info.row.original.rowview)
+                  && (
                   <div className="relative">
                     <div className="category-ranking-container">
                       <CategoryRanking
@@ -328,10 +301,18 @@ export default function ReviewFinancialSpreadsPage() {
         meta: { width: "15%" },
       }),
       tableColumnHelper.accessor("rowconfidence", {
-        cell: (info) => (
+        cell: (info) => {
+
+          const id = info?.cell.id;
+          console.log(id)
+          const col = id.split("_")[1];
+          const row = id.split("_")[0];
+
+          return (
+          <>
           <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
             <Heading
-              // onClick={openPopover}
+             onClick={() => openPopover(row, col)}
               as="p"
               className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
                 info?.getValue?.() == "High"
@@ -361,12 +342,15 @@ export default function ReviewFinancialSpreadsPage() {
                     ? "#F9CDD0" // Equivalent to bg-red-300
                     : "#FDFFFF" // Equivalent to bg-white-500
                 }`,
+                cursor: "pointer"
               }}
             >
               {info?.getValue?.()}
             </Heading>
           </div>
-        ),
+            </>
+            )
+            },
         header: (info) => (
           <Heading
             as="h2"
@@ -388,7 +372,7 @@ export default function ReviewFinancialSpreadsPage() {
                 <input
                   type="checkbox"
                   defaultChecked={info.row.original.rowconfidence === "High"}
-                  checked={info.row.original.rowconfidence === "High"}
+                  // checked={info.row.original.rowconfidence === "High"}
                   style={{
                     appearance: "none", // Hide default checkbox appearance
                     width: "20px",
@@ -443,14 +427,9 @@ export default function ReviewFinancialSpreadsPage() {
 
   const handleCategoryClick = (col: string, row: string, category: string) => {
     setSelectedCategory(category);
-    console.log("row, col, category: ", row, col, category);
+    // console.log("row, col, category: ", row, col, category);
 
     const updatedTableData = [...data];
-
-    // Identify the cell you want to update
-    const rowIndex = 0; // Row index of the cell
-    const subRowIndex = 1; // Sub-row index of the cell
-    const columnName = "millionsofusd"; // Column name of the cell
 
     const rowSplit = row.split(".");
 
@@ -461,13 +440,26 @@ export default function ReviewFinancialSpreadsPage() {
     updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
       "rowconfidence"
     ] = "High";
-
-    // console.log(data[0]['subRows'][1]['categorylabels'])
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
+      "rowview"
+    ] = false;
 
     // Update the state with the modified table data
     setData(updatedTableData);
 
-    console.log(data);
+    // console.log(data);
+  };
+
+  const openPopover = (row: string, col: string) => {
+    const updatedTableData = [...data];
+
+    const rowSplit = row.split(".");
+
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
+      "rowview"
+    ] = !updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]]["rowview"];
+
+    setData(updatedTableData);
   };
 
   const handleInputChange = (value: string) => {
