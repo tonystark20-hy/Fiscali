@@ -26,8 +26,10 @@ const CategoryRanking: React.FC<TableComponentProps> = ({
 
   const [value, setValue] = useState();
 
-  const handleChange = (event) => {
-    onCategoryClick(col, row, event.target.value)
+  const handleInputChange = (event) => {
+    if (event.key === 'Enter') {
+      onCategoryClick(col, row, event.target.value)
+    }
   };
 
   return (
@@ -51,7 +53,7 @@ const CategoryRanking: React.FC<TableComponentProps> = ({
           ))}
           <tr>
             <td colSpan={3}>
-              <input type="text" onChange={handleChange} placeholder="Type Category Here" />
+              <input type="text" onKeyDown={handleInputChange} placeholder="Type Category Here" />
             </td>
           </tr>
         </tbody>
