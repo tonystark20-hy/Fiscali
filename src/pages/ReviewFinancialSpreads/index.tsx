@@ -39,35 +39,35 @@ const tableData = [
         millionsofusd: "6,614.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
-        rowview: false
+        rowview: false,
       },
       {
         rowtablehead: "Advertising Revenues",
         millionsofusd: "1,700.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
-        rowview: false
+        rowview: false,
       },
       {
         rowtablehead: "Other Revenues",
         millionsofusd: "151.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
-        rowview: false
+        rowview: false,
       },
       {
         rowtablehead: "Equipment Revenues",
         millionsofusd: "201.00",
         categorylabels: "Revenues",
         rowconfidence: "High",
-        rowview: false
+        rowview: false,
       },
       {
         rowtablehead: "Total Revenues",
         millionsofusd: "8696.00",
         categorylabels: "Total Revenues",
         rowconfidence: "High",
-        rowview: false
+        rowview: false,
       },
     ],
   },
@@ -91,49 +91,49 @@ const tableData = [
             millionsofusd: "559.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
-            rowview: false
+            rowview: false,
           },
           {
             rowtablehead: "Customer Service Center & Billing",
             millionsofusd: "501.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
-            rowview: false
+            rowview: false,
           },
           {
             rowtablehead: "Transmission",
             millionsofusd: "218.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
-            rowview: false
+            rowview: false,
           },
           {
             rowtablehead: "Cost of Equipment",
             millionsofusd: "18.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
-            rowview: false
+            rowview: false,
           },
           {
             rowtablehead: "Subscriber Acquisition Costs",
             millionsofusd: "325.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
-            rowview: false
+            rowview: false,
           },
           {
             rowtablehead: "Sales and Marketing",
             millionsofusd: "1056.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
-            rowview: false
+            rowview: false,
           },
           {
             rowtablehead: "Engineering, Design and Development",
             millionsofusd: "265.00",
             categorylabels: "R&D Expense",
             rowconfidence: "Low",
-            rowview: true
+            rowview: true,
           },
         ],
       },
@@ -163,13 +163,6 @@ export default function ReviewFinancialSpreadsPage() {
 
   const [showTable, setShowTable] = useState(false);
   const [tablePosition, setTablePosition] = useState({ x: 0, y: 0 });
-
-  const [showCategoryRanking, setShowCategoryRanking] = useState(false);
-
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    setShowCategoryRanking(!showCategoryRanking);
-    console.log("showCate: ", showCategoryRanking);
-  };
 
   const tableColumns = React.useMemo(() => {
     const tableColumnHelper = createColumnHelper<TableRowType>();
@@ -264,7 +257,7 @@ export default function ReviewFinancialSpreadsPage() {
 
           return (
             <>
-              <div onClick={handleClick} style={{ cursor: "pointer" }}>
+              <div style={{ cursor: "pointer" }}>
                 <CellComponent
                   initialValue={initialValue}
                   onChange={handleInputChange}
@@ -272,20 +265,18 @@ export default function ReviewFinancialSpreadsPage() {
                 />
               </div>
 
-              {
-                (info.row.original.rowview)
-                  && (
-                  <div className="relative">
-                    <div className="category-ranking-container">
-                      <CategoryRanking
-                        categories={categories}
-                        col={col}
-                        row={row}
-                        onCategoryClick={handleCategoryClick}
-                      />
-                    </div>
+              {info.row.original.rowview && (
+                <div className="relative">
+                  <div className="category-ranking-container">
+                    <CategoryRanking
+                      categories={categories}
+                      col={col}
+                      row={row}
+                      onCategoryClick={handleCategoryClick}
+                    />
                   </div>
-                )}
+                </div>
+              )}
             </>
           );
         },
@@ -302,55 +293,54 @@ export default function ReviewFinancialSpreadsPage() {
       }),
       tableColumnHelper.accessor("rowconfidence", {
         cell: (info) => {
-
           const id = info?.cell.id;
-          console.log(id)
+          console.log(id);
           const col = id.split("_")[1];
           const row = id.split("_")[0];
 
           return (
-          <>
-          <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
-            <Heading
-             onClick={() => openPopover(row, col)}
-              as="p"
-              className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
-                info?.getValue?.() == "High"
-                  ? "bg-green-300"
-                  : info?.getValue?.() == "Medium"
-                  ? "bg-yellow-200"
-                  : info?.getValue?.() == "Low"
-                  ? "bg-red-300"
-                  : "bg-white-500"
-              }`}
-              style={{
-                color: `${
-                  info?.getValue?.() == "High"
-                    ? "#038C8C"
-                    : info?.getValue?.() == "Medium"
-                    ? "#CCB400"
-                    : info?.getValue?.() == "Low"
-                    ? "#DF4D5A"
-                    : "white"
-                }`,
-                backgroundColor: `${
-                  info?.getValue?.() == "High"
-                    ? "#BAD8D8"
-                    : info?.getValue?.() == "Medium"
-                    ? "#FFE08E" // Equivalent to bg-yellow-200
-                    : info?.getValue?.() == "Low"
-                    ? "#F9CDD0" // Equivalent to bg-red-300
-                    : "#FDFFFF" // Equivalent to bg-white-500
-                }`,
-                cursor: "pointer"
-              }}
-            >
-              {info?.getValue?.()}
-            </Heading>
-          </div>
+            <>
+              <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
+                <Heading
+                  onClick={() => openPopover(row, col)}
+                  as="p"
+                  className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
+                    info?.getValue?.() == "High"
+                      ? "bg-green-300"
+                      : info?.getValue?.() == "Medium"
+                      ? "bg-yellow-200"
+                      : info?.getValue?.() == "Low"
+                      ? "bg-red-300"
+                      : "bg-white-500"
+                  }`}
+                  style={{
+                    color: `${
+                      info?.getValue?.() == "High"
+                        ? "#038C8C"
+                        : info?.getValue?.() == "Medium"
+                        ? "#CCB400"
+                        : info?.getValue?.() == "Low"
+                        ? "#DF4D5A"
+                        : "white"
+                    }`,
+                    backgroundColor: `${
+                      info?.getValue?.() == "High"
+                        ? "#BAD8D8"
+                        : info?.getValue?.() == "Medium"
+                        ? "#FFE08E" // Equivalent to bg-yellow-200
+                        : info?.getValue?.() == "Low"
+                        ? "#F9CDD0" // Equivalent to bg-red-300
+                        : "#FDFFFF" // Equivalent to bg-white-500
+                    }`,
+                    cursor: "pointer",
+                  }}
+                >
+                  {info?.getValue?.()}
+                </Heading>
+              </div>
             </>
-            )
-            },
+          );
+        },
         header: (info) => (
           <Heading
             as="h2"
@@ -457,7 +447,10 @@ export default function ReviewFinancialSpreadsPage() {
 
     updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
       "rowview"
-    ] = !updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]]["rowview"];
+    ] =
+      !updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
+        "rowview"
+      ];
 
     setData(updatedTableData);
   };
@@ -477,10 +470,7 @@ export default function ReviewFinancialSpreadsPage() {
       </Helmet>
 
       <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit mb-2">
-        <div
-          onClick={handleClick}
-          className="flex w-[100%] md:w-full cursor-pointer "
-        >
+        <div className="flex w-[100%] md:w-full cursor-pointer ">
           <Img
             src="images/img_image_23.png"
             className="h-[60px] w-[200px] md:h-auto md:w-auto object-cover"

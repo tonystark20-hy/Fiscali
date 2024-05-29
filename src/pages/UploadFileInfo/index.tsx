@@ -67,6 +67,7 @@ export default function UploadFileInfoPage() {
 
       <div className="w-full md:h-auto bg-white-A700_01 relative flex h-full">
         {/* <Col md className="border-2 border-blue-500 border-dashed"> */}
+
         <Sidebar
           width="250px !important"
           collapsedWidth="80px !important"
@@ -308,7 +309,6 @@ export default function UploadFileInfoPage() {
             </Button>
           </div>
         </div>
-        {/* </Col> */}
       </div>
     </>
   );
