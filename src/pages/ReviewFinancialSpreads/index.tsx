@@ -469,7 +469,7 @@ export default function ReviewFinancialSpreadsPage() {
         />
       </Helmet>
 
-      <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit mb-2">
+      {/* <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit mb-2">
         <div className="flex w-[100%] md:w-full cursor-pointer ">
           <Img
             src="images/img_image_23.png"
@@ -487,7 +487,7 @@ export default function ReviewFinancialSpreadsPage() {
             <Text as="p">Henry Coleman</Text>
           </div>
         </div>
-      </header>
+      </header> */}
 
       <div className="h-[1024px] w-full md:h-auto bg-white-A700_02 relative flex ">
         <Sidebar

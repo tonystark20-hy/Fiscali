@@ -57,36 +57,37 @@ const tableData = [
       {
         rowtablehead: "Gross Profit",
         millionsofusd: "3653.00",
-
       },
       {
         rowtablehead: "Selling, general and administrative expenses",
         millionsofusd: "3,237.00",
-        notes: "SG&A includes 269.5 Depreciation and Amortization expense in cash flow statement",
-        definitionofcom: "(c) depreciation and amortization expense, (d) amortization of intangibles(including, but not limited to, goodwill) and organization costs",
-        rowconfidence: "High"
+        notes:
+          "SG&A includes 269.5 Depreciation and Amortization expense in cash flow statement",
+        definitionofcom:
+          "(c) depreciation and amortization expense, (d) amortization of intangibles(including, but not limited to, goodwill) and organization costs",
+        rowconfidence: "High",
       },
       {
         rowtablehead: "Impairment of assets",
         millionsofusd: "31.60",
-        definitionofcom: "(ii) any extraordinary or non-recurring non-cash income or gains (including, whether or not otherwise included sa a separate item in the statement of such Consolidated Net Income for such period, gains on the sales of assets outside of the ordinary course of business)",
-        rowconfidence: "High"
+        definitionofcom:
+          "(ii) any extraordinary or non-recurring non-cash income or gains (including, whether or not otherwise included sa a separate item in the statement of such Consolidated Net Income for such period, gains on the sales of assets outside of the ordinary course of business)",
+        rowconfidence: "High",
       },
       {
         rowtablehead: "Restructuring and other charges",
         millionsofusd: "8,096.00",
-        definitionofcom: "(g) Chargers incured during such period in connection with restructuring or reorganization change, including without limitation post-closing restructuring, reorganization and/or intergration charges or costs",
-        rowconfidence: "Medium"
+        definitionofcom:
+          "(g) Chargers incured during such period in connection with restructuring or reorganization change, including without limitation post-closing restructuring, reorganization and/or intergration charges or costs",
+        rowconfidence: "Medium",
       },
       {
         rowtablehead: "Total other operating expenses, net",
         millionsofusd: "3,336.00",
-
       },
       {
         rowtablehead: "Operating Profit",
         millionsofusd: "317.00",
-
       },
     ],
   },
@@ -346,7 +347,7 @@ export default function ReviewCovenantMatchesPage() {
         />
       </Helmet>
 
-      <header className="flex justify-center items-center w-full shadow-lg h-24 md:h-fit mb-2">
+      {/* <header className="flex justify-center items-center w-full shadow-lg h-24 md:h-fit mb-2">
         <div className="flex w-[100%] md:w-full  ">
           <Img
             src="images/img_image_23.png"
@@ -354,8 +355,7 @@ export default function ReviewCovenantMatchesPage() {
           />
         </div>
 
-        {/* <div className="my-auto flex self-start justify-between items-center whitespace-nowrap w-[94%] md:w-full 
-        ml-0.5 gap-5 md:ml-0"> */}
+
         <div className="whitespace-nowrap w-[94%] flex self-start justify-between  my-auto ">
           <div className="w-[13%] object-cover"></div>
           <div className="flex item-center gap-[17px] px-5 ">
@@ -367,7 +367,7 @@ export default function ReviewCovenantMatchesPage() {
             <Text as="p">Henry Coleman</Text>
           </div>
         </div>
-      </header>
+      </header> */}
 
       <div className="h-[1024px] w-full md:h-auto bg-white-A700_01 relative flex">
         <Sidebar

@@ -29,7 +29,7 @@ thead tr th{
   }
   
   .left-blank, .right-blank {
-    flex: 1;
+    flex: 0.7;
   }
   
   .center-content {

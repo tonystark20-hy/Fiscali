@@ -43,7 +43,7 @@ export default function CovenantComplianceResultsPage() {
         />
       </Helmet>
 
-      <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit mb-2">
+      {/* <header className="flex justify-center items-center w-full  shadow-lg h-24 md:h-fit mb-2">
         <div className="flex w-[100%] md:w-full  ">
           <Img
             src="images/img_image_23.png"
@@ -62,7 +62,7 @@ export default function CovenantComplianceResultsPage() {
             <Text as="p">Henry Coleman</Text>
           </div>
         </div>
-      </header>
+      </header> */}
 
       <div className="h-full w-full bg-white-A700_01 relative flex ">
         <Sidebar

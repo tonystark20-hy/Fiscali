@@ -90,7 +90,7 @@ const SelectNDragFile = () => {
               // Close finder when clicking outside
             ></div>{" "}
             <div className="fixed inset-0 flex items-center justify-center z-40">
-              <div className=" w-[40vw] h-[60vh]  text-black-900 bg-gray-300 font-medium  shadow-2xl z-40 rounded-[6px]">
+              <div className=" w-[40vw] h-[60vh] text-black-900 bg-gray-300 font-medium  shadow-2xl z-40 rounded-[6px]">
                 <div className="relative flex flex-col h-full p-4">
                   <FinderWindow
                     filenames={filenames}

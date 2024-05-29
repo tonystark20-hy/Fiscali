@@ -45,7 +45,7 @@ export default function UploadFileInfoPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      <header className="flex justify-center items-center w-full shadow-lg h-24 md:h-fit mb-2">
+      {/* <header className="flex justify-center items-center w-full shadow-lg h-24 md:h-fit mb-2">
         <div className="flex w-[100%] md:w-full  ">
           <Img
             src="images/img_image_23.png"
@@ -63,7 +63,7 @@ export default function UploadFileInfoPage() {
             <Text as="p">Henry Coleman</Text>
           </div>
         </div>
-      </header>
+      </header> */}
 
       <div className="w-full md:h-auto bg-white-A700_01 relative flex h-full">
         {/* <Col md className="border-2 border-blue-500 border-dashed"> */}
