@@ -196,6 +196,15 @@ export default function ReviewFinancialSpreadsPage() {
                   paddingTop: "2.5px",
                 }}
               >
+                {/* {info.row.getIsExpanded() ? (
+                  <img src="images/img_down_arw.svg" alt="Down Arrow" />
+                ) : (
+                  <img
+                    src="images/img_down_arw.svg"
+                    alt="Up Arrow"
+                    style={{ transform: "rotateX(180deg)" }}
+                  />
+                )} */}
                 {info.row.getIsExpanded() ? (
                   <img src="images/img_down_arw.svg" alt="Down Arrow" />
                 ) : (
