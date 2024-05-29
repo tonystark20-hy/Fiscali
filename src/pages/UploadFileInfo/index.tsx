@@ -129,7 +129,6 @@ export default function UploadFileInfoPage() {
             </Button>
           </div>
         </div>
-        {/* </Col> */}
       </div>
     </>
   );
