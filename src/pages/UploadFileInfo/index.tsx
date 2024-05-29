@@ -67,7 +67,6 @@ export default function UploadFileInfoPage() {
       </header>
 
       <div className="w-full md:h-auto bg-white-A700_01 relative flex h-full">
-        {/* <Col md className="border-2 border-blue-500 border-dashed"> */}
 
         <SideBar/>
 
