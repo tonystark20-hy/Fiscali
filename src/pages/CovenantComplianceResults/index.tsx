@@ -46,8 +46,6 @@ export default function CovenantComplianceResultsPage() {
         />
       </Helmet>
 
-      <Header/>
-
       <div className="h-full w-full bg-white-A700_01 relative flex ">
 
         <SideBar/>

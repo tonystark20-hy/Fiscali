@@ -319,8 +319,6 @@ export default function ReviewCovenantMatchesPage() {
         />
       </Helmet>
 
-      <Header/>
-
       <div className="h-[1024px] w-full md:h-auto bg-white-A700_01 relative flex">
 
         <SideBar/>

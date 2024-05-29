@@ -48,7 +48,6 @@ export default function UploadFileInfoPage() {
       </Helmet>
       
       <div className="app-container">
-      <Header/>
 
         <div className="w-full bg-white-A700_01 relative flex">
 

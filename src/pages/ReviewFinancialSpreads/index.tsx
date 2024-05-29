@@ -478,8 +478,6 @@ export default function ReviewFinancialSpreadsPage() {
         />
       </Helmet>
 
-      <Header/>
-
       <div className="h-[1024px] w-full md:h-auto bg-white-A700_02 relative flex ">
 
         <SideBar/>
