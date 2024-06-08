@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Helmet } from "react-helmet";
 import { CloseSVG } from "../../assets/images";
 import { Text, Img, Heading, Button, SelectBox } from "../../components";
@@ -13,6 +13,9 @@ import { useNavigate } from "react-router-dom";
 import CellComponent from "../../components/CellComponent";
 import SideBar from "components/SideBar";
 import Header from "components/Header";
+import NumberComponent from "../../components/NumberComponent";
+import CategoryRanking from "../../components/CategoryRanking";
+
 
 const tableData = [
   {
@@ -28,7 +31,7 @@ const tableData = [
       },
       {
         rowtablehead: "Gross Profit",
-        millionsofusd: "3653.00",
+        millionsofusd: "3,653.00",
       },
       {
         rowtablehead: "Selling, general and administrative expenses",
@@ -52,6 +55,7 @@ const tableData = [
         definitionofcom:
           "(g) Chargers incured during such period in connection with restructuring or reorganization change, including without limitation post-closing restructuring, reorganization and/or intergration charges or costs",
         rowconfidence: "Medium",
+        rowview: true,
       },
       {
         rowtablehead: "Total other operating expenses, net",
@@ -74,10 +78,58 @@ type TableRowType = {
   rowview?: any;
 };
 
+const categories = [
+  { name: "Restructuring Expense", ranking: 1 },
+  { name: "Impairment Charge", ranking: 2 },
+  { name: "M&A Expense", ranking: 3 },
+];
+
+
+
 export default function ReviewCovenantMatchesPage() {
   const [searchBarValue, setSearchBarValue] = React.useState("");
   const [collapsed, setCollapsed] = React.useState(false);
   const navigate = useNavigate();
+  const [data, setData] = useState(tableData);
+
+  const handleCategoryClick = (col: string, row: string, category: string) => {
+    // console.log("row, col, category: ", row, col, category);
+  
+    const updatedTableData = [...data];
+  
+    const rowSplit = row.split(".");
+  
+    // Update the value of the cell
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
+      col
+    ] = category;
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
+      "rowconfidence"
+    ] = "High";
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
+      "rowview"
+    ] = false;
+  
+    // Update the state with the modified table data
+    setData(updatedTableData);
+  
+    // console.log(data);
+  };
+
+  const openPopover = (row: string, col: string) => {
+    const updatedTableData = [...data];
+
+    const rowSplit = row.split(".");
+
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
+      "rowview"
+    ] =
+      !updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
+        "rowview"
+      ];
+
+    setData(updatedTableData);
+  };
 
   const handleInputChange = (value: string) => {
     // setSelectedCategory(value);
@@ -137,13 +189,20 @@ export default function ReviewCovenantMatchesPage() {
         cell: (info) => {
           const initialValue = info?.getValue?.();
 
-          // return <CellComponent value={selectedCategory} onChange={handleInputChange} />;
           return (
-            <CellComponent
-              initialValue={initialValue}
-              onChange={handleInputChange}
-              category={initialValue}
-            />
+
+            <div className="cell-container">
+            {/* <div className="left-blank"></div> */}
+            <div className="center-content">
+              <NumberComponent
+                initialValue={initialValue}
+                onChange={handleInputChange}
+                category={initialValue}
+              />
+            </div>
+            <div className="right-blank"></div>
+            <div className="right-blank"></div>
+          </div>
           );
         },
         header: (info) => (
@@ -184,17 +243,36 @@ export default function ReviewCovenantMatchesPage() {
       tableColumnHelper.accessor("definitionofcom", {
         cell: (info) => {
           const initialValue = info?.getValue?.();
-
+          const id = info?.cell.id;
+          const col = id.split("_")[1];
+          const row = id.split("_")[0];
           // return <CellComponent value={selectedCategory} onChange={handleInputChange} />;
           return (
-            <CellComponent
-              initialValue={initialValue}
-              onChange={handleInputChange}
-              category={initialValue}
-            />
+            <>
+              <div style={{ cursor: "pointer" }}>
+              <CellComponent
+                initialValue={initialValue}
+                onChange={handleInputChange}
+                category={initialValue}
+              />
+              </div>
+              {info.row.original.rowview && (
+                <div className="relative">
+                  <div className="category-ranking-container">
+                    <CategoryRanking
+                      categories={categories}
+                      col={col}
+                      row={row}
+                      onCategoryClick={handleCategoryClick}
+                    />
+                  </div>
+                </div>
+              )}
+            </>
           );
         },
         header: (info) => (
+          
           <Heading
             as="h1"
             className="flex justify-start pl-2 items-center h-[36px] border-indigo-50"
@@ -206,44 +284,55 @@ export default function ReviewCovenantMatchesPage() {
         meta: { width: "15%" },
       }),
       tableColumnHelper.accessor("rowconfidence", {
-        cell: (info) => (
-          <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
-            <Heading
-              as="p"
-              className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
-                info?.getValue?.() == "High"
-                  ? "bg-green-300"
-                  : info?.getValue?.() == "Medium"
-                  ? "bg-yellow-200"
-                  : info?.getValue?.() == "Low"
-                  ? "bg-red-300"
-                  : "bg-white-500"
-              }`}
-              style={{
-                color: `${
-                  info?.getValue?.() == "High"
-                    ? "#038C8C"
-                    : info?.getValue?.() == "Medium"
-                    ? "#CCB400"
-                    : info?.getValue?.() == "Low"
-                    ? "#DF4D5A"
-                    : "white"
-                }`,
-                backgroundColor: `${
-                  info?.getValue?.() == "High"
-                    ? "#BAD8D8"
-                    : info?.getValue?.() == "Medium"
-                    ? "#FFE08E" // Equivalent to bg-yellow-200
-                    : info?.getValue?.() == "Low"
-                    ? "#F9CDD0" // Equivalent to bg-red-300
-                    : "#FDFFFF" // Equivalent to bg-white-500
-                }`,
-              }}
-            >
-              {info?.getValue?.()}
-            </Heading>
-          </div>
-        ),
+        cell: (info) => {
+          const id = info?.cell.id;
+          console.log(id);
+          const col = id.split("_")[1];
+          const row = id.split("_")[0];
+
+          return (
+            <>
+              <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
+                <Heading
+                  onClick={() => openPopover(row, col)}
+                  as="p"
+                  className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
+                    info?.getValue?.() == "High"
+                      ? "bg-green-300"
+                      : info?.getValue?.() == "Medium"
+                      ? "bg-yellow-200"
+                      : info?.getValue?.() == "Low"
+                      ? "bg-red-300"
+                      : "bg-white-500"
+                  }`}
+                  style={{
+                    color: `${
+                      info?.getValue?.() == "High"
+                        ? "#038C8C"
+                        : info?.getValue?.() == "Medium"
+                        ? "#CCB400"
+                        : info?.getValue?.() == "Low"
+                        ? "#DF4D5A"
+                        : "white"
+                    }`,
+                    backgroundColor: `${
+                      info?.getValue?.() == "High"
+                        ? "#BAD8D8"
+                        : info?.getValue?.() == "Medium"
+                        ? "#FFE08E" // Equivalent to bg-yellow-200
+                        : info?.getValue?.() == "Low"
+                        ? "#F9CDD0" // Equivalent to bg-red-300
+                        : "#FDFFFF" // Equivalent to bg-white-500
+                    }`,
+                    cursor: "pointer",
+                  }}
+                >
+                  {info?.getValue?.()}
+                </Heading>
+              </div>
+            </>
+          );
+        },
         header: (info) => (
           <Heading
             as="h2"
@@ -378,7 +467,7 @@ export default function ReviewCovenantMatchesPage() {
               rowDataProps={{ className: "md:flex-col" }}
               className="self-stretch mt-1.5 shadow-lg"
               columns={tableColumns}
-              data={tableData}
+              data={data}
             />
             <Button
               className="lex whitespace-nowrap items-center justify-center h-[39px]  px-[35px]  text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] my-20  ml-auto "

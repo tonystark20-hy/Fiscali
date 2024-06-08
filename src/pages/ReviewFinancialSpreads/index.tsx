@@ -64,7 +64,7 @@ const tableData = [
       },
       {
         rowtablehead: "Total Revenues",
-        millionsofusd: "8696.00",
+        millionsofusd: "8,696.00",
         categorylabels: "Total Revenues",
         rowconfidence: "High",
         rowview: false,
@@ -123,7 +123,7 @@ const tableData = [
           },
           {
             rowtablehead: "Sales and Marketing",
-            millionsofusd: "1056.00",
+            millionsofusd: "1,056.00",
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
             rowview: false,
@@ -239,7 +239,7 @@ export default function ReviewFinancialSpreadsPage() {
                 />
               </div>
               <div className="right-blank"></div>
-              {/* <div className="right-blank"></div> */}
+              <div className="right-blank"></div>
             </div>
           );
         },
