@@ -11,6 +11,7 @@ import "./index.css";
 import SelectNDragFile from "./selectNDragFile";
 import SideBar from "components/SideBar";
 import Header from "components/Header";
+import BlurPage from "components/BlurPage";
 import { Container, Col, Row } from "react-bootstrap";
 
 export default function UploadFileInfoPage() {
@@ -39,6 +40,7 @@ export default function UploadFileInfoPage() {
 
   return (
     <>
+    {/* <BlurPage/> */}
       <Helmet>
         <title>Fiscali 2</title>
         <meta

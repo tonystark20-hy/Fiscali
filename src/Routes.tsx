@@ -6,11 +6,16 @@ import ReviewFinancialSpreads from "pages/ReviewFinancialSpreads";
 import CovenantComplianceResults from "pages/CovenantComplianceResults";
 import ReviewCovenantMatches from "pages/ReviewCovenantMatches";
 import UploadFileInfo from "pages/UploadFileInfo";
+import LoginPage from "pages/LoginPage";
 
 const ProjectRoutes = () => {
   let element = useRoutes([
-    { path: "/", element: <UploadFileInfo /> },
+    { path: "/uploadfileinfo", element: <UploadFileInfo /> },
     { path: "*", element: <NotFound /> },
+    {
+      path: "/",
+      element: <LoginPage />,
+    },  
     {
       path: "reviewfinancialspreads",
       element: <ReviewFinancialSpreads />,

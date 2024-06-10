@@ -12,7 +12,7 @@ import SideBar from "components/SideBar";
 import Header from "components/Header";
 import { Container, Col, Row } from "react-bootstrap";
 
-export default function UploadFileInfoPage() {
+export default function LoginPage() {
   const [searchBarValue, setSearchBarValue] = React.useState("");
   const [collapsed, setCollapsed] = React.useState(false);
 
@@ -36,8 +36,7 @@ export default function UploadFileInfoPage() {
     if (username === dummyUsername && password === dummyPassword) {
       setMessage('Login successful!');
       setMessageColor('green');
-      // Navigate to another page if needed
-      // navigate('/some-route');
+      navigate("uploadfileinfo")
     } else {
       setMessage('Invalid username or password.');
       setMessageColor('red');
@@ -68,7 +67,7 @@ export default function UploadFileInfoPage() {
 
         <div className="w-full bg-white-A700_01 relative flex">
 
-          <SideBar/>
+          {/* <SideBar/> */}
 
           <div className="content-container flex md:flex-col justify-end items-start w-[82%] pl-10">
 
