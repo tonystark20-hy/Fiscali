@@ -9,24 +9,34 @@ import UploadFileInfo from "pages/UploadFileInfo";
 import LoginPage from "pages/LoginPage";
 
 const ProjectRoutes = () => {
+  const [loginSuccess, setLoginSuccess] = React.useState(false);
+
   let element = useRoutes([
-    { path: "/uploadfileinfo", element: <UploadFileInfo /> },
-    { path: "*", element: <NotFound /> },
     {
       path: "/",
-      element: <LoginPage />,
-    },  
+      element: <UploadFileInfo loginSuccess={loginSuccess} />,
+    },
+    { path: "*", element: <NotFound /> },
+    {
+      path: "/login",
+      element: (
+        <LoginPage
+          loginSuccess={loginSuccess}
+          setLoginSuccess={setLoginSuccess}
+        />
+      ),
+    },
     {
       path: "reviewfinancialspreads",
-      element: <ReviewFinancialSpreads />,
+      element: <ReviewFinancialSpreads loginSuccess={loginSuccess} />,
     },
     {
       path: "covenantcomplianceresults",
-      element: <CovenantComplianceResults />,
+      element: <CovenantComplianceResults loginSuccess={loginSuccess} />,
     },
     {
       path: "reviewcovenantmatches",
-      element: <ReviewCovenantMatches />,
+      element: <ReviewCovenantMatches loginSuccess={loginSuccess} />,
     },
   ]);
 

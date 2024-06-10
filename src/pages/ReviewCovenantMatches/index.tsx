@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { CloseSVG } from "../../assets/images";
 import { Text, Img, Heading, Button, SelectBox } from "../../components";
@@ -15,7 +15,7 @@ import SideBar from "components/SideBar";
 import Header from "components/Header";
 import NumberComponent from "../../components/NumberComponent";
 import CategoryRanking from "../../components/CategoryRanking";
-
+import BlurPage from "components/BlurPage";
 
 const tableData = [
   {
@@ -84,9 +84,7 @@ const categories = [
   { name: "M&A Expense", ranking: 3 },
 ];
 
-
-
-export default function ReviewCovenantMatchesPage() {
+export default function ReviewCovenantMatchesPage({ loginSuccess }) {
   const [searchBarValue, setSearchBarValue] = React.useState("");
   const [collapsed, setCollapsed] = React.useState(false);
   const navigate = useNavigate();
@@ -94,25 +92,20 @@ export default function ReviewCovenantMatchesPage() {
 
   const handleCategoryClick = (col: string, row: string, category: string) => {
     // console.log("row, col, category: ", row, col, category);
-  
+
     const updatedTableData = [...data];
-  
+
     const rowSplit = row.split(".");
-  
+
     // Update the value of the cell
-    updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
-      col
-    ] = category;
-    updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
-      "rowconfidence"
-    ] = "High";
-    updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
-      "rowview"
-    ] = false;
-  
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]][col] = category;
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]]["rowconfidence"] =
+      "High";
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]]["rowview"] = false;
+
     // Update the state with the modified table data
     setData(updatedTableData);
-  
+
     // console.log(data);
   };
 
@@ -121,12 +114,8 @@ export default function ReviewCovenantMatchesPage() {
 
     const rowSplit = row.split(".");
 
-    updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
-      "rowview"
-    ] =
-      !updatedTableData[rowSplit[0]].subRows[rowSplit[1]][
-        "rowview"
-      ];
+    updatedTableData[rowSplit[0]].subRows[rowSplit[1]]["rowview"] =
+      !updatedTableData[rowSplit[0]].subRows[rowSplit[1]]["rowview"];
 
     setData(updatedTableData);
   };
@@ -161,13 +150,13 @@ export default function ReviewCovenantMatchesPage() {
                 }}
               >
                 {info.row.getIsExpanded() ? (
+                  <img src="images/img_down_arw.svg" alt="Down Arrow" />
+                ) : (
                   <img
                     src="images/img_down_arw.svg"
                     alt="Up Arrow"
                     style={{ transform: "rotateX(180deg)" }}
                   />
-                ) : (
-                  <img src="images/img_down_arw.svg" alt="Down Arrow" />
                 )}
               </button>
             )}
@@ -190,19 +179,18 @@ export default function ReviewCovenantMatchesPage() {
           const initialValue = info?.getValue?.();
 
           return (
-
             <div className="cell-container">
-            {/* <div className="left-blank"></div> */}
-            <div className="center-content">
-              <NumberComponent
-                initialValue={initialValue}
-                onChange={handleInputChange}
-                category={initialValue}
-              />
+              {/* <div className="left-blank"></div> */}
+              <div className="center-content">
+                <NumberComponent
+                  initialValue={initialValue}
+                  onChange={handleInputChange}
+                  category={initialValue}
+                />
+              </div>
+              <div className="right-blank"></div>
+              <div className="right-blank"></div>
             </div>
-            <div className="right-blank"></div>
-            <div className="right-blank"></div>
-          </div>
           );
         },
         header: (info) => (
@@ -250,11 +238,11 @@ export default function ReviewCovenantMatchesPage() {
           return (
             <>
               <div style={{ cursor: "pointer" }}>
-              <CellComponent
-                initialValue={initialValue}
-                onChange={handleInputChange}
-                category={initialValue}
-              />
+                <CellComponent
+                  initialValue={initialValue}
+                  onChange={handleInputChange}
+                  category={initialValue}
+                />
               </div>
               {info.row.original.rowview && (
                 <div className="relative">
@@ -272,7 +260,6 @@ export default function ReviewCovenantMatchesPage() {
           );
         },
         header: (info) => (
-          
           <Heading
             as="h1"
             className="flex justify-start pl-2 items-center h-[36px] border-indigo-50"
@@ -400,6 +387,8 @@ export default function ReviewCovenantMatchesPage() {
 
   return (
     <>
+      {!loginSuccess && <BlurPage />}
+
       <Helmet>
         <title>Fiscali 2</title>
         <meta
@@ -409,9 +398,8 @@ export default function ReviewCovenantMatchesPage() {
       </Helmet>
 
       <div className="h-[1024px] w-full md:h-auto bg-white-A700_01 relative flex">
+        <SideBar />
 
-        <SideBar/>
-        
         <div className="flex md:flex-col justify-end items-start w-[82%] gap-6 pl-10">
           <div className="flex flex-col items-start md:self-stretch mt-14 md:p-5 flex-1">
             <Text size="xl" as="p">

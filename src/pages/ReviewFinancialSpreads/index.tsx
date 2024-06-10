@@ -16,6 +16,7 @@ import { Input } from "../../components/Input";
 import { CloseSVG } from "../../assets/images";
 import SideBar from "components/SideBar";
 import Header from "components/Header";
+import BlurPage from "components/BlurPage";
 
 // import { useHistory } from 'react-router-dom';
 
@@ -153,7 +154,7 @@ type TableRowType = {
 const isMainRow = (row) => row.depth === 0;
 // const tableRef = useRef(null);
 
-export default function ReviewFinancialSpreadsPage() {
+export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
   const [searchBarValue, setSearchBarValue] = React.useState("");
   const [collapsed, setCollapsed] = React.useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -470,6 +471,8 @@ export default function ReviewFinancialSpreadsPage() {
 
   return (
     <>
+      {!loginSuccess && <BlurPage />}
+
       <Helmet>
         <title>Fiscali</title>
         <meta
@@ -479,8 +482,7 @@ export default function ReviewFinancialSpreadsPage() {
       </Helmet>
 
       <div className="h-[1024px] w-full md:h-auto bg-white-A700_02 relative flex ">
-
-        <SideBar/>
+        <SideBar />
 
         <div className="flex md:flex-col justify-end items-start w-[82%] gap-6 pl-10">
           {/* <div className="flex flex-col w-[66%] top-[13%] right-0 left-0 m-auto absolute"> */}
