@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import SideBar from "components/SideBar";
 import Header from "components/Header";
+import BlurPage from "components/BlurPage";
 
-
-export default function CovenantComplianceResultsPage() {
+export default function CovenantComplianceResultsPage({ loginSuccess }) {
   const [searchBarValue, setSearchBarValue] = React.useState("");
   const [collapsed, setCollapsed] = React.useState(false);
   const navigate = useNavigate();
@@ -36,8 +36,11 @@ export default function CovenantComplianceResultsPage() {
     navigate("/reviewcovenantmatches");
   };
 
+  console.log("loginSuccess:", loginSuccess.loginSuccess);
+
   return (
     <>
+      {loginSuccess == false && <BlurPage />}
       <Helmet>
         <title>Fiscali 2</title>
         <meta
@@ -47,8 +50,7 @@ export default function CovenantComplianceResultsPage() {
       </Helmet>
 
       <div className="h-full w-full bg-white-A700_01 relative flex ">
-
-        <SideBar/>
+        <SideBar />
 
         <div className="flex md:flex-col justify-end items-start w-[82%] gap-6 pl-10 mb-20">
           <div className="flex flex-col items-start md:self-stretch mt-14 md:p-5 flex-1">

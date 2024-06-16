@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { CloseSVG } from "../../assets/images";
 import { Text, Img, Heading, Button } from "../../components";
@@ -14,7 +14,7 @@ import Header from "components/Header";
 import BlurPage from "components/BlurPage";
 import { Container, Col, Row } from "react-bootstrap";
 
-export default function UploadFileInfoPage() {
+export default function UploadFileInfoPage({ loginSuccess }) {
   const [searchBarValue, setSearchBarValue] = React.useState("");
   const [collapsed, setCollapsed] = React.useState(false);
 
@@ -37,10 +37,17 @@ export default function UploadFileInfoPage() {
       fileInputLabel.textContent = "Browse Files"; // Reset label text if no file is chosen
     }
   }
+  useEffect(() => {
+    if (!loginSuccess) {
+      navigate("login");
+    }
+  }, [loginSuccess]);
+
+  console.log("loginSuccess:", loginSuccess);
 
   return (
     <>
-    {/* <BlurPage/> */}
+      {!loginSuccess && <BlurPage />}
       <Helmet>
         <title>Fiscali 2</title>
         <meta
@@ -48,12 +55,10 @@ export default function UploadFileInfoPage() {
           content="Web site created using create-react-app"
         />
       </Helmet>
-      
+
       <div className="app-container">
-
         <div className="w-full bg-white-A700_01 relative flex">
-
-          <SideBar/>
+          <SideBar />
 
           <div className="content-container flex md:flex-col justify-end items-start w-[82%] pl-10">
             <div className="flex flex-col items-start md:self-stretch mt-14 flex-1">
@@ -91,8 +96,8 @@ export default function UploadFileInfoPage() {
                 Upload Financial Statement
               </Text>
               <Text size="md" as="p" className="mt-[9px]">
-                Please upload PDF, Word or HTML file below. Please keep file size
-                under 10 MB.
+                Please upload PDF, Word or HTML file below. Please keep file
+                size under 10 MB.
               </Text>
               <SelectNDragFile />
 
@@ -100,15 +105,15 @@ export default function UploadFileInfoPage() {
                 Upload Credit Agreement
               </Text>
               <Text size="md" as="p" className="mt-[22px]">
-                Please upload PDF, Word or HTML file below. Please keep file size
-                under 10 MB.
+                Please upload PDF, Word or HTML file below. Please keep file
+                size under 10 MB.
               </Text>
 
               <SelectNDragFile />
 
               <Button
                 className="flex whitespace-nowrap items-center justify-center h-[39px]  px-[35px]  text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] mt-20  ml-auto "
-                onClick={() => navigate("reviewfinancialspreads")}
+                onClick={() => navigate("/reviewfinancialspreads")}
               >
                 Continue
               </Button>

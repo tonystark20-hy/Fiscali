@@ -10,6 +10,7 @@ const SelectNDragFile = () => {
   const [finder, setFinder] = useState(false);
   const [selectedFilename, setSelectedFilename] = useState<string>("");
   const [uploadedFile, setUploadedFile] = useState<string>("");
+  const [screenshot, setScreenshot] = useState(null);
 
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -41,11 +42,14 @@ const SelectNDragFile = () => {
   };
 
   const filenames = [
-    { folders: "Documents", files: "file1" },
-    { folders: "Desktop", files: "file2" },
-    { folders: "Downloads", files: "file3" },
-    { folders: "", files: "file4" },
-    { folders: "", files: "file5" },
+    { folders: "Documents", files: "SiriusXM 10-K - FY2021" },
+    {
+      folders: "Desktop",
+      files: "SiriusXM Credit Agreement - Dated 12.05.2012",
+    },
+    { folders: "Downloads", files: "" },
+    // { folders: " ", files: " " },
+    // { folders: " ", files: " " },
   ];
 
   const handleFinderClick = (filename: string) => {
@@ -125,16 +129,33 @@ const SelectNDragFile = () => {
       </div>
 
       <div onDragOver={handleDragOver} onDrop={handleDrop} className="w-full">
-        <div className="flex flex-col items-center justify-center w-full md:w-full mt-[22px] gap-12 p-14 py-[75px] md:p-5 border-gray-400 border border-dashed bg-gray-100">
-          <Img
-            src="images/img_line_md_cloud_upload_loop.svg"
-            alt="linemdcloud_one"
-            className="h-[86px] w-[86px] mt-2.5"
-          />
-          <Heading size="md" as="h1" className="!text-gray-500_02">
-            Drag and drop files here
-          </Heading>
-        </div>
+        {uploadedFile.length > 0 && (
+          <>
+            <div className="mt-2 text-[#4270bb] text-md">
+              Uploaded: {uploadedFile}{" "}
+            </div>
+            <div className="w-[80%] mt-2 border-2 border-solid  border-gray-500 border-opacity-20">
+              {uploadedFile === "SiriusXM 10-K - FY2021" ? (
+                <img src="/images/financial_statement.png" alt="" />
+              ) : (
+                <img src="/images/credit_agreement.png" alt="" />
+              )}
+            </div>
+          </>
+        )}
+
+        {!uploadedFile && (
+          <div className="flex flex-col items-center justify-center w-full md:w-full mt-[22px] gap-12 p-14 py-[75px] md:p-5 border-gray-400 border border-dashed bg-gray-100">
+            <Img
+              src="images/img_line_md_cloud_upload_loop.svg"
+              alt="linemdcloud_one"
+              className="h-[86px] w-[86px] mt-2.5"
+            />
+            <Heading size="md" as="h1" className="!text-gray-500_02">
+              Drag and drop files here
+            </Heading>
+          </div>
+        )}
         {file && (
           <div className="mt-4 text-[#4270bb] text-md">
             <ul>
@@ -146,11 +167,6 @@ const SelectNDragFile = () => {
           </div>
         )}
       </div>
-      {uploadedFile.length > 0 && (
-        <div className="mt-2 text-[#4270bb] text-lg">
-          Uploaded: {uploadedFile}{" "}
-        </div>
-      )}
     </>
   );
 };
