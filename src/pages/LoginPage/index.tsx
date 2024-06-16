@@ -26,6 +26,7 @@ export default function LoginPage() {
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [message, setMessage] = React.useState<string>("");
+  const [token, setToken] = React.useState(false);
 
   const dummyUsername = 'fiscali0000';
   const dummyPassword = 'fiscali1234';
@@ -34,9 +35,10 @@ export default function LoginPage() {
     event.preventDefault();
     
     if (username === dummyUsername && password === dummyPassword) {
+      setToken(true);
       setMessage('Login successful!');
       setMessageColor('green');
-      navigate("uploadfileinfo")
+      navigate("uploadfileinfo");
     } else {
       setMessage('Invalid username or password.');
       setMessageColor('red');

@@ -424,6 +424,23 @@ export default function ReviewFinancialSpreadsPage() {
     { name: "Tax Expense", ranking: 3 },
   ];
 
+  const updateRow = (
+    data: any,
+    indices: string[],
+    col: string,
+    category: any,
+    depth: number = 0
+  ): void => {
+    if (depth === indices.length - 1) {
+      data[indices[depth]][col] = category;
+      data[indices[depth]]["rowconfidence"] = "High";
+      data[indices[depth]]["rowview"] = false;
+    } else {
+      console.log(depth)
+      updateRow(data[indices[depth]].subRows, indices, col, category, depth + 1);
+    }
+  };
+
   const handleCategoryClick = (col: string, row: string, category: string) => {
     setSelectedCategory(category);
     // console.log("row, col, category: ", row, col, category);
@@ -432,16 +449,7 @@ export default function ReviewFinancialSpreadsPage() {
 
     const rowSplit = row.split(".");
 
-    // Update the value of the cell
-    updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
-      col
-    ] = category;
-    updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
-      "rowconfidence"
-    ] = "High";
-    updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
-      "rowview"
-    ] = false;
+    updateRow(updatedTableData, rowSplit, col, category);
 
     // Update the state with the modified table data
     setData(updatedTableData);
@@ -449,17 +457,26 @@ export default function ReviewFinancialSpreadsPage() {
     // console.log(data);
   };
 
+  const updatePopOver = (
+    data: any,
+    indices: string[],
+    col: string,
+    depth: number = 0
+  ): void => {
+    if (depth === indices.length - 1) {
+      data[indices[depth]]["rowview"] = !data[indices[depth]]["rowview"];
+    } else {
+      // console.log(depth)
+      updatePopOver(data[indices[depth]].subRows, indices, col, depth + 1);
+    }
+  };
+
   const openPopover = (row: string, col: string) => {
     const updatedTableData = [...data];
 
     const rowSplit = row.split(".");
 
-    updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
-      "rowview"
-    ] =
-      !updatedTableData[rowSplit[0]].subRows[rowSplit[1]].subRows[rowSplit[2]][
-        "rowview"
-      ];
+    updatePopOver(updatedTableData, rowSplit, col);
 
     setData(updatedTableData);
   };
