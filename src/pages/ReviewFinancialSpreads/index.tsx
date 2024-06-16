@@ -170,7 +170,7 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
     return [
       tableColumnHelper.accessor("rowtablehead", {
         cell: (info) => {
-          // info.row.toggleExpanded(true)
+          info.row.toggleExpanded(true)
 
           return (
             <>
