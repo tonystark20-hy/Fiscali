@@ -169,7 +169,11 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
     const tableColumnHelper = createColumnHelper<TableRowType>();
     return [
       tableColumnHelper.accessor("rowtablehead", {
-        cell: (info) => (
+        cell: (info) => {
+          // info.row.toggleExpanded(true)
+
+          return (
+            <>
           <div className="flex justify-start items-center">
             <Heading
               as="h4"
@@ -190,15 +194,6 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
                   paddingTop: "2.5px",
                 }}
               >
-                {/* {info.row.getIsExpanded() ? (
-                  <img src="images/img_down_arw.svg" alt="Down Arrow" />
-                ) : (
-                  <img
-                    src="images/img_down_arw.svg"
-                    alt="Up Arrow"
-                    style={{ transform: "rotateX(180deg)" }}
-                  />
-                )} */}
                 {info.row.getIsExpanded() ? (
                   <img src="images/img_down_arw.svg" alt="Down Arrow" />
                 ) : (
@@ -212,7 +207,9 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
             )}
             {/* </Heading> */}
           </div>
-        ),
+          </>
+          )
+        },
         header: ({ table }) => (
           <Heading
             as="h1"

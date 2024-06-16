@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useTable, useExpanded } from "react-table";
 import {
@@ -15,6 +15,7 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
   getExpandedRowModel,
+
 } from "@tanstack/react-table";
 
 // Define the ReactTableProps type
@@ -36,16 +37,13 @@ const ReactTable = <D extends unknown>({
   rowDataProps = { className: "" },
   ...restConfig
 }: ReactTableProps<D>) => {
-  const [expanded, setExpanded] = useState({});
+  const [expanded, setExpanded] = useState<ExpandedState>({});
 
 
   const tableConfig = {
     columns,
     data,
     state: { expanded },
-    initialState: {
-      expanded
-    },
     onExpandedChange: setExpanded,
     getSubRows: (row) => row.subRows,
     getCoreRowModel: getCoreRowModel(),
@@ -54,6 +52,7 @@ const ReactTable = <D extends unknown>({
     getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
     // autoResetExpanded: false,
+
     ...restConfig,
   };
 
