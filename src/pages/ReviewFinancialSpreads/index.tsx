@@ -170,7 +170,10 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
     return [
       tableColumnHelper.accessor("rowtablehead", {
         cell: (info) => {
-          info.row.toggleExpanded(true)
+          // const [expanded, setExpanded] = useState(true);
+          // setExpanded(true)
+          // let expanded = true
+          // info.row.toggleExpanded(expanded)
 
           return (
             <>
@@ -188,6 +191,7 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
             {info.row.getCanExpand() && (
               <button
                 onClick={info.row.getToggleExpandedHandler()}
+                // onClick={() => expanded = !expanded}
                 style={{
                   cursor: "pointer",
                   paddingLeft: "15px",
