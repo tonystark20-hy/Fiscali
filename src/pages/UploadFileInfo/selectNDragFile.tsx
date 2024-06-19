@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Text, Button } from "../../components";
 // import FinderWindow from "../../components/FinderWindow";
 import FinderWindow from "../../components/FinderWindow";
+import Finder from "./finder";
 
 const SelectNDragFile = () => {
   const [file, setFile] = useState(null);
@@ -94,13 +95,13 @@ const SelectNDragFile = () => {
               // Close finder when clicking outside
             ></div>{" "}
             <div className="fixed inset-0 flex items-center justify-center z-40">
-              <div className=" w-[40vw] h-[60vh] text-black-900 bg-gray-300 font-medium  shadow-2xl z-40 rounded-[6px]">
+              <div className=" w-fit h-fit text-black-900 bg-gray-300 font-medium  shadow-2xl z-40 rounded-[6px]">
                 <div className="relative flex flex-col h-full p-4">
                   <FinderWindow
                     filenames={filenames}
                     onFinderClick={handleFinderClick}
                   />
-                  <div className="relative ml-auto mt-auto">
+                  <div className="relative ml-auto mt-10">
                     <button
                       onClick={openFinder}
                       className="text-white-A700_01 text-center text-base font-medium bg-indigo-800 min-w-[100px] rounded-[3px] cursor-pointer mr-2"
@@ -121,6 +122,7 @@ const SelectNDragFile = () => {
                       upload
                     </button>
                   </div>
+                  <Finder />
                 </div>
               </div>
             </div>
