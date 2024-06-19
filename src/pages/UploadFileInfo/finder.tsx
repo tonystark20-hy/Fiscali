@@ -27,7 +27,7 @@ const Finder = () => {
   ];
 
   return (
-    <div className="my-10  bg-white-700  h-fit flex justify-center items-center mx-auto">
+    <div className="my-10 bg-white-700  h-fit flex justify-center items-center mx-auto">
       <div className="bg-white rounded-lg shadow-lg  flex flex-col">
         <div className="bg-gray-100 border-b border-gray-300 flex items-center p-2 rounded-t-lg">
           <div className="flex space-x-2">

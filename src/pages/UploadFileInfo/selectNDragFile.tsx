@@ -147,7 +147,7 @@ const SelectNDragFile = () => {
         )}
 
         {!uploadedFile && (
-          <div className="flex flex-col items-center justify-center w-full md:w-full mt-[22px] gap-12 p-14 py-[75px] md:p-5 border-gray-400 border border-dashed bg-gray-100">
+          <div className="flex flex-col items-center justify-center w-[90%] mt-[22px] gap-12 p-14 py-[75px] md:p-5 border-gray-400 border border-dashed bg-gray-100">
             <Img
               src="images/img_line_md_cloud_upload_loop.svg"
               alt="linemdcloud_one"
