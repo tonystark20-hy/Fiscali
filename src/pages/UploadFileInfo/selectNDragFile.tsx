@@ -5,7 +5,7 @@ import { Text, Button } from "../../components";
 // import FinderWindow from "../../components/FinderWindow";
 import FinderWindow from "../../components/FinderWindow";
 
-const SelectNDragFile = () => {
+const SelectNDragFile = ({ onFileChange }) => {
   const [file, setFile] = useState(null);
   const [finder, setFinder] = useState(false);
   const [selectedFilename, setSelectedFilename] = useState<string>("");
@@ -54,6 +54,7 @@ const SelectNDragFile = () => {
 
   const handleFinderClick = (filename: string) => {
     setSelectedFilename(filename);
+    onFileChange(true);
     console.log(selectedFilename);
   };
 

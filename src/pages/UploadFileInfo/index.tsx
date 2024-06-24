@@ -25,18 +25,21 @@ export default function UploadFileInfoPage({ loginSuccess }) {
   //    setCollapsed(!collapsed)
   //}
 
-  function handleFileChange(files) {
-    const fileInput = document.getElementById("fileInput");
-    const fileInputLabel = document.getElementById("fileInputLabel");
+  const [isFinancialSelected, setIsFinancialSelected] = React.useState(false);
+  const [isCreditSelected, setIsCreditSelected] = React.useState(false);
 
-    console.log("file");
+  // function handleFileChange(files) {
+  //   const fileInput = document.getElementById("fileInput");
+  //   const fileInputLabel = document.getElementById("fileInputLabel");
 
-    if (files.length > 0) {
-      fileInputLabel.textContent = files[0].name; // Display the chosen file name
-    } else {
-      fileInputLabel.textContent = "Browse Files"; // Reset label text if no file is chosen
-    }
-  }
+  //   console.log("file");
+
+  //   if (files.length > 0) {
+  //     fileInputLabel.textContent = files[0].name; // Display the chosen file name
+  //   } else {
+  //     fileInputLabel.textContent = "Browse Files"; // Reset label text if no file is chosen
+  //   }
+  // }
   useEffect(() => {
     if (!loginSuccess) {
       navigate("login");
@@ -45,11 +48,22 @@ export default function UploadFileInfoPage({ loginSuccess }) {
 
   console.log("loginSuccess:", loginSuccess);
 
+  const handleFinancialChange = (isSelected) => {
+    setIsFinancialSelected(isSelected);
+    console.log(isSelected)
+    console.log(isFinancialSelected)
+  };
+
+  const handleCreditChange = (isSelected) => {
+    setIsCreditSelected(isSelected);
+    console.log(isCreditSelected)
+  };
+
   return (
     <>
       {!loginSuccess && <BlurPage />}
       <Helmet>
-        <title>Fiscali 2</title>
+        <title>Fiscali</title>
         <meta
           name="description"
           content="Web site created using create-react-app"
@@ -99,7 +113,8 @@ export default function UploadFileInfoPage({ loginSuccess }) {
                 Please upload PDF, Word or HTML file below. Please keep file
                 size under 10 MB.
               </Text>
-              <SelectNDragFile />
+              
+              <SelectNDragFile onFileChange={handleFinancialChange} />
 
               <Text size="lg" as="p" className="mt-[53px]">
                 Upload Credit Agreement
@@ -109,7 +124,7 @@ export default function UploadFileInfoPage({ loginSuccess }) {
                 size under 10 MB.
               </Text>
 
-              <SelectNDragFile />
+              <SelectNDragFile onFileChange={handleCreditChange} />
 
               <Button
                 className="flex whitespace-nowrap items-center justify-center h-[39px]  px-[35px]  text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] mt-20  ml-auto "
