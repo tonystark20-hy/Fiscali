@@ -8,8 +8,8 @@ import ReviewCovenantMatches from "pages/ReviewCovenantMatches";
 import UploadFileInfo from "pages/UploadFileInfo";
 import LoginPage from "pages/LoginPage";
 
-const ProjectRoutes = () => {
-  const [loginSuccess, setLoginSuccess] = React.useState(false);
+const ProjectRoutes = ({ loginSuccess, setLoginSuccess }) => {
+  // const [loginSuccess, setLoginSuccess] = React.useState(false);
 
   let element = useRoutes([
     {

@@ -6,11 +6,13 @@ import Container from "react-bootstrap/Container";
 import Header from "components/Header";
 
 function App() {
+  const [loginSuccess, setLoginSuccess] = React.useState(false);
+
   return (
     <Router>
       <Container fluid>
-        <Header />
-        <Routes />
+        <Header loginSuccess={loginSuccess} />
+        <Routes loginSuccess={loginSuccess} setLoginSuccess={setLoginSuccess} />
       </Container>
     </Router>
   );
