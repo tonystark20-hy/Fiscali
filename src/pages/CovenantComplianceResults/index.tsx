@@ -107,7 +107,7 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                   <div className="h-full flex md:flex-col justify-center items-center gap-7 z-[1]">
                     <div className="flex flex-col items-start md:self-stretch flex-1">
                       <div className="flex sm:flex-col items-center mt-8 gap-2.5 p-2.5">
-                        <div className="flex flex-col">
+                        {/* <div className="flex flex-col">
                           <div className=" flex items-center justify-center">
                             <input
                               type="checkbox"
@@ -125,8 +125,8 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                               }}
                             />
                           </div>
-                        </div>
-                        <Text size="md" as="p" className="self-end">
+                        </div> */}
+                        <Text size="md" as="p" className="self-end ml-6">
                           Consolidated Leverage Ratio = 3.25&lt;3.75 Threshold
                         </Text>
                         <Img
@@ -161,10 +161,7 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                         </div>
                       </div>
                       <div className="flex sm:flex-col items-center  ml-2.5 gap-2.5 md:ml-0">
-                        <div className="flex flex-col">
-                          {/* <Button className="flex items-center justify-center h-[20px] w-[20px] border-cyan-800 border border-solid bg-white-A700_01 rounded-md">
-                            <Img src="images/img_check.svg" />
-                          </Button> */}
+                        {/* <div className="flex flex-col">
                           <div className=" flex items-center justify-center">
                             <input
                               type="checkbox"
@@ -182,8 +179,8 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                               }}
                             />
                           </div>
-                        </div>
-                        <Text size="md" as="p" className="self-start">
+                        </div> */}
+                        <Text size="md" as="p" className="self-start ml-6">
                           Indebtedness Covenant: Not Validated
                         </Text>
                         <Img
