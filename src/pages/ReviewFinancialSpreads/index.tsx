@@ -134,7 +134,8 @@ const tableData = [
             millionsofusd: "265.00",
             categorylabels: "R&D Expense",
             rowconfidence: "Low",
-            rowview: true,
+            originalconfidence: "Low",
+            rowview: false,
           },
         ],
       },
@@ -147,6 +148,7 @@ type TableRowType = {
   millionsofusd?: string;
   categorylabels?: any;
   rowconfidence?: any;
+  originalconfidence?: any;
   rowview?: boolean;
   subRows?: TableRowType[];
 };
@@ -276,7 +278,7 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
                 />
               </div>
 
-              {info.row.original.rowview && (
+              {info.row.original.rowview && (info.row.original.originalconfidence === "Low" || info.row.original.originalconfidence === "Medium") && (
                 <div className="relative">
                   <div className="category-ranking-container">
                     <CategoryRanking
@@ -313,7 +315,8 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
             <>
               <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
                 <Heading
-                  onClick={() => openPopover(row, col)}
+                  // onClick={() => openPopover(row, col)}
+                  onMouseOver={() => openPopover(row, col)}
                   as="p"
                   className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
                     info?.getValue?.() == "High"

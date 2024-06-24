@@ -55,7 +55,8 @@ const tableData = [
         definitionofcom:
           "(g) Chargers incured during such period in connection with restructuring or reorganization change, including without limitation post-closing restructuring, reorganization and/or intergration charges or costs",
         rowconfidence: "Medium",
-        rowview: true,
+        originalconfidence: "Medium",
+        rowview: false,
       },
       {
         rowtablehead: "Total other operating expenses, net",
@@ -75,6 +76,7 @@ type TableRowType = {
   notes?: any;
   definitionofcom?: any;
   rowconfidence?: any;
+  originalconfidence?: any;
   rowview?: any;
 };
 
@@ -288,7 +290,7 @@ export default function ReviewCovenantMatchesPage({ loginSuccess }) {
                   category={initialValue}
                 />
               </div>
-              {info.row.original.rowview && (
+              {info.row.original.rowview && (info.row.original.originalconfidence === "Low" || info.row.original.originalconfidence === "Medium") &&(
                 <div className="relative">
                   <div className="category-ranking-container">
                     <CategoryRanking
@@ -325,7 +327,8 @@ export default function ReviewCovenantMatchesPage({ loginSuccess }) {
             <>
               <div className="flex justify-start pl-2 md:w-full p-2 border-indigo-50">
                 <Heading
-                  onClick={() => openPopover(row, col)}
+                  // onClick={() => openPopover(row, col)}
+                  onMouseOver={() => openPopover(row, col)}
                   as="p"
                   className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
                     info?.getValue?.() == "High"

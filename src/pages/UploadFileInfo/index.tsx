@@ -50,13 +50,20 @@ export default function UploadFileInfoPage({ loginSuccess }) {
 
   const handleFinancialChange = (isSelected) => {
     setIsFinancialSelected(isSelected);
-    console.log(isSelected)
-    console.log(isFinancialSelected)
+    // console.log(isSelected)
+    // console.log(isFinancialSelected)
   };
 
   const handleCreditChange = (isSelected) => {
     setIsCreditSelected(isSelected);
-    console.log(isCreditSelected)
+    // console.log(isCreditSelected)
+  };
+
+  const buttonClick = () => {
+    if (isFinancialSelected && isCreditSelected)
+      navigate("/reviewfinancialspreads")
+    else
+      alert("Please upload documents")
   };
 
   return (
@@ -128,7 +135,7 @@ export default function UploadFileInfoPage({ loginSuccess }) {
 
               <Button
                 className="flex whitespace-nowrap items-center justify-center h-[39px]  px-[35px]  text-white-A700_01 text-center text-base font-medium bg-indigo-800 rounded-[3px] mt-20  ml-auto "
-                onClick={() => navigate("/reviewfinancialspreads")}
+                onClick={buttonClick}
               >
                 Continue
               </Button>

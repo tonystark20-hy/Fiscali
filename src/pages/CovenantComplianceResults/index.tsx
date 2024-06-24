@@ -42,7 +42,7 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
     <>
       {loginSuccess == false && <BlurPage />}
       <Helmet>
-        <title>Fiscali 2</title>
+        <title>Fiscali</title>
         <meta
           name="description"
           content="Web site created using create-react-app"
