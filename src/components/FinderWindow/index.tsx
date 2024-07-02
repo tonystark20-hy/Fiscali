@@ -35,30 +35,32 @@ const FinderWindow: React.FC<TableComponentProps> = ({
       <table id="cr">
         <thead>
           <tr>
-            <th>Folders</th>
-            <th>Files</th>
+            <th>Name</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
           {filenames.map((category, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              className={`${
+                selectedFile === category.folders
+                  ? "bg-[#2963d9] text-white-A700_02"
+                  : "text-black-900"
+              }  cursor-pointer whitespace-nowrap`}
+              onClick={() => handleFileClick(category.folders)}
+            >
               <td
-                className={
-                  category.folders === "Documents"
-                    ? "bg-[#2963d9] text-white-A700_02"
-                    : ""
-                }
-                // bg-[#dcdcdc]
+                className={`${
+                  selectedFile === category.folders ? "bg-[#2963d9] " : ""
+                }`}
               >
                 {category.folders}
               </td>
               <td
                 className={`${
-                  selectedFile === category.files
-                    ? "bg-[#2963d9] text-white-A700_02"
-                    : ""
-                }  cursor-pointer`}
-                onClick={() => handleFileClick(category.files)}
+                  selectedFile === category.folders ? "bg-[#2963d9] " : ""
+                }`}
               >
                 {category.files}
               </td>

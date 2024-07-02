@@ -43,12 +43,19 @@ const SelectNDragFile = ({ onFileChange }) => {
   };
 
   const filenames = [
-    { folders: "Documents", files: "SiriusXM 10-K - FY2021" },
     {
-      folders: "Desktop",
-      files: "SiriusXM Credit Agreement - Dated 12.05.2012",
+      folders: "SiriusXM 10-K - FY2021",
+      files: "4 Nov 2022 at 14:57",
     },
-    { folders: "Downloads", files: "" },
+    {
+      folders: "SiriusXM Credit Agreement - Dated 12.05.2012",
+      files: "3 Nov 2022 at 14:57",
+    },
+    { folders: "NOPE", files: "3 Nov 2022 at 14:54" },
+    {
+      folders: "Nah_Not_Dis_One",
+      files: "3 Nov 2022 at 14:57",
+    },
     // { folders: " ", files: " " },
     // { folders: " ", files: " " },
   ];
@@ -58,6 +65,31 @@ const SelectNDragFile = ({ onFileChange }) => {
     onFileChange(true);
     console.log(selectedFilename);
   };
+
+  const files1 = [
+    // { name: "Custom Keyboard Shortcuts.pages", date: "4 Nov 2022 at 15:12" },
+    {
+      name: "SiriusXM 10-K - FY2021",
+      date: "3 Nov 2022 at 14:57",
+    },
+    {
+      name: "SiriusXM Credit Agreement - Dated 12.05.2012",
+      date: "3 Nov 2022 at 14:57",
+    },
+    {
+      name: "NOPE",
+      date: "3 Nov 2022 at 14:54",
+    },
+    {
+      name: "Nah_Not_Dis_One",
+      date: "3 Nov 2022 at 14:54",
+    },
+    // {
+    //   name: "",
+    //   date: "",
+    // },
+    // Add more files as needed
+  ];
 
   return (
     <>
@@ -96,34 +128,88 @@ const SelectNDragFile = ({ onFileChange }) => {
               // Close finder when clicking outside
             ></div>{" "}
             <div className="fixed inset-0 flex items-center justify-center z-40">
-              <div className=" w-fit h-fit text-black-900 bg-gray-300 font-medium  shadow-2xl z-40 rounded-[6px]">
-                <div className="relative flex flex-col h-full p-4">
-                  <FinderWindow
-                    filenames={filenames}
-                    onFinderClick={handleFinderClick}
-                  />
-                  <div className="relative ml-auto mt-10">
-                    <button
-                      onClick={openFinder}
-                      className="text-white-A700_01 text-center text-base font-medium bg-indigo-800 min-w-[100px] rounded-[3px] cursor-pointer mr-2"
-                    >
-                      cancel
-                    </button>
-                    <button
-                      disabled={selectedFilename.length === 0}
-                      onClick={
-                        selectedFilename.length > 0 ? uploadFile : undefined
-                      }
-                      className={`text-white-A700_01 text-center text-base font-medium min-w-[100px] rounded-[3px] relative ml-auto mt-auto ${
-                        selectedFilename.length > 0
-                          ? "cursor-pointer bg-indigo-800"
-                          : "cursor-not-allowed bg-white text-[#c6c6c6]"
-                      }`}
-                    >
-                      upload
-                    </button>
+              <div className=" w-fit h-fit text-black-900 bg-transparent font-medium z-40 rounded-[6px]">
+                <div className="relative flex flex-col h-full p-4"></div>
+                <div className="my-10 bg-white-700  h-fit flex justify-center items-center mx-auto">
+                  <div className="bg-white rounded-lg shadow-lg  flex flex-col">
+                    <div className="bg-gray-100 border-b border-gray-300 flex items-center p-2 rounded-t-lg">
+                      <div className="flex space-x-2">
+                        <button className="w-3 h-3 bg-red-500 rounded-full"></button>
+                        <button className="w-3 h-3 bg-yellow-500 rounded-full"></button>
+                        <button className="w-3 h-3 bg-green-500 rounded-full"></button>
+                      </div>
+                      <div className="flex-grow text-center font-semibold"></div>
+                    </div>
+                    <div className="flex flex-grow ">
+                      <div className="bg-gray-200 h-auto w-1/4 p-2 border-r border-gray-300 rounded-bl-lg text-base">
+                        <ul>
+                          <li className="flex items-center mb-2">
+                            <span className="mr-2">📁</span> Applications
+                          </li>
+                          <li className="flex items-center mb-2">
+                            <span className="mr-2">📁</span> Pictures
+                          </li>
+                          <li className="flex items-center mb-2">
+                            <span className="mr-2">📁</span> Downloads
+                          </li>
+                          <li className="flex items-center mb-2">
+                            <span className="mr-2">📁</span> Desktop
+                          </li>
+                          <li className="flex items-center mb-2">
+                            <span className="mr-2">📁</span> Apl
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="flex-grow p-2">
+                        <FinderWindow
+                          filenames={filenames}
+                          onFinderClick={handleFinderClick}
+                        />
+                        <div className="flex flex-row justify-end relative ml-auto px-2 mt-2">
+                          <button
+                            onClick={openFinder}
+                            className="text-white-A700_01 text-center text-base font-medium bg-indigo-800 min-w-[100px] rounded-[3px] cursor-pointer mr-2 "
+                          >
+                            cancel
+                          </button>
+                          <button
+                            disabled={selectedFilename.length === 0}
+                            onClick={
+                              selectedFilename.length > 0
+                                ? uploadFile
+                                : undefined
+                            }
+                            className={`text-white-A700_01 text-center text-base font-medium min-w-[100px] rounded-[3px] relative mt-auto ${
+                              selectedFilename.length > 0
+                                ? "cursor-pointer bg-indigo-800"
+                                : "cursor-not-allowed bg-white text-[#c6c6c6]"
+                            }`}
+                          >
+                            upload
+                          </button>
+                        </div>
+                        {/* <table className="w-full border-collapse">
+                          <thead>
+                            <tr className="border-b  text-md">
+                              <th className="text-left p-2">Name</th>
+                              <th className="text-left p-2">Date Modified</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {files1.map((file, index) => (
+                              <tr
+                                key={index}
+                                className="border-b text-md whitespace-nowrap"
+                              >
+                                <td className="p-2">{file.name}</td>
+                                <td className="p-2">{file.date}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table> */}
+                      </div>
+                    </div>
                   </div>
-                  <Finder />
                 </div>
               </div>
             </div>

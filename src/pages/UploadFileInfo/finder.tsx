@@ -40,7 +40,7 @@ const Finder = () => {
           </div>
         </div>
         <div className="flex flex-grow ">
-          <div className="bg-gray-200 w-1/4 p-2 border-r border-gray-300 rounded-bl-lg text-sm">
+          <div className="bg-gray-200 w-1/4 p-2 border-r border-gray-300 rounded-bl-lg text-base">
             <ul>
               <li className="flex items-center mb-2">
                 <span className="mr-2">📁</span> Applications
@@ -62,7 +62,7 @@ const Finder = () => {
           <div className="flex-grow p-2">
             <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b  text-xs">
+                <tr className="border-b  text-md">
                   <th className="text-left p-2">Name</th>
                   <th className="text-left p-2">Date Modified</th>
                 </tr>
