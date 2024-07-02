@@ -59,7 +59,7 @@ const Finder = () => {
               </li>
             </ul>
           </div>
-          <div className="flex-grow p-2">
+          <div className="flex-grow p-2  border-2 border-red-400">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="border-b  text-md">

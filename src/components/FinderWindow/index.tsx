@@ -19,10 +19,6 @@ const FinderWindow: React.FC<TableComponentProps> = ({
 }) => {
   const [value, setValue] = useState();
 
-  // const handleChange = (event) => {
-  //   onFinderClick(event.target.value);
-  // };
-
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
   const handleFileClick = (file: string) => {
@@ -31,7 +27,7 @@ const FinderWindow: React.FC<TableComponentProps> = ({
   };
 
   return (
-    <div>
+    <div className=" mb-40">
       <table id="cr">
         <thead>
           <tr>
@@ -45,14 +41,14 @@ const FinderWindow: React.FC<TableComponentProps> = ({
               key={index}
               className={`${
                 selectedFile === category.folders
-                  ? "bg-[#2963d9] text-white-A700_02"
+                  ? "bg-[#2963d9] text-white-A700_02 rounded-3xl"
                   : "text-black-900"
               }  cursor-pointer whitespace-nowrap`}
               onClick={() => handleFileClick(category.folders)}
             >
               <td
                 className={`${
-                  selectedFile === category.folders ? "bg-[#2963d9] " : ""
+                  selectedFile === category.folders ? "bg-[#2963d9]" : ""
                 }`}
               >
                 {category.folders}

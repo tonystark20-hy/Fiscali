@@ -103,30 +103,18 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                 </Text>
               </div>
               <Row className="">
-                <Col lg className="flex flex-col md:mb-0 ">
+                <Col
+                  lg
+                  className="flex flex-col md:mb-0 border-2 border-green-400"
+                >
                   <div className="h-full flex md:flex-col justify-center items-center gap-7 z-[1]">
                     <div className="flex flex-col items-start md:self-stretch flex-1">
                       <div className="flex sm:flex-col items-center mt-8 gap-2.5 p-2.5">
-                        {/* <div className="flex flex-col">
-                          <div className=" flex items-center justify-center">
-                            <input
-                              type="checkbox"
-                              defaultChecked={false}
-                              style={{
-                                appearance: "none", // Hide default checkbox appearance
-                                width: "20px",
-                                height: "20px",
-                                borderRadius: "15%", // Rounded checkbox
-                                border: "2px solid #4CAF50", // Green border
-                                // backgroundColor: '#fff',
-                                position: "relative",
-                                cursor: "pointer", // Show pointer cursor when hovering
-                                transition: "background-color 0.3s ease", // Smooth transition for background color change
-                              }}
-                            />
-                          </div>
-                        </div> */}
-                        <Text size="md" as="p" className="self-end ml-6">
+                        <Text
+                          size="md"
+                          as="p"
+                          className="self-end ml-6 border-2 border-red-400"
+                        >
                           Consolidated Leverage Ratio = 3.25&lt;3.75 Threshold
                         </Text>
                         <Img
@@ -140,7 +128,7 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                           className="h-[24px] w-[24px] sm:w-full"
                         />
                       </div>
-                      <div className="self-stretch ml-[30px] p-5 md:ml-0 bg-white-A700_01 rounded-[3px]">
+                      <div className="md:self-stretch p-5 bg-white-A700_01 flex-1 rounded-[3px]">
                         <div className="flex sm:flex-col justify-center items-start gap-[15px]">
                           <Img
                             src="images/img_material_symbols_info_outline.svg"
@@ -160,44 +148,25 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                           </Text>
                         </div>
                       </div>
-                      <div className="flex sm:flex-col items-center  ml-2.5 gap-2.5 md:ml-0">
-                        {/* <div className="flex flex-col">
-                          <div className=" flex items-center justify-center">
-                            <input
-                              type="checkbox"
-                              defaultChecked={false}
-                              style={{
-                                appearance: "none", // Hide default checkbox appearance
-                                width: "20px",
-                                height: "20px",
-                                borderRadius: "15%", // Rounded checkbox
-                                border: "2px solid #4CAF50", // Green border
-                                // backgroundColor: '#fff',
-                                position: "relative",
-                                cursor: "pointer", // Show pointer cursor when hovering
-                                transition: "background-color 0.3s ease", // Smooth transition for background color change
-                              }}
-                            />
-                          </div>
-                        </div> */}
+                      <div className="flex sm:flex-col items-center  ml-2.5 gap-2.5 md:ml-0 border-2 border-red-400">
                         <Text size="md" as="p" className="self-start ml-6">
                           Indebtedness Covenant: Not Validated
                         </Text>
                         <Img
                           src="images/img_vector.svg"
                           alt="vector_three"
-                          className="h-[20px] w-[20px] sm:w-full"
+                          className="h-[20px] w-[20px] sm:w-full "
                         />
                         <Img
                           src="images/img_material_symbols_info_outline.svg"
                           alt="material_five"
-                          className="h-[24px] w-[24px] sm:w-full"
+                          className="h-[24px] w-[24px] sm:w-full "
                         />
                       </div>
                     </div>
                   </div>
-                  <div className="flex md:flex-col justify-center items-start w-[97%] md:w-full mt-[-1px] gap-6">
-                    <div className="md:self-stretch p-5 bg-white-A700_01 flex-1 rounded-[3px]">
+                  <div className="flex md:flex-col justify-center items-start w-[97%] md:w-full gap-6 border-2 border-red-400">
+                    <div className="md:self-stretch  bg-white-A700_01 flex-1 rounded-[3px]">
                       <div className="flex sm:flex-col justify-center items-start gap-[15px]">
                         <Img
                           src="images/img_material_symbols_info_outline.svg"

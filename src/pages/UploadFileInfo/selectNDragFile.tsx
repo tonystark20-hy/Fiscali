@@ -51,11 +51,11 @@ const SelectNDragFile = ({ onFileChange }) => {
       folders: "SiriusXM Credit Agreement - Dated 12.05.2012",
       files: "3 Nov 2022 at 14:57",
     },
-    { folders: "NOPE", files: "3 Nov 2022 at 14:54" },
-    {
-      folders: "Nah_Not_Dis_One",
-      files: "3 Nov 2022 at 14:57",
-    },
+    // { folders: " ", files: " " },
+    // {
+    //   folders: " ",
+    //   files: " ",
+    // },
     // { folders: " ", files: " " },
     // { folders: " ", files: " " },
   ];
@@ -141,7 +141,7 @@ const SelectNDragFile = ({ onFileChange }) => {
                       <div className="flex-grow text-center font-semibold"></div>
                     </div>
                     <div className="flex flex-grow ">
-                      <div className="bg-gray-200 h-auto w-1/4 p-2 border-r border-gray-300 rounded-bl-lg text-base">
+                      <div className="bg-gray-200 h-auto w-1/4 pt-3 p-2.5 border-r border-gray-300 rounded-bl-lg text-base">
                         <ul>
                           <li className="flex items-center mb-2">
                             <span className="mr-2">📁</span> Applications
@@ -168,7 +168,7 @@ const SelectNDragFile = ({ onFileChange }) => {
                         <div className="flex flex-row justify-end relative ml-auto px-2 mt-2">
                           <button
                             onClick={openFinder}
-                            className="text-white-A700_01 text-center text-base font-medium bg-indigo-800 min-w-[100px] rounded-[3px] cursor-pointer mr-2 "
+                            className="text-black-900 text-center text-base font-medium bg-white min-w-[90px] rounded-[5px] cursor-pointer mr-2 shadow-xl"
                           >
                             cancel
                           </button>
@@ -179,34 +179,15 @@ const SelectNDragFile = ({ onFileChange }) => {
                                 ? uploadFile
                                 : undefined
                             }
-                            className={`text-white-A700_01 text-center text-base font-medium min-w-[100px] rounded-[3px] relative mt-auto ${
+                            className={`text-white-A700_01 text-center text-base font-medium min-w-[90px] rounded-[5px] relative mt-auto shadow-xl ${
                               selectedFilename.length > 0
-                                ? "cursor-pointer bg-indigo-800"
+                                ? "cursor-pointer bg-[#3b80f7]"
                                 : "cursor-not-allowed bg-white text-[#c6c6c6]"
                             }`}
                           >
                             upload
                           </button>
                         </div>
-                        {/* <table className="w-full border-collapse">
-                          <thead>
-                            <tr className="border-b  text-md">
-                              <th className="text-left p-2">Name</th>
-                              <th className="text-left p-2">Date Modified</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {files1.map((file, index) => (
-                              <tr
-                                key={index}
-                                className="border-b text-md whitespace-nowrap"
-                              >
-                                <td className="p-2">{file.name}</td>
-                                <td className="p-2">{file.date}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table> */}
                       </div>
                     </div>
                   </div>
