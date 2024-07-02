@@ -16,6 +16,7 @@ import Header from "components/Header";
 import NumberComponent from "../../components/NumberComponent";
 import CategoryRanking from "../../components/CategoryRanking";
 import BlurPage from "components/BlurPage";
+import Checkbox from "components/Checkbox";
 
 const tableData = [
   {
@@ -41,6 +42,7 @@ const tableData = [
         definitionofcom:
           "(c) depreciation and amortization expense, (d) amortization of intangibles(including, but not limited to, goodwill) and organization costs",
         rowconfidence: "High",
+        checked: true
       },
       {
         rowtablehead: "Impairment of assets",
@@ -48,6 +50,7 @@ const tableData = [
         definitionofcom:
           "(ii) any extraordinary or non-recurring non-cash income or gains (including, whether or not otherwise included sa a separate item in the statement of such Consolidated Net Income for such period, gains on the sales of assets outside of the ordinary course of business)",
         rowconfidence: "High",
+        checked: true
       },
       {
         rowtablehead: "Restructuring and other charges",
@@ -57,6 +60,7 @@ const tableData = [
         rowconfidence: "Medium",
         originalconfidence: "Medium",
         rowview: false,
+        checked: false
       },
       {
         rowtablehead: "Total other operating expenses, net",
@@ -77,6 +81,7 @@ type TableRowType = {
   definitionofcom?: any;
   rowconfidence?: any;
   originalconfidence?: any;
+  checked?: boolean;
   rowview?: any;
 };
 
@@ -103,6 +108,7 @@ export default function ReviewCovenantMatchesPage({ loginSuccess }) {
       data[indices[depth]][col] = category;
       data[indices[depth]]["rowconfidence"] = "High";
       data[indices[depth]]["rowview"] = false;
+      data[indices[depth]]["checked"] = true;
     } else {
       console.log(depth)
       updateRow(data[indices[depth]].subRows, indices, col, category, depth + 1);
@@ -379,13 +385,19 @@ export default function ReviewCovenantMatchesPage({ loginSuccess }) {
         meta: { width: "15%" },
       }),
       tableColumnHelper.accessor("rowview", {
-        cell: (info) => (
+        cell: (info) => {
+          const id = info?.cell.id;
+          const row = id.split("_")[0];
+          return (
+            <>
           <div className="flex justify-center">
-            {info.row.depth > 0 && info.row.subRows ? (
+            {info.row.depth > 0 && info.row.subRows && info.row.original.rowconfidence !== undefined ? (
               <div className="h-[36px] flex items-center justify-center">
                 <input
                   type="checkbox"
-                  defaultChecked={info.row.original.rowconfidence === "High"}
+                  // defaultChecked={info.row.original.rowconfidence === "High"}
+                  checked={info.row.original.checked}
+                  onChange={() => handleCheckboxChange(row)}
                   style={{
                     appearance: "none", // Hide default checkbox appearance
                     width: "20px",
@@ -399,11 +411,14 @@ export default function ReviewCovenantMatchesPage({ loginSuccess }) {
                   }}
                 />
               </div>
+              // <Checkbox initialChecked={info.row.original.rowconfidence === "High"}/>
             ) : (
               <div className="h-[36px] w-[41px] flex items-center justify-center"></div>
             )}
           </div>
-        ),
+          </>
+          )
+        },
         header: (info) => (
           <div className="flex">
             <div
@@ -416,6 +431,26 @@ export default function ReviewCovenantMatchesPage({ loginSuccess }) {
       }),
     ];
   }, []);
+
+  const updateCheck = (
+    data: any,
+    indices: string[],
+    depth: number = 0
+  ): void => {
+    if (depth === indices.length - 1) {
+      data[indices[depth]]["checked"] = !data[indices[depth]]["checked"];
+    } else {
+      console.log(depth)
+      updateCheck(data[indices[depth]].subRows, indices, depth + 1);
+    }
+  };
+
+  const handleCheckboxChange = (row: string) => {
+    const updatedTableData = [...data];
+    const rowSplit = row.split(".");
+    updateCheck(updatedTableData, rowSplit);
+    setData(updatedTableData);
+  }
 
   const handleNavigate = () => {
     // Navigate to the '/reviewcovenantmatches' route
@@ -437,7 +472,7 @@ export default function ReviewCovenantMatchesPage({ loginSuccess }) {
       {!loginSuccess && <BlurPage />}
 
       <Helmet>
-        <title>Fiscali 2</title>
+        <title>Fiscali</title>
         <meta
           name="description"
           content="Web site created using create-react-app"

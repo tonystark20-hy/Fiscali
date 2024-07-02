@@ -15,6 +15,7 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
   getExpandedRowModel,
+  // toggleAllRowsExpanded
 
 } from "@tanstack/react-table";
 
@@ -51,12 +52,14 @@ const ReactTable = <D extends unknown>({
     getFilteredRowModel: getFilteredRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    // autoResetExpanded: false,
-
     ...restConfig,
   };
 
   const table = useReactTable(tableConfig);
+
+  useEffect(() => {
+    table.toggleAllRowsExpanded(true);
+  }, [table]);
 
   const renderRow = (row, isSubRow = false) => (
     <React.Fragment key={row.id}>

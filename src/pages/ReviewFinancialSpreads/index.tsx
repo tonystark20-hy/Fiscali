@@ -17,6 +17,7 @@ import { CloseSVG } from "../../assets/images";
 import SideBar from "components/SideBar";
 import Header from "components/Header";
 import BlurPage from "components/BlurPage";
+import Checkbox from "components/Checkbox";
 
 // import { useHistory } from 'react-router-dom';
 
@@ -41,6 +42,7 @@ const tableData = [
         categorylabels: "Revenues",
         rowconfidence: "High",
         rowview: false,
+        checked: true,
       },
       {
         rowtablehead: "Advertising Revenues",
@@ -48,6 +50,7 @@ const tableData = [
         categorylabels: "Revenues",
         rowconfidence: "High",
         rowview: false,
+        checked: true,
       },
       {
         rowtablehead: "Other Revenues",
@@ -55,6 +58,7 @@ const tableData = [
         categorylabels: "Revenues",
         rowconfidence: "High",
         rowview: false,
+        checked: true,
       },
       {
         rowtablehead: "Equipment Revenues",
@@ -62,6 +66,7 @@ const tableData = [
         categorylabels: "Revenues",
         rowconfidence: "High",
         rowview: false,
+        checked: true,
       },
       {
         rowtablehead: "Total Revenues",
@@ -69,6 +74,7 @@ const tableData = [
         categorylabels: "Total Revenues",
         rowconfidence: "High",
         rowview: false,
+        checked: true,
       },
     ],
   },
@@ -93,6 +99,7 @@ const tableData = [
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
             rowview: false,
+            checked: true,
           },
           {
             rowtablehead: "Customer Service Center & Billing",
@@ -100,6 +107,7 @@ const tableData = [
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
             rowview: false,
+            checked: true,
           },
           {
             rowtablehead: "Transmission",
@@ -107,6 +115,7 @@ const tableData = [
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
             rowview: false,
+            checked: true,
           },
           {
             rowtablehead: "Cost of Equipment",
@@ -114,6 +123,7 @@ const tableData = [
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
             rowview: false,
+            checked: true,
           },
           {
             rowtablehead: "Subscriber Acquisition Costs",
@@ -121,6 +131,7 @@ const tableData = [
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
             rowview: false,
+            checked: true,
           },
           {
             rowtablehead: "Sales and Marketing",
@@ -128,6 +139,7 @@ const tableData = [
             categorylabels: "Cost of Goods Sold",
             rowconfidence: "High",
             rowview: false,
+            checked: true,
           },
           {
             rowtablehead: "Engineering, Design and Development",
@@ -136,6 +148,7 @@ const tableData = [
             rowconfidence: "Low",
             originalconfidence: "Low",
             rowview: false,
+            checked: false,
           },
         ],
       },
@@ -150,6 +163,7 @@ type TableRowType = {
   rowconfidence?: any;
   originalconfidence?: any;
   rowview?: boolean;
+  checked?: boolean;
   subRows?: TableRowType[];
 };
 
@@ -162,12 +176,14 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [data, setData] = useState(tableData);
   const navigate = useNavigate();
+  const [expanded, setExpanded] = React.useState(true);
   // const history = useHistory();
 
   const [showTable, setShowTable] = useState(false);
   const [tablePosition, setTablePosition] = useState({ x: 0, y: 0 });
 
   const tableColumns = React.useMemo(() => {
+    // toggleAllRowsExpanded(true)
     const tableColumnHelper = createColumnHelper<TableRowType>();
     return [
       tableColumnHelper.accessor("rowtablehead", {
@@ -193,6 +209,7 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
             {info.row.getCanExpand() && (
               <button
                 onClick={info.row.getToggleExpandedHandler()}
+                // onClick={() => setExpanded(!expanded)}
                 // onClick={() => expanded = !expanded}
                 style={{
                   cursor: "pointer",
@@ -262,7 +279,7 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
         cell: (info) => {
           const initialValue = info?.getValue?.();
           const id = info?.cell.id;
-          console.log(initialValue);
+          // console.log(initialValue);
           const col = id.split("_")[1];
           const row = id.split("_")[0];
           // console.log(row);
@@ -307,7 +324,7 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
       tableColumnHelper.accessor("rowconfidence", {
         cell: (info) => {
           const id = info?.cell.id;
-          console.log(id);
+          // console.log(id);
           const col = id.split("_")[1];
           const row = id.split("_")[0];
 
@@ -367,7 +384,11 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
         meta: { width: "15%" },
       }),
       tableColumnHelper.accessor("rowview", {
-        cell: (info) => (
+        cell: (info) => {
+          const id = info?.cell.id;
+          const row = id.split("_")[0];
+          return (
+            <>
           <div className="flex justify-center">
             {info.row.depth > 0 &&
             info.row.subRows &&
@@ -375,8 +396,10 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
               <div className="h-[36px] flex items-center justify-center">
                 <input
                   type="checkbox"
-                  defaultChecked={info.row.original.rowconfidence === "High"}
-                  // checked={info.row.original.rowconfidence === "High"}
+                  // defaultChecked={info.row.original.rowconfidence === "High"}
+                  checked={info.row.original.checked}
+                  // onClick={() => handleCheckboxChange(row)}
+                  onChange={() => handleCheckboxChange(row)}
                   style={{
                     appearance: "none", // Hide default checkbox appearance
                     width: "20px",
@@ -390,11 +413,14 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
                   }}
                 />
               </div>
+              // <Checkbox initialChecked={info.row.original.checked} onChange={handleCheckboxChange(row)}/>
             ) : (
               <div className="h-[36px] w-[41px] flex items-center justify-center"></div>
             )}
           </div>
-        ),
+          </>
+          )
+        },
         header: (info) => (
           <div className="flex">
             <div
@@ -429,6 +455,26 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
     { name: "Tax Expense", ranking: 3 },
   ];
 
+  const updateCheck = (
+    data: any,
+    indices: string[],
+    depth: number = 0
+  ): void => {
+    if (depth === indices.length - 1) {
+      data[indices[depth]]["checked"] = !data[indices[depth]]["checked"];
+    } else {
+      console.log(depth)
+      updateCheck(data[indices[depth]].subRows, indices, depth + 1);
+    }
+  };
+
+  const handleCheckboxChange = (row: string) => {
+    const updatedTableData = [...data];
+    const rowSplit = row.split(".");
+    updateCheck(updatedTableData, rowSplit);
+    setData(updatedTableData);
+  }
+
   const updateRow = (
     data: any,
     indices: string[],
@@ -440,6 +486,7 @@ export default function ReviewFinancialSpreadsPage({ loginSuccess }) {
       data[indices[depth]][col] = category;
       data[indices[depth]]["rowconfidence"] = "High";
       data[indices[depth]]["rowview"] = false;
+      data[indices[depth]]["checked"] = true;
     } else {
       console.log(depth)
       updateRow(data[indices[depth]].subRows, indices, col, category, depth + 1);
