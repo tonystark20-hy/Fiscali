@@ -103,18 +103,11 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                 </Text>
               </div>
               <Row className="">
-                <Col
-                  lg
-                  className="flex flex-col md:mb-0 border-2 border-green-400"
-                >
-                  <div className="h-full flex md:flex-col justify-center items-center gap-7 z-[1]">
-                    <div className="flex flex-col items-start md:self-stretch flex-1">
-                      <div className="flex sm:flex-col items-center mt-8 gap-2.5 p-2.5">
-                        <Text
-                          size="md"
-                          as="p"
-                          className="self-end ml-6 border-2 border-red-400"
-                        >
+                <Col lg className="flex flex-col md:mb-0  justify-center">
+                  <div className="h-full flex md:flex-col items-center gap-7 z-[1]">
+                    <div className="flex flex-col items-start md:self-stretch ">
+                      <div className="flex sm:flex-col items-center gap-2.5 ">
+                        <Text size="md" as="p" className="self-end ">
                           Consolidated Leverage Ratio = 3.25&lt;3.75 Threshold
                         </Text>
                         <Img
@@ -128,7 +121,7 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                           className="h-[24px] w-[24px] sm:w-full"
                         />
                       </div>
-                      <div className="md:self-stretch p-5 bg-white-A700_01 flex-1 rounded-[3px]">
+                      <div className="md:self-stretch p-5 bg-white-A700_01 rounded-[3px] ">
                         <div className="flex sm:flex-col justify-center items-start gap-[15px]">
                           <Img
                             src="images/img_material_symbols_info_outline.svg"
@@ -138,7 +131,7 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                           <Text
                             size="md"
                             as="p"
-                            className="w-[96%] sm:w-full !text-blue_gray-700"
+                            className="w-[96%] sm:w-full !text-blue_gray-700 "
                           >
                             “Consolidated Leverage Ratio” means on the last day
                             of any Fiscal Quarter, the ratio of (a) Adjusted
@@ -148,8 +141,8 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                           </Text>
                         </div>
                       </div>
-                      <div className="flex sm:flex-col items-center  ml-2.5 gap-2.5 md:ml-0 border-2 border-red-400">
-                        <Text size="md" as="p" className="self-start ml-6">
+                      <div className="flex sm:flex-col items-center  gap-2.5 mt-12 ">
+                        <Text size="md" as="p" className="self-start  ">
                           Indebtedness Covenant: Not Validated
                         </Text>
                         <Img
@@ -163,26 +156,25 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
                           className="h-[24px] w-[24px] sm:w-full "
                         />
                       </div>
-                    </div>
-                  </div>
-                  <div className="flex md:flex-col justify-center items-start w-[97%] md:w-full gap-6 border-2 border-red-400">
-                    <div className="md:self-stretch  bg-white-A700_01 flex-1 rounded-[3px]">
-                      <div className="flex sm:flex-col justify-center items-start gap-[15px]">
-                        <Img
-                          src="images/img_material_symbols_info_outline.svg"
-                          alt="material_seven"
-                          className="h-[24px] w-[24px] sm:w-full"
-                        />
-                        <Text
-                          size="md"
-                          as="p"
-                          className="w-[96%] sm:w-full !text-blue_gray-700"
-                        >
-                          “Consolidated Leverage Ration” means on the last day
-                          of any Fiscal Quarter, the ratio of (a) Adjusted Debt
-                          on such day to (b) Consolidated EBITDAR for the period
-                          of four consecutive Fiscal Quarters ending on such day
-                        </Text>
+                      <div className="md:self-stretch p-5 bg-white-A700_01 rounded-[3px] ">
+                        <div className="flex sm:flex-col justify-center items-start gap-[15px]">
+                          <Img
+                            src="images/img_material_symbols_info_outline.svg"
+                            alt="material_three"
+                            className="h-[24px] w-[24px] sm:w-full"
+                          />
+                          <Text
+                            size="md"
+                            as="p"
+                            className="w-[96%] sm:w-full !text-blue_gray-700 "
+                          >
+                            “Consolidated Leverage Ration” means on the last day
+                            of any Fiscal Quarter, the ratio of (a) Adjusted
+                            Debt on such day to (b) Consolidated EBITDAR for the
+                            period of four consecutive Fiscal Quarters ending on
+                            such day
+                          </Text>
+                        </div>
                       </div>
                     </div>
                   </div>

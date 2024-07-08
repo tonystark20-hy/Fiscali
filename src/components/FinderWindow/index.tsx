@@ -32,7 +32,7 @@ const FinderWindow: React.FC<TableComponentProps> = ({
         <thead>
           <tr>
             <th>Name</th>
-            <th>Date</th>
+            <th>Date Added</th>
           </tr>
         </thead>
         <tbody>

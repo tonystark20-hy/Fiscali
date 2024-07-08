@@ -1,10 +1,9 @@
 import { Heading } from "components/Heading";
 import { Img } from "components/Img";
 import React, { useState } from "react";
-import { Text, Button } from "../../components";
+import { Text } from "../../components";
 // import FinderWindow from "../../components/FinderWindow";
 import FinderWindow from "../../components/FinderWindow";
-import Finder from "./finder";
 
 const SelectNDragFile = ({ onFileChange }) => {
   const [file, setFile] = useState(null);
@@ -45,11 +44,11 @@ const SelectNDragFile = ({ onFileChange }) => {
   const filenames = [
     {
       folders: "SiriusXM 10-K - FY2021",
-      files: "4 Nov 2022 at 14:57",
+      files: "Nov 4, 2022 at 14:57",
     },
     {
       folders: "SiriusXM Credit Agreement - Dated 12.05.2012",
-      files: "3 Nov 2022 at 14:57",
+      files: "Nov 3, 2022 at 09:57",
     },
     // { folders: " ", files: " " },
     // {
@@ -65,31 +64,6 @@ const SelectNDragFile = ({ onFileChange }) => {
     onFileChange(true);
     console.log(selectedFilename);
   };
-
-  const files1 = [
-    // { name: "Custom Keyboard Shortcuts.pages", date: "4 Nov 2022 at 15:12" },
-    {
-      name: "SiriusXM 10-K - FY2021",
-      date: "3 Nov 2022 at 14:57",
-    },
-    {
-      name: "SiriusXM Credit Agreement - Dated 12.05.2012",
-      date: "3 Nov 2022 at 14:57",
-    },
-    {
-      name: "NOPE",
-      date: "3 Nov 2022 at 14:54",
-    },
-    {
-      name: "Nah_Not_Dis_One",
-      date: "3 Nov 2022 at 14:54",
-    },
-    // {
-    //   name: "",
-    //   date: "",
-    // },
-    // Add more files as needed
-  ];
 
   return (
     <>
@@ -134,29 +108,72 @@ const SelectNDragFile = ({ onFileChange }) => {
                   <div className="bg-white rounded-lg shadow-lg  flex flex-col">
                     <div className="bg-gray-100 border-b border-gray-300 flex items-center p-2 rounded-t-lg">
                       <div className="flex space-x-2">
-                        <button className="w-3 h-3 bg-red-500 rounded-full"></button>
-                        <button className="w-3 h-3 bg-yellow-500 rounded-full"></button>
-                        <button className="w-3 h-3 bg-green-500 rounded-full"></button>
+                        <button
+                          onClick={openFinder}
+                          className="w-3 h-3 bg-[#ed6a5e] rounded-full border-[1px] border-[#ce4d64]"
+                        ></button>
+                        <button className="w-3 h-3 bg-[#DCDCDC] rounded-full pointer-events-none border-[1px] border-[#C6C6C6]"></button>
+                        <button className="w-3 h-3 bg-[#DCDCDC] rounded-full pointer-events-none border-[1px] border-[#C6C6C6]"></button>
                       </div>
                       <div className="flex-grow text-center font-semibold"></div>
                     </div>
                     <div className="flex flex-grow ">
-                      <div className="bg-gray-200 h-auto w-1/4 pt-3 p-2.5 border-r border-gray-300 rounded-bl-lg text-base">
-                        <ul>
-                          <li className="flex items-center mb-2">
-                            <span className="mr-2">📁</span> Applications
+                      <div className="bg-gray-200 h-auto w-1/4 pt-3 p-1 border-r border-gray-300 rounded-bl-lg text-base">
+                        <ul className=" cursor-not-allowed ">
+                          <li className="flex items-center mb-2 bg-[#b4b4b4] rounded-md px-1.5 py-0.5">
+                            {/* <span className="mr-2">📁</span> Applications */}
+                            <span className="mr-2">
+                              <img
+                                src="/images/folder.svg"
+                                alt="mac folder icon"
+                                className="h-[18px]"
+                              />
+                            </span>
+                            Documents
                           </li>
-                          <li className="flex items-center mb-2">
-                            <span className="mr-2">📁</span> Pictures
+                          <li className="flex items-center mb-2 px-1.5 py-0.5">
+                            {/* <span className="mr-2">📁</span> Pictures */}
+                            <span className="mr-2">
+                              <img
+                                src="/images/folder.svg"
+                                alt="mac folder icon"
+                                className="h-[18px]"
+                              />
+                            </span>
+                            Pictures
                           </li>
-                          <li className="flex items-center mb-2">
-                            <span className="mr-2">📁</span> Downloads
+                          <li className="flex items-center mb-2 px-1.5 py-0.5">
+                            {/* <span className="mr-2">📁</span> Downloads */}
+                            <span className="mr-2">
+                              <img
+                                src="/images/folder.svg"
+                                alt="mac folder icon"
+                                className="h-[18px]"
+                              />
+                            </span>
+                            Downloads
                           </li>
-                          <li className="flex items-center mb-2">
-                            <span className="mr-2">📁</span> Desktop
+                          <li className="flex items-center mb-2 px-1.5 py-0.5">
+                            {/* <span className="mr-2">📁</span> Desktop */}
+                            <span className="mr-2">
+                              <img
+                                src="/images/folder.svg"
+                                alt="mac folder icon"
+                                className="h-[18px]"
+                              />
+                            </span>
+                            Desktop
                           </li>
-                          <li className="flex items-center mb-2">
-                            <span className="mr-2">📁</span> Apl
+                          <li className="flex items-center mb-2 px-1.5 py-0.5">
+                            {/* <span className="mr-2">📁</span> Apl */}
+                            <span className="mr-2">
+                              <img
+                                src="/images/folder.svg"
+                                alt="mac folder icon"
+                                className="h-[18px]"
+                              />
+                            </span>
+                            Applications
                           </li>
                         </ul>
                       </div>
@@ -165,10 +182,10 @@ const SelectNDragFile = ({ onFileChange }) => {
                           filenames={filenames}
                           onFinderClick={handleFinderClick}
                         />
-                        <div className="flex flex-row justify-end relative ml-auto px-2 mt-2">
+                        <div className="flex flex-row justify-end relative ml-auto px-2 mt-2 mb-2">
                           <button
                             onClick={openFinder}
-                            className="text-black-900 text-center text-base font-medium bg-white min-w-[90px] rounded-[5px] cursor-pointer mr-2 shadow-xl"
+                            className="text-black-900 pb-[1.5px] text-center text-base font-medium bg-white min-w-[90px] rounded-[5px] cursor-pointer mr-2 shadow-xl border-[1px] border-[#dadada] "
                           >
                             cancel
                           </button>
@@ -179,7 +196,7 @@ const SelectNDragFile = ({ onFileChange }) => {
                                 ? uploadFile
                                 : undefined
                             }
-                            className={`text-white-A700_01 text-center text-base font-medium min-w-[90px] rounded-[5px] relative mt-auto shadow-xl ${
+                            className={`text-white-A700_01 pb-[1.5px] text-center text-base font-medium min-w-[90px] rounded-[5px] relative mt-auto shadow-xl border-[1px] border-[#dadada] ${
                               selectedFilename.length > 0
                                 ? "cursor-pointer bg-[#3b80f7]"
                                 : "cursor-not-allowed bg-white text-[#c6c6c6]"
