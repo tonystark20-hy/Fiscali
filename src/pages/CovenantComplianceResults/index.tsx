@@ -40,7 +40,7 @@ export default function CovenantComplianceResultsPage({ loginSuccess }) {
 
   return (
     <>
-      {loginSuccess == false && <BlurPage />}
+      {loginSuccess === false && <BlurPage />}
       <Helmet>
         <title>Fiscali</title>
         <meta
