@@ -337,30 +337,30 @@ export default function ReviewCovenantMatchesPage({ loginSuccess }) {
                   onMouseOver={() => openPopover(row, col)}
                   as="p"
                   className={`flex justify-center items-center h-[20px] px-2.5 py-px rounded-[10px] ${
-                    info?.getValue?.() == "High"
+                    info?.getValue?.() === "High"
                       ? "bg-green-300"
-                      : info?.getValue?.() == "Medium"
+                      : info?.getValue?.() === "Medium"
                       ? "bg-yellow-200"
-                      : info?.getValue?.() == "Low"
+                      : info?.getValue?.() === "Low"
                       ? "bg-red-300"
                       : "bg-white-500"
                   }`}
                   style={{
                     color: `${
-                      info?.getValue?.() == "High"
+                      info?.getValue?.() === "High"
                         ? "#038C8C"
-                        : info?.getValue?.() == "Medium"
+                        : info?.getValue?.() === "Medium"
                         ? "#CCB400"
-                        : info?.getValue?.() == "Low"
+                        : info?.getValue?.() === "Low"
                         ? "#DF4D5A"
                         : "white"
                     }`,
                     backgroundColor: `${
-                      info?.getValue?.() == "High"
+                      info?.getValue?.() === "High"
                         ? "#BAD8D8"
-                        : info?.getValue?.() == "Medium"
+                        : info?.getValue?.() === "Medium"
                         ? "#FFE08E" // Equivalent to bg-yellow-200
-                        : info?.getValue?.() == "Low"
+                        : info?.getValue?.() === "Low"
                         ? "#F9CDD0" // Equivalent to bg-red-300
                         : "#FDFFFF" // Equivalent to bg-white-500
                     }`,
